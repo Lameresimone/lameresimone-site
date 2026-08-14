@@ -93,22 +93,27 @@ export const parcours = [
   {
     titre: 'CAP Cuisine - Major de Promo',
     soustitre: 'Ecole Hôtelière de Cannes',
+    icone: '/images/icons/cap.png',
   },
   {
     titre: 'Formation HACCP',
     soustitre: "Normes d'hygiène alimentaire professionnelles",
+    icone: '/images/icons/spray.png',
   },
   {
     titre: 'Restaurants gastronomiques + traiteur',
     soustitre: 'Expérience en cuisine professionnelle',
+    icone: '/images/icons/chefhat.png',
   },
   {
     titre: 'Chef de produit culinaire',
     soustitre: 'Box de recettes à domicile',
+    icone: '/images/icons/bowl.png',
   },
   {
     titre: 'Créatrice de contenu culinaire',
     soustitre: 'Magazine de cuisine',
+    icone: '/images/icons/newspaper.png',
   },
 ];
 

@@ -19,7 +19,10 @@ import { parcours, valeursCuisine } from '../data/site';
           se met au service de votre quotidien.
         </p>
       </div>
-      <img class="bio-photo" src="/images/placeholder-portrait.svg" alt="Lola, La mère Simone" />
+      <div class="bio-photo-wrap">
+        <img class="bio-spoon" src="/images/spoons/cream-pale.png" alt="" aria-hidden="true" />
+        <img class="bio-photo" src="/images/photo-portrait.png" alt="Lola, La mère Simone" />
+      </div>
     </div>
   </section>
 
@@ -45,6 +48,7 @@ import { parcours, valeursCuisine } from '../data/site';
         {
           parcours.map((etape) => (
             <Card variant="cream">
+              <img slot="icon" src={etape.icone} alt="" aria-hidden="true" />
               <strong>{etape.titre}</strong>
               <span>{etape.soustitre}</span>
             </Card>
@@ -111,8 +115,24 @@ import { parcours, valeursCuisine } from '../data/site';
     margin-bottom: 1rem;
   }
 
+  .bio-photo-wrap {
+    position: relative;
+  }
+
   .bio-photo {
-    border-radius: var(--radius-lg);
+    position: relative;
+    z-index: 1;
+    max-height: 480px;
+    margin-inline: auto;
+  }
+
+  .bio-spoon {
+    position: absolute;
+    top: -2rem;
+    right: -1rem;
+    width: 40%;
+    z-index: 0;
+    transform: rotate(12deg);
   }
 
   .parcours {

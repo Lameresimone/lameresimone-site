@@ -38,11 +38,18 @@ const { variant = 'cream' } = Astro.props;
 
   .card-icon {
     flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .card-icon :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.4rem;
   }
 
   .card-body {
