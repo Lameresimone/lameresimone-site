@@ -1,9 +1,11 @@
 @import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
 
 /*
   Police du logo "Loubag" : police à licence commerciale (non disponible sur Google Fonts).
   Dépose les fichiers .woff2 dans src/assets/fonts/loubag/ et décommente le bloc ci-dessous
-  une fois la licence web vérifiée. En attendant, fallback sur une serif système proche.
+  une fois la licence web vérifiée. En attendant, Fraunces (self-hosted) sert de police
+  d'affichage : un vrai serif variable, pas un fallback système.
 */
 /*
 @font-face {
@@ -17,8 +19,10 @@
 :root {
   /* Palette */
   --color-olive: #6d6c53;
+  --color-olive-dark: #55543f;
   --color-cream: #faf3ed;
   --color-burgundy: #7d394d;
+  --color-burgundy-dark: #602a3a;
   --color-mauve: #7d505e;
 
   --color-text: var(--color-burgundy);
@@ -26,14 +30,23 @@
   --color-bg: var(--color-cream);
 
   /* Typographie */
-  --font-display: 'Loubag', 'Fraunces', Georgia, serif;
+  --font-display: 'Loubag', 'Fraunces Variable', Georgia, serif;
   --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
 
   /* Rythme */
-  --radius-md: 0.75rem;
-  --radius-lg: 1.25rem;
-  --space-section: clamp(2.5rem, 6vw, 5rem);
-  --content-max: 1160px;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1.5rem;
+  --space-section: clamp(4rem, 9vw, 8rem);
+  --space-block: clamp(1.5rem, 3vw, 2.5rem);
+  --content-max: 1180px;
+
+  /* Élévation & mouvement */
+  --shadow-sm: 0 2px 8px rgba(56, 24, 33, 0.06);
+  --shadow-md: 0 12px 28px -8px rgba(56, 24, 33, 0.22);
+  --shadow-lg: 0 24px 48px -16px rgba(56, 24, 33, 0.28);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.35s var(--ease);
 }
 
 *,
@@ -51,15 +64,20 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  line-height: 1.1;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -79,22 +97,39 @@ img {
 .container {
   max-width: var(--content-max);
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 3rem);
+  padding-inline: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.9rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
   border-radius: 999px;
   font-weight: 600;
+  font-size: 0.98rem;
   text-decoration: none;
   text-align: center;
   border: 2px solid transparent;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition),
+    color var(--transition), border-color var(--transition);
 }
 
 .btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-primary {
@@ -104,16 +139,22 @@ img {
 }
 
 .btn-primary:hover {
-  background: transparent;
+  background: var(--color-burgundy-dark);
   color: var(--color-cream);
   border-color: var(--color-cream);
 }
 
 .btn-block {
-  display: block;
+  display: flex;
+  justify-content: center;
   background: var(--color-olive);
   color: var(--color-cream);
   border-radius: var(--radius-md);
-  padding: 1.1rem 2rem;
-  font-size: 1.1rem;
+  padding: 1.15rem 2rem;
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-block:hover {
+  background: var(--color-olive-dark);
 }

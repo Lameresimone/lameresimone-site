@@ -42,32 +42,64 @@ const currentPath = Astro.url.pathname;
   .nav-bar ul {
     list-style: none;
     display: flex;
-    gap: clamp(1rem, 3vw, 2.25rem);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
     margin: 0;
-    padding: 0.85rem 0;
+    padding: 0.95rem 0;
   }
 
   .nav-bar a {
+    position: relative;
+    display: inline-block;
     color: var(--color-cream);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
-    opacity: 0.85;
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    opacity: 0.8;
+    padding-block: 0.15rem;
+    transition: opacity var(--transition);
+  }
+
+  .nav-bar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -0.2rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 999px;
+    transition: right var(--transition);
   }
 
   .nav-bar a:hover,
+  .nav-bar a:focus-visible,
   .nav-bar a[aria-current='page'] {
     opacity: 1;
   }
 
+  .nav-bar a:hover::after,
+  .nav-bar a:focus-visible::after,
+  .nav-bar a[aria-current='page']::after {
+    right: 0;
+  }
+
   .logo-bar {
     background: var(--color-cream);
-    padding-block: 1.25rem;
+    padding-block: 1.35rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 1px 0 rgba(125, 57, 77, 0.08);
   }
 
   .logo {
     display: inline-flex;
     text-decoration: none;
+    transition: opacity var(--transition);
+  }
+
+  .logo:hover {
+    opacity: 0.85;
   }
 
   .logo img {

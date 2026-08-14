@@ -16,14 +16,15 @@ import { contact } from '../data/site';
 <style>
   footer {
     background: var(--color-cream);
-    padding-block: 1.25rem;
+    padding: 2rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-burgundy) 12%, transparent);
   }
 
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem 2rem;
+    gap: 0.6rem 2.25rem;
     text-align: center;
   }
 
@@ -31,10 +32,17 @@ import { contact } from '../data/site';
   span {
     color: var(--color-burgundy);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  a {
+    transition: opacity var(--transition);
   }
 
   a:hover {
+    opacity: 1;
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
