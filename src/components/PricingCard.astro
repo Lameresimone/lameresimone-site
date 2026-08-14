@@ -1,0 +1,88 @@
+---
+import type { formules } from '../data/site';
+
+type Formule = (typeof formules)[number];
+
+interface Props {
+  formule: Formule;
+}
+
+const { formule } = Astro.props;
+---
+
+<div class="pricing-card">
+  <p class="pricing-name">{formule.nom}</p>
+  <p class="pricing-from">à partir de</p>
+  <p class="pricing-price">{formule.prixApresCredit}&euro;</p>
+  <p class="pricing-before-credit">
+    soit {formule.prixAvantCredit}&euro; avant crédit d&rsquo;impôt*<br />
+    Tarif hors prix des courses
+  </p>
+  <ul class="pricing-features">
+    {formule.avantages.map((avantage) => <li>{avantage}</li>)}
+  </ul>
+  <p class="pricing-footnote">
+    *Tarif pour {formule.nbPlats} plats de {formule.nbPortions} portions
+  </p>
+</div>
+
+<style>
+  .pricing-card {
+    background: var(--color-burgundy);
+    color: var(--color-cream);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .pricing-name {
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+
+  .pricing-from {
+    text-align: center;
+    margin: 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+  }
+
+  .pricing-price {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 3.25rem;
+    margin: 0;
+  }
+
+  .pricing-before-credit {
+    background: var(--color-cream);
+    color: var(--color-burgundy);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+  }
+
+  .pricing-features {
+    list-style: disc;
+    padding-left: 1.2rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .pricing-footnote {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.85;
+  }
+</style>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { site, creditImpot, argumentsClesAccueil } from '../data/site';
+---
+
+<BaseLayout title="Accueil" description={site.description}>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>{site.tagline}</h1>
+        <p class="hero-subtitle">{site.description}</p>
+
+        <div class="credit-row">
+          <div class="credit-box">
+            <p class="credit-percent">{creditImpot.taux}%</p>
+            <p class="credit-label">{creditImpot.label}</p>
+          </div>
+          <img
+            class="sap-badge"
+            src="/images/badge-sap.svg"
+            alt="Agréé Services à la personne"
+            width="110"
+          />
+        </div>
+
+        <a class="btn btn-primary" href="/offre">Découvrir l&rsquo;offre</a>
+      </div>
+
+      <div class="hero-photo">
+        <img src="/images/placeholder-hero.svg" alt="Lola, La mère Simone, présentant un plat cuisiné" />
+      </div>
+
+      <div class="hero-badges">
+        {
+          argumentsClesAccueil.map((arg) => (
+            <Card variant="cream">
+              <strong>{arg.titre}</strong>
+              <span>{arg.sousTitre}</span>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: var(--color-burgundy);
+    color: var(--color-cream);
+    padding-block: var(--space-section);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.75rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    max-width: 30ch;
+  }
+
+  .credit-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .credit-box {
+    background: color-mix(in srgb, var(--color-burgundy) 70%, black 15%);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .credit-percent {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .credit-label {
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 16ch;
+  }
+
+  .hero-photo img {
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+      order: 2;
+    }
+
+    .hero-badges {
+      order: 3;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .hero-badges > :global(.card) {
+      flex: 1 1 220px;
+    }
+  }
+</style>

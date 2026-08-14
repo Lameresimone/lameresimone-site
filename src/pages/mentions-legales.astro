@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../data/site';
+---
+
+<BaseLayout title="Mentions légales & CGV" description="Mentions légales et conditions générales de vente de La mère Simone.">
+  <section class="legal">
+    <div class="container">
+      <h1>Mentions légales &amp; CGV</h1>
+      <p>Contenu à rédiger. SIRET : {contact.siret}.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    background: var(--color-cream);
+    padding-block: var(--space-section);
+    min-height: 40vh;
+  }
+
+  .legal h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 1.25rem;
+  }
+</style>

@@ -1,0 +1,119 @@
+@import '@fontsource-variable/inter';
+
+/*
+  Police du logo "Loubag" : police à licence commerciale (non disponible sur Google Fonts).
+  Dépose les fichiers .woff2 dans src/assets/fonts/loubag/ et décommente le bloc ci-dessous
+  une fois la licence web vérifiée. En attendant, fallback sur une serif système proche.
+*/
+/*
+@font-face {
+  font-family: 'Loubag';
+  src: url('/fonts/loubag/Loubag.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+*/
+
+:root {
+  /* Palette */
+  --color-olive: #6d6c53;
+  --color-cream: #faf3ed;
+  --color-burgundy: #7d394d;
+  --color-mauve: #7d505e;
+
+  --color-text: var(--color-burgundy);
+  --color-text-on-dark: var(--color-cream);
+  --color-bg: var(--color-cream);
+
+  /* Typographie */
+  --font-display: 'Loubag', 'Fraunces', Georgia, serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+
+  /* Rythme */
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --space-section: clamp(2.5rem, 6vw, 5rem);
+  --content-max: 1160px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--color-cream);
+  color: var(--color-burgundy);
+  border-color: var(--color-cream);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--color-cream);
+  border-color: var(--color-cream);
+}
+
+.btn-block {
+  display: block;
+  background: var(--color-olive);
+  color: var(--color-cream);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 2rem;
+  font-size: 1.1rem;
+}

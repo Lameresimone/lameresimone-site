@@ -1,0 +1,65 @@
+---
+interface Props {
+  variant?: 'cream' | 'mauve';
+}
+
+const { variant = 'cream' } = Astro.props;
+---
+
+<div class:list={['card', `card-${variant}`]}>
+  {Astro.slots.has('icon') && (
+    <div class="card-icon">
+      <slot name="icon" />
+    </div>
+  )}
+  <div class="card-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .card {
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .card-cream {
+    background: var(--color-cream);
+    color: var(--color-burgundy);
+  }
+
+  .card-mauve {
+    background: var(--color-mauve);
+    color: var(--color-cream);
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .card-body :global(strong) {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .card-body :global(span) {
+    display: block;
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
+</style>

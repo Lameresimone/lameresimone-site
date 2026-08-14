@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="110" height="70" viewBox="0 0 110 70">
+  <rect width="110" height="70" rx="10" fill="#faf3ed" />
+  <text x="55" y="30" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#7d394d" text-anchor="middle">
+    Services à
+  </text>
+  <text x="55" y="45" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#7d394d" text-anchor="middle">
+    la personne
+  </text>
+</svg>

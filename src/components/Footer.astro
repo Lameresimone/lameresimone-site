@@ -1,0 +1,40 @@
+---
+import { contact } from '../data/site';
+---
+
+<footer>
+  <div class="container">
+    <a href={`mailto:${contact.email}`}>{contact.email}</a>
+    <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">
+      {contact.instagram}
+    </a>
+    <a href="/mentions-legales">Mentions légales &amp; CGV</a>
+    <span>SIRET {contact.siret}</span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--color-cream);
+    padding-block: 1.25rem;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+    text-align: center;
+  }
+
+  a,
+  span {
+    color: var(--color-burgundy);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
