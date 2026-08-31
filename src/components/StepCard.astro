@@ -9,17 +9,16 @@ const { numero, titre, texte } = Astro.props;
 ---
 
 <div class="step-card">
-  <p class="step-number">{numero}</p>
+  <span class="n">{numero}</span>
   <h3>{titre}</h3>
-  <p class="step-text">{texte}</p>
+  <p>{texte}</p>
 </div>
 
 <style>
   .step-card {
-    background: var(--color-cream);
+    background: var(--color-cream-card);
     border-radius: var(--radius-lg);
-    padding: 2.25rem 2rem;
-    box-shadow: var(--shadow-sm);
+    padding: 2.25rem 1.9rem;
     transition: transform var(--transition), box-shadow var(--transition);
   }
 
@@ -28,30 +27,23 @@ const { numero, titre, texte } = Astro.props;
     box-shadow: var(--shadow-lg);
   }
 
-  .step-number {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 2.75rem;
-    color: var(--color-burgundy);
-    margin: 0 0 1.1rem;
-    padding-bottom: 0.85rem;
-    border-bottom: 2px solid color-mix(in srgb, var(--color-burgundy) 30%, transparent);
-    display: inline-block;
+  .n {
+    font-weight: 900;
+    font-size: 2.25rem;
+    color: var(--color-wine);
+    opacity: 0.35;
   }
 
   .step-card h3 {
-    font-family: var(--font-body);
+    margin-top: 0.9rem;
     font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--color-burgundy);
-    margin: 1.1rem 0 0.6rem;
+    color: var(--color-wine);
   }
 
-  .step-text {
-    color: var(--color-burgundy);
-    opacity: 0.75;
-    font-size: 0.98rem;
+  .step-card p {
+    margin-top: 0.65rem;
+    font-size: 0.92rem;
+    color: var(--color-ink-soft);
     line-height: 1.6;
   }
 </style>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { creditImpot, contact } from '../data/site';
+---
+
+<BaseLayout
+  title="Crédit d'impôt"
+  description="Comprendre le crédit d'impôt de 50% sur les services de batchcooking à domicile."
+>
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="rule"></span>
+        Bon à savoir
+      </p>
+      <h1>Crédit d&rsquo;impôt de {creditImpot.taux}%</h1>
+      <p class="intro">Cette page est en cours de rédaction — le détail arrive bientôt.</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container">
+      <p>
+        En tant que service à la personne agréé, la prestation de batchcooking à domicile ouvre droit à un
+        crédit d&rsquo;impôt de {creditImpot.taux}% sur son montant. En attendant le détail complet de cette page,
+        n&rsquo;hésitez pas à me contacter directement pour toute question :
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding-block: clamp(3.5rem, 8vw, 5.5rem);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-cream);
+  }
+
+  .rule {
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
+  }
+
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+    color: #fff;
+  }
+
+  .intro {
+    margin-top: 1.15rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 52ch;
+  }
+
+  .content {
+    padding: clamp(3rem, 6vw, 4.5rem) 0;
+    min-height: 30vh;
+  }
+
+  .content p {
+    max-width: 60ch;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+  }
+
+  .content a {
+    color: var(--color-wine);
+    font-weight: 700;
+  }
+</style>

@@ -1,147 +1,246 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
-import { site, creditImpot, argumentsClesAccueil } from '../data/site';
+import { site, creditImpot, trustItems } from '../data/site';
+
+const trustIconPaths = [
+  'M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11Z M8 15c1 2 3 3 4 3',
+  'M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.65 12 21 12 21Z',
+  'M4 6h10M4 12h16M4 18h7 M17 4v4M9 10v4M17 16v4',
+];
 ---
 
 <BaseLayout title="Accueil" description={site.description}>
   <section class="hero">
     <div class="container hero-grid">
-      <div class="hero-content">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="rule"></span>
+          {site.secteur}
+        </p>
         <h1>{site.tagline}</h1>
-        <p class="hero-subtitle">{site.description}</p>
+        <p class="sub">{site.description}</p>
+        <a href="/offre" class="cta-link">Découvrir l&rsquo;offre</a>
+      </div>
 
-        <div class="credit-row">
-          <div class="credit-box">
-            <p class="credit-percent">{creditImpot.taux}%</p>
-            <p class="credit-label">{creditImpot.label}</p>
-          </div>
-          <img
-            class="sap-badge"
-            src="/images/badge-sap.svg"
-            alt="Agréé Services à la personne"
-            width="110"
-          />
+      <div class="hero-photo-col">
+        <img class="hero-photo" src="/images/photo-hero.png" alt="Lola, La mère Simone, présentant un plat cuisiné" />
+        <div class="hero-credit">
+          <span class="pct">{creditImpot.taux}%</span>
+          <span class="desc">{creditImpot.label}</span>
         </div>
-
-        <a class="btn btn-primary" href="/offre">Découvrir l&rsquo;offre</a>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-photo">
-        <img src="/images/photo-hero.png" alt="Lola, La mère Simone, présentant un plat cuisiné" />
-      </div>
-
-      <div class="hero-badges">
-        {
-          argumentsClesAccueil.map((arg) => (
-            <Card variant="cream">
-              <strong>{arg.titre}</strong>
-              <span>{arg.sousTitre}</span>
-            </Card>
-          ))
-        }
-      </div>
+  <section class="trust">
+    <div class="container trust-row">
+      {
+        trustItems.map((item, i) => (
+          <>
+            <div class="trust-item">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d={trustIconPaths[i]} />
+              </svg>
+              <div>
+                <div class="t">{item.titre}</div>
+                <div class="s">{item.sousTitre}</div>
+              </div>
+            </div>
+            {i < trustItems.length - 1 && <div class="trust-divider" />}
+          </>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
-    background: var(--color-burgundy);
-    color: var(--color-cream);
-    padding-block: var(--space-section);
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    overflow: hidden;
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr auto;
-    gap: 2.75rem;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    gap: 2.5rem;
+    padding-block: clamp(3.5rem, 8vw, 5.5rem);
+    min-height: 560px;
   }
 
-  .hero-content h1 {
-    font-size: clamp(2.75rem, 5vw, 4.25rem);
-    margin-bottom: 1.15rem;
+  .hero-copy {
+    max-width: 480px;
   }
 
-  .hero-subtitle {
-    font-size: 1.3rem;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 2.25rem;
-    max-width: 30ch;
-    opacity: 0.92;
-  }
-
-  .credit-row {
+  .eyebrow {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 2.25rem;
+    gap: 0.6rem;
+    color: var(--color-cream);
   }
 
-  .credit-box {
-    background: color-mix(in srgb, var(--color-burgundy) 70%, black 15%);
+  .rule {
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
+  }
+
+  .hero-copy h1 {
+    margin-top: 1rem;
+    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    color: #fff;
+  }
+
+  .sub {
+    margin-top: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.55;
+    max-width: 36ch;
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: 2rem;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+    padding: 1rem 2rem;
     border-radius: var(--radius-md);
-    padding: 1.35rem 1.6rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .credit-percent {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 3rem;
-    margin: 0;
-  }
-
-  .credit-label {
-    margin: 0;
+    font-weight: 800;
     font-size: 0.95rem;
-    max-width: 16ch;
-    opacity: 0.9;
+    text-decoration: none;
+    border-bottom: 3px solid var(--color-olive);
+    transition: transform var(--transition), box-shadow var(--transition);
   }
 
-  .sap-badge {
-    transition: transform var(--transition);
-  }
-
-  .sap-badge:hover {
+  .cta-link:hover {
     transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 
-  .hero-photo img {
-    max-height: 520px;
-    margin-inline: auto;
+  .hero-photo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 1.4rem;
+    width: 320px;
+    max-width: 100%;
+  }
+
+  .hero-photo {
+    max-height: 420px;
+    width: auto;
     transition: transform var(--transition);
   }
 
-  .hero-photo:hover img {
+  .hero-photo-col:hover .hero-photo {
     transform: translateY(-4px);
   }
 
-  .hero-badges {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
+  .hero-credit {
+    background: var(--color-wine-deepest);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    width: 100%;
+    text-align: left;
+    box-shadow: var(--shadow-md);
   }
 
-  @media (max-width: 900px) {
+  .hero-credit .pct {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    display: block;
+    color: var(--color-cream);
+  }
+
+  .hero-credit .desc {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: rgba(247, 240, 230, 0.85);
+  }
+
+  .trust {
+    background: var(--color-cream-card);
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .trust-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .trust-item .icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    color: var(--color-olive);
+  }
+
+  .trust-item .t {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-olive-dark);
+    line-height: 1.3;
+  }
+
+  .trust-item .s {
+    font-size: 0.9rem;
+    color: var(--color-olive-dark);
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.15rem;
+  }
+
+  .trust-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--color-line);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 980px) {
     .hero-grid {
       grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 3rem;
     }
 
-    .hero-photo {
-      order: 2;
+    .hero-photo-col {
+      order: -1;
+      margin-inline: auto;
+      padding-top: 0.5rem;
     }
 
-    .hero-badges {
-      order: 3;
-      flex-direction: row;
-      flex-wrap: wrap;
+    .hero-copy {
+      max-width: none;
     }
 
-    .hero-badges > :global(.card) {
-      flex: 1 1 220px;
+    .trust-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .trust-divider {
+      display: none;
     }
   }
 </style>

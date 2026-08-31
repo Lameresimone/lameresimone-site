@@ -1,0 +1,225 @@
+---
+import CheckIcon from './CheckIcon.astro';
+import { optionsFormules, portionsNote, formules } from '../data/site';
+
+type Formule = (typeof formules)[number];
+
+interface Props {
+  formule: Formule;
+}
+
+const { formule } = Astro.props;
+const { ponctuel, mensuel2, mensuel4 } = formule.prix;
+---
+
+<div class="plan" data-plan={formule.id}>
+  <h3>{formule.nom}</h3>
+  <div class="price-box">
+    <p class="from">à partir de</p>
+    <div class="price-row-main">
+      <div class="price" data-client={ponctuel.client} data-client2={mensuel2.client} data-client4={mensuel4.client}>
+        {ponctuel.client}&euro;
+      </div>
+    </div>
+    <p class="price-note">
+      soit <strong data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>{ponctuel.avant}&euro;</strong>
+      avant crédit d&rsquo;impôt* — tarif hors prix des courses (courses non éligibles au crédit d&rsquo;impôt)
+    </p>
+  </div>
+  <div class="price-savings-slot"></div>
+  <ul class="plan-features">
+    {
+      formule.avantages.map((avantage) => (
+        <li>
+          <CheckIcon />
+          {avantage}
+        </li>
+      ))
+    }
+  </ul>
+  <p class="options-label">En option</p>
+  <ul class="plan-options">
+    {
+      optionsFormules.map((option) => (
+        <li>
+          <span class="plus">+</span> {option.label} <span class="opt-price">{option.prix}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="plan-footnote">*Tarif pour {formule.nbPlats} plats de {formule.nbPortions} portions</p>
+  <p class="portions-note">
+    {
+      portionsNote.split('\n').map((ligne, i) => (
+        <>
+          {i > 0 && <br />}
+          {ligne}
+        </>
+      ))
+    }
+  </p>
+</div>
+
+<style>
+  .plan {
+    background: var(--color-olive);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.25rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+
+  .plan:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-mauve);
+  }
+
+  .plan h3 {
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    font-weight: 800;
+  }
+
+  .price-box {
+    margin-top: 1.35rem;
+    background: var(--color-cream);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem;
+  }
+
+  .from {
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+  }
+
+  .price-row-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .price {
+    font-size: 3.1rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-wine);
+  }
+
+  .price-note {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+
+  .price-note strong {
+    color: var(--color-ink);
+  }
+
+  .price-savings-slot :global(.price-savings) {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-cream);
+    background: var(--color-olive-dark);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-top: 0.65rem;
+  }
+
+  .plan-features {
+    margin-top: 1.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.4;
+  }
+
+  .plan-features li :global(svg) {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: var(--color-cream);
+  }
+
+  .options-label {
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.22);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .plan-options {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .plan-options li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.4;
+  }
+
+  .plus {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .opt-price {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .plan-footnote {
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.22);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+  }
+
+  .portions-note {
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.55;
+    font-style: italic;
+  }
+</style>

@@ -8,7 +8,10 @@ import { parcours, valeursCuisine } from '../data/site';
   <section class="bio">
     <div class="container bio-grid">
       <div class="bio-text">
-        <p class="eyebrow">QUI SUIS-JE ?</p>
+        <p class="eyebrow">
+          <span class="rule"></span>
+          Qui suis-je ?
+        </p>
         <h1>Hello,<br />moi c&rsquo;est Lola</h1>
         <p>
           Lilloise, 26 ans, cuisinière de cœur et de métier. J'ai créé La mère Simone parce que bien manger
@@ -87,9 +90,9 @@ import { parcours, valeursCuisine } from '../data/site';
 
 <style>
   .bio {
-    background: var(--color-burgundy);
-    color: var(--color-cream);
-    padding-block: var(--space-section);
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding-block: clamp(3.5rem, 8vw, 5.5rem);
   }
 
   .bio-grid {
@@ -100,8 +103,17 @@ import { parcours, valeursCuisine } from '../data/site';
   }
 
   .bio-text .eyebrow {
-    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-cream);
     margin-bottom: 0.75rem;
+  }
+
+  .bio-text .rule {
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
   }
 
   .bio-text h1 {
@@ -154,14 +166,20 @@ import { parcours, valeursCuisine } from '../data/site';
   }
 
   .parcours-text h2 {
-    font-size: clamp(2.1rem, 4vw, 2.85rem);
+    font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+    color: var(--color-wine);
     margin-bottom: 1.5rem;
   }
 
   .parcours-text p {
     margin-bottom: 1.15rem;
     line-height: 1.65;
-    opacity: 0.92;
+    color: var(--color-ink-soft);
+  }
+
+  .parcours-text strong {
+    color: var(--color-ink);
+    font-weight: 700;
   }
 
   .parcours-badges {
@@ -171,7 +189,7 @@ import { parcours, valeursCuisine } from '../data/site';
   }
 
   .valeurs {
-    background: var(--color-olive);
+    background: var(--color-olive-muted);
     color: var(--color-cream);
     padding-block: var(--space-section);
   }
@@ -196,8 +214,7 @@ import { parcours, valeursCuisine } from '../data/site';
   }
 
   .valeur-card {
-    background: var(--color-cream);
-    color: var(--color-burgundy);
+    background: var(--color-cream-card);
     border-radius: var(--radius-lg);
     padding: 2rem 1.85rem;
     box-shadow: var(--shadow-sm);
@@ -210,15 +227,13 @@ import { parcours, valeursCuisine } from '../data/site';
   }
 
   .valeur-card h3 {
-    font-family: var(--font-body);
     font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    color: var(--color-wine);
     margin-bottom: 0.85rem;
   }
 
   .valeur-card p {
-    opacity: 0.75;
+    color: var(--color-ink-soft);
     line-height: 1.6;
   }
 
