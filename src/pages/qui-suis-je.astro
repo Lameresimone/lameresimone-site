@@ -24,7 +24,7 @@ import { parcours, valeursCuisine } from '../data/site';
       </div>
       <div class="bio-photo-wrap">
         <img class="bio-spoon" src="/images/spoons/cream-pale.png" alt="" aria-hidden="true" />
-        <img class="bio-photo" src="/images/photo-portrait.png" alt="Lola, La mère Simone" />
+        <img class="bio-photo" src="/images/photo-portrait.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
       </div>
     </div>
   </section>
@@ -135,8 +135,13 @@ import { parcours, valeursCuisine } from '../data/site';
   .bio-photo {
     position: relative;
     z-index: 1;
-    max-height: 480px;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
     margin-inline: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     transition: transform var(--transition);
   }
 

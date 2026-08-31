@@ -23,7 +23,7 @@ const trustIconPaths = [
       </div>
 
       <div class="hero-photo-col">
-        <img class="hero-photo" src="/images/photo-hero.png" alt="Lola, La mère Simone, présentant un plat cuisiné" />
+        <img class="hero-photo" src="/images/photo-hero.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
         <div class="hero-credit">
           <span class="pct">{creditImpot.taux}%</span>
           <span class="desc">{creditImpot.label}</span>
@@ -127,13 +127,16 @@ const trustIconPaths = [
     align-items: center;
     justify-self: center;
     gap: 1.4rem;
-    width: 320px;
+    width: 360px;
     max-width: 100%;
   }
 
   .hero-photo {
-    max-height: 420px;
-    width: auto;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     transition: transform var(--transition);
   }
 
