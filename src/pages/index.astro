@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, creditImpot, trustItems } from '../data/site';
+import { site, creditImpot, trustItems, avisClients } from '../data/site';
 
 const trustIconPaths = [
   'M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11Z M8 15c1 2 3 3 4 3',
@@ -23,7 +23,7 @@ const trustIconPaths = [
       </div>
 
       <div class="hero-photo-col">
-        <img class="hero-photo" src="/images/photo-hero.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
+        <img class="hero-photo" src="/images/photo-hero-landscape.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
         <div class="hero-credit">
           <span class="pct">{creditImpot.taux}%</span>
           <span class="desc">{creditImpot.label}</span>
@@ -52,6 +52,45 @@ const trustIconPaths = [
       }
     </div>
   </section>
+
+  <section class="about-teaser">
+    <div class="container about-grid">
+      <img class="about-photo" src="/images/photo-portrait.jpg" alt="Lola, La mère Simone, en cuisine" />
+      <div class="about-copy">
+        <p class="eyebrow">Qui suis-je</p>
+        <h2>Une cheffe formée, à votre service</h2>
+        <p>
+          Diplômée d&rsquo;un CAP Cuisine, je cuisine pour vous des repas faits maison à partir de produits
+          frais et de saison. Je viens directement chez vous préparer les repas de la semaine, dans le
+          respect de vos goûts et de vos éventuelles allergies.
+        </p>
+        <a href="/qui-suis-je" class="about-cta">En savoir plus sur mon parcours →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="avis" id="avis">
+    <div class="container">
+      <div class="avis-head">
+        <p class="eyebrow">Avis clients</p>
+        <h2>Vos avis, ma plus belle vitrine</h2>
+      </div>
+      <div class="avis-grid">
+        {
+          avisClients.map((avis) => (
+            <div class="avis-card">
+              <div class="avis-stars">{'★'.repeat(avis.note)}{'☆'.repeat(5 - avis.note)}</div>
+              <p class="avis-text">{avis.texte}</p>
+              <p class="avis-author">
+                <strong>{avis.nom}</strong>
+              </p>
+              {avis.placeholder && <span class="avis-placeholder-tag">Exemple à remplacer</span>}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -66,8 +105,8 @@ const trustIconPaths = [
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 2.5rem;
-    padding-block: clamp(3.5rem, 8vw, 5.5rem);
-    min-height: 560px;
+    padding-block: clamp(3rem, 7vw, 4rem);
+    min-height: 480px;
   }
 
   .hero-copy {
@@ -85,32 +124,33 @@ const trustIconPaths = [
     width: 22px;
     height: 1px;
     background: var(--color-cream);
+    flex-shrink: 0;
   }
 
   .hero-copy h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    margin-top: 1.1rem;
+    font-size: clamp(2.875rem, 5.6vw, 4.5rem);
     color: #fff;
   }
 
   .sub {
-    margin-top: 1.25rem;
-    font-size: 1.15rem;
+    margin-top: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
-    line-height: 1.55;
-    max-width: 36ch;
+    line-height: 1.5;
+    max-width: 34ch;
   }
 
   .cta-link {
     display: inline-block;
-    margin-top: 2rem;
+    margin-top: 2.1rem;
     background: var(--color-cream);
     color: var(--color-wine-deeper);
-    padding: 1rem 2rem;
+    padding: 1.1rem 2.25rem;
     border-radius: var(--radius-md);
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: 1rem;
     text-decoration: none;
     border-bottom: 3px solid var(--color-olive);
     transition: transform var(--transition), box-shadow var(--transition);
@@ -126,14 +166,14 @@ const trustIconPaths = [
     flex-direction: column;
     align-items: center;
     justify-self: center;
-    gap: 1.4rem;
-    width: 360px;
+    gap: 1.15rem;
+    width: 400px;
     max-width: 100%;
   }
 
   .hero-photo {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -220,6 +260,133 @@ const trustIconPaths = [
     flex-shrink: 0;
   }
 
+  .about-teaser {
+    padding: clamp(4rem, 8vw, 5.5rem) 0;
+    background: var(--color-cream-card);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition);
+  }
+
+  .about-photo:hover {
+    transform: translateY(-4px);
+  }
+
+  .about-copy h2 {
+    margin-top: 0.75rem;
+    font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+    color: var(--color-wine);
+  }
+
+  .about-copy p {
+    margin-top: 1.15rem;
+    font-size: 1rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+    max-width: 48ch;
+  }
+
+  .about-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.65rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--color-wine);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-olive);
+    padding-bottom: 0.2rem;
+    transition: color var(--transition);
+  }
+
+  .about-cta:hover {
+    color: var(--color-wine-dark);
+  }
+
+  .avis {
+    padding: clamp(4rem, 8vw, 5.5rem) 0;
+  }
+
+  .avis-head {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+  }
+
+  .avis-head h2 {
+    margin-top: 0.75rem;
+    font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+    color: var(--color-wine);
+  }
+
+  .avis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .avis-card {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.85rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avis-stars {
+    color: var(--color-olive);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .avis-text {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    color: var(--color-ink);
+    line-height: 1.65;
+    flex-grow: 1;
+  }
+
+  .avis-author {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+  }
+
+  .avis-author strong {
+    color: var(--color-wine);
+    font-weight: 800;
+  }
+
+  .avis-placeholder-tag {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-olive-dark);
+    background: var(--color-cream-card);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
   @media (max-width: 980px) {
     .hero-grid {
       grid-template-columns: 1fr;
@@ -244,6 +411,18 @@ const trustIconPaths = [
 
     .trust-divider {
       display: none;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-photo {
+      aspect-ratio: 16 / 10;
+    }
+
+    .avis-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

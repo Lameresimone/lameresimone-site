@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ScrollTopButton from '../components/ScrollTopButton.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -26,5 +27,6 @@ const { title, description = 'Batchcooking à domicile, secteur Lille et alentou
       <slot />
     </main>
     <Footer />
+    <ScrollTopButton />
   </body>
 </html>

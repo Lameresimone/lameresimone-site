@@ -1,32 +1,43 @@
 ---
-import { contact, footerNav } from '../data/site';
+import { site, contact, footerSiteLinks, footerLegalLinks } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
 
 <footer>
-  <div class="container">
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h5>Navigation</h5>
-        {footerNav.map((item) => <a href={item.href}>{item.label}</a>)}
-      </div>
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">
-          {contact.instagram}
-        </a>
-      </div>
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="/" class="logo">
+        <img src="/images/logo-on-dark.png" alt="La mère Simone" />
+      </a>
+      <p class="footer-tagline">{site.description}</p>
+      <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-social">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+        </svg>
+        {contact.instagram}
+      </a>
     </div>
-    <div class="footer-bottom">
-      <span>SIRET {contact.siret}</span>
-      <span>|</span>
-      <a href="/mentions-legales">Mentions légales &amp; CGV</a>
-      <span>|</span>
-      <span>&copy; {year} La mère Simone — Tous droits réservés</span>
+
+    <div class="footer-col">
+      <h5>Le site</h5>
+      {footerSiteLinks.map((item) => <a href={item.href}>{item.label}</a>)}
     </div>
-    <div class="sap-placeholder">Logo<br />SAP</div>
+
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href={`mailto:${contact.email}`} class="footer-mail">{contact.email}</a>
+      <a href="/contact" class="footer-devis-btn">Demander mon devis</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>&copy; {year} La mère Simone — SIRET {contact.siret}</span>
+    <div class="footer-legal">
+      {footerLegalLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+    </div>
   </div>
 </footer>
 
@@ -34,52 +45,72 @@ const year = new Date().getFullYear();
   footer {
     background: var(--color-olive-dark);
     color: rgba(247, 240, 230, 0.75);
-    padding: 2.5rem 0 1rem;
-    position: relative;
+    padding: 4rem 0 1.75rem;
   }
 
-  .sap-placeholder {
-    position: absolute;
-    right: clamp(1.25rem, 4vw, 2.5rem);
-    bottom: 1rem;
-    width: 44px;
-    height: 44px;
-    border: 1px dashed rgba(247, 240, 230, 0.35);
-    border-radius: 6px;
-    display: flex;
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(247, 240, 230, 0.15);
+  }
+
+  .footer-brand .logo img {
+    height: 2.5rem;
+    width: auto;
+  }
+
+  .footer-tagline {
+    margin-top: 1.15rem;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: rgba(247, 240, 230, 0.75);
+    max-width: 30ch;
+  }
+
+  .footer-social {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 8px;
-    line-height: 1.3;
-    color: rgba(247, 240, 230, 0.45);
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+    border: 1px solid rgba(247, 240, 230, 0.28);
+    border-radius: 30px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    width: fit-content;
+    transition: border-color var(--transition), background var(--transition);
   }
 
-  .footer-cols {
-    display: flex;
-    justify-content: center;
-    gap: 3.5rem;
-    flex-wrap: wrap;
-    padding-bottom: 1.5rem;
-    text-align: center;
+  .footer-social svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .footer-social:hover {
+    border-color: #fff;
+    background: rgba(247, 240, 230, 0.06);
   }
 
   .footer-col h5 {
-    font-size: 0.65rem;
-    letter-spacing: 0.09em;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(247, 240, 230, 0.4);
-    margin-bottom: 0.5rem;
+    color: rgba(247, 240, 230, 0.45);
     font-weight: 800;
+    margin-bottom: 0.6rem;
   }
 
-  .footer-col a,
-  .footer-col span {
+  .footer-col a {
     display: block;
-    font-size: 0.8rem;
-    color: rgba(247, 240, 230, 0.75);
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    color: rgba(247, 240, 230, 0.85);
     text-decoration: none;
-    padding-block: 0.15rem;
     transition: color var(--transition);
   }
 
@@ -87,31 +118,71 @@ const year = new Date().getFullYear();
     color: #fff;
   }
 
-  .footer-bottom {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(247, 240, 230, 0.12);
-    font-size: 0.7rem;
-    color: rgba(247, 240, 230, 0.4);
-    display: flex;
-    justify-content: center;
-    gap: 0.65rem;
-    flex-wrap: wrap;
+  .footer-mail {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    word-break: break-word;
   }
 
-  .footer-bottom a {
-    color: rgba(247, 240, 230, 0.55);
+  .footer-devis-btn {
+    display: inline-block;
+    margin-top: 1.1rem;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper) !important;
+    font-weight: 800;
+    font-size: 0.82rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    border-bottom: 2px solid var(--color-olive);
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .footer-devis-btn:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    padding-top: 1.35rem;
+    font-size: 0.7rem;
+    color: rgba(247, 240, 230, 0.45);
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-legal a {
+    color: rgba(247, 240, 230, 0.6);
     text-decoration: none;
     transition: color var(--transition);
   }
 
-  .footer-bottom a:hover {
+  .footer-legal a:hover {
     color: #fff;
   }
 
-  @media (max-width: 560px) {
-    footer {
-      padding-bottom: 4rem;
+  @media (max-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-legal {
+      justify-content: flex-start;
     }
   }
 </style>

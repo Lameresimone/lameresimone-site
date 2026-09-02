@@ -1,255 +1,381 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
 import { parcours, valeursCuisine } from '../data/site';
 ---
 
 <BaseLayout title="Qui suis-je" description="À la rencontre de Lola, la cuisinière derrière La mère Simone.">
-  <section class="bio">
-    <div class="container bio-grid">
-      <div class="bio-text">
-        <p class="eyebrow">
-          <span class="rule"></span>
-          Qui suis-je ?
-        </p>
-        <h1>Hello,<br />moi c&rsquo;est Lola</h1>
-        <p>
-          Lilloise, 26 ans, cuisinière de cœur et de métier. J'ai créé La mère Simone parce que bien manger
-          ne devrait pas être une contrainte !
-        </p>
-        <p>
-          Depuis toujours, ma façon de prendre soin des autres passe par la cuisine. Alors, la mère Simone
-          se met au service de votre quotidien.
-        </p>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Qui suis-je</p>
+        <h1>Hello, moi c&rsquo;est Lola</h1>
+        <div class="bio">
+          <p>
+            Lilloise, 26 ans, cuisinière de cœur et de métier.<br />J&rsquo;ai créé La mère Simone parce que
+            bien manger ne devrait pas être une contrainte !
+          </p>
+          <p>Depuis toujours, ma façon de prendre soin des autres passe par la cuisine.</p>
+          <p>Alors, la mère Simone se met au service de votre quotidien.</p>
+        </div>
       </div>
-      <div class="bio-photo-wrap">
-        <img class="bio-spoon" src="/images/spoons/cream-pale.png" alt="" aria-hidden="true" />
-        <img class="bio-photo" src="/images/photo-portrait.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
-      </div>
+      <img class="hero-photo" src="/images/photo-portrait.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
     </div>
   </section>
 
   <section class="parcours">
     <div class="container parcours-grid">
       <div class="parcours-text">
+        <p class="eyebrow">Mon parcours</p>
         <h2>Faire de ma passion, mon métier</h2>
         <p>
-          Après des études de commerce, j'ai suivi ma vraie vocation : le <strong>CAP Cuisine</strong>, que
-          j'ai obtenu Major de Promo à l'école Hôtelière de Cannes.
+          Après des études de commerce, j&rsquo;ai suivi ma vraie vocation : le <strong>CAP Cuisine</strong>,
+          que j&rsquo;ai obtenu Major de Promo à l&rsquo;École Hôtelière de Cannes.
         </p>
         <p>
-          Depuis, j'ai construit une expérience solide : <strong>chef de produit culinaire</strong> pour une
-          box de recettes à domicile, traiteur, <strong>restaurants gastronomiques</strong> et aujourd'hui
-          créatrice de contenu pour un <strong>magazine de cuisine</strong>.
+          Depuis, j&rsquo;ai construit une expérience solide : <strong>chef de produit culinaire</strong> pour
+          une box de recettes à domicile, traiteur, <strong>restaurants gastronomiques</strong> et
+          aujourd&rsquo;hui créatrice de contenu pour un magazine de cuisine.
         </p>
         <p>
-          Je suis également formée <strong>HACCP</strong>, les normes d'hygiène alimentaire professionnelles.
-          Chez vous, je travaille comme en cuisine professionnelle.
+          Je suis également formée <strong>HACCP</strong>, les normes d&rsquo;hygiène alimentaire
+          professionnelles. Chez vous, je travaille comme en cuisine professionnelle.
         </p>
       </div>
-      <div class="parcours-badges">
+
+      <div class="timeline">
         {
           parcours.map((etape) => (
-            <Card variant="cream">
-              <img slot="icon" src={etape.icone} alt="" aria-hidden="true" />
-              <strong>{etape.titre}</strong>
-              <span>{etape.soustitre}</span>
-            </Card>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="valeurs">
-    <div class="container">
-      <h2>Ma cuisine, c&rsquo;est quoi ?</h2>
-      <p class="valeurs-intro">Du réconfort, de la gourmandise et des plats bons pour le corps et pour la tête.</p>
-      <div class="valeurs-grid">
-        {
-          valeursCuisine.map((valeur) => (
-            <div class="valeur-card">
-              <h3>{valeur.titre}</h3>
-              <p>
-                {
-                  valeur.texte.split('\n').map((ligne, i) => (
-                    <>
-                      {i > 0 && <br />}
-                      {ligne}
-                    </>
-                  ))
-                }
-              </p>
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <img src={etape.icone} alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="t-title">{etape.titre}</div>
+                <div class="t-sub">{etape.soustitre}</div>
+              </div>
             </div>
           ))
         }
       </div>
     </div>
   </section>
+
+  <section class="values">
+    <div class="container">
+      <div class="values-head">
+        <p class="eyebrow">Ma cuisine, c&rsquo;est quoi ?</p>
+        <p class="tagline">Du réconfort, de la gourmandise et des plats bons pour le corps et pour la tête.</p>
+      </div>
+      <div class="values-grid">
+        {
+          valeursCuisine.map((valeur) => (
+            <div class="value-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d={valeur.icone} />
+              </svg>
+              <h3>{valeur.titre}</h3>
+              <p>{valeur.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Envie de soulager votre quotidien ?</h2>
+        <a href="/contact" class="cta-link">Contactez-moi</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .bio {
-    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+  .hero {
+    background: var(--color-olive-muted);
     color: #fff;
-    padding-block: clamp(3.5rem, 8vw, 5.5rem);
+    padding: clamp(2.25rem, 5vw, 2.85rem) 0 clamp(2.75rem, 5vw, 3.35rem);
   }
 
-  .bio-grid {
+  .hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2.75rem;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
   }
 
-  .bio-text .eyebrow {
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    color: var(--color-cream);
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    color: var(--color-cream);
-    margin-bottom: 0.75rem;
   }
 
-  .bio-text .rule {
+  .hero-copy .eyebrow::before {
+    content: '';
     width: 22px;
     height: 1px;
     background: var(--color-cream);
   }
 
-  .bio-text h1 {
-    font-size: clamp(2.5rem, 4vw, 3.75rem);
-    margin-bottom: 1.35rem;
+  .hero-copy h1 {
+    margin-top: 0.9rem;
+    font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+    color: #fff;
   }
 
-  .bio-text p {
-    max-width: 42ch;
-    margin-bottom: 1.1rem;
+  .bio {
+    margin-top: 1.15rem;
+    font-size: 0.97rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
-    opacity: 0.92;
+    max-width: 46ch;
   }
 
-  .bio-photo-wrap {
-    position: relative;
+  .bio p + p {
+    margin-top: 0.75rem;
   }
 
-  .bio-photo {
-    position: relative;
-    z-index: 1;
+  .hero-photo {
     width: 100%;
-    max-width: 420px;
-    aspect-ratio: 3 / 4;
+    height: 100%;
+    min-height: 320px;
     object-fit: cover;
-    margin-inline: auto;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     transition: transform var(--transition);
   }
 
-  .bio-photo-wrap:hover .bio-photo {
+  .hero-photo:hover {
     transform: translateY(-4px);
   }
 
-  .bio-spoon {
-    position: absolute;
-    top: -2rem;
-    right: -1rem;
-    width: 40%;
-    z-index: 0;
-    transform: rotate(12deg);
-  }
-
   .parcours {
+    padding: clamp(2.75rem, 6vw, 3.5rem) 0;
     background: var(--color-cream);
-    padding-block: var(--space-section);
   }
 
   .parcours-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .parcours-text .eyebrow {
+    color: var(--color-olive-dark);
   }
 
   .parcours-text h2 {
-    font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 2.8vw, 1.875rem);
     color: var(--color-wine);
-    margin-bottom: 1.5rem;
   }
 
   .parcours-text p {
-    margin-bottom: 1.15rem;
-    line-height: 1.65;
-    color: var(--color-ink-soft);
-  }
-
-  .parcours-text strong {
-    color: var(--color-ink);
-    font-weight: 700;
-  }
-
-  .parcours-badges {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-  }
-
-  .valeurs {
-    background: var(--color-olive-muted);
-    color: var(--color-cream);
-    padding-block: var(--space-section);
-  }
-
-  .valeurs h2 {
-    font-size: clamp(2.1rem, 4vw, 2.85rem);
-    margin-bottom: 0.85rem;
-  }
-
-  .valeurs-intro {
-    font-weight: 500;
-    font-size: 1.1rem;
-    max-width: 40ch;
-    margin-bottom: 2.75rem;
-    opacity: 0.92;
-  }
-
-  .valeurs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-  }
-
-  .valeur-card {
-    background: var(--color-cream-card);
-    border-radius: var(--radius-lg);
-    padding: 2rem 1.85rem;
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
-  }
-
-  .valeur-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .valeur-card h3 {
-    font-size: 1.2rem;
-    color: var(--color-wine);
-    margin-bottom: 0.85rem;
-  }
-
-  .valeur-card p {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
     color: var(--color-ink-soft);
     line-height: 1.6;
   }
 
-  @media (max-width: 900px) {
-    .bio-grid,
+  .parcours-text strong {
+    color: var(--color-ink);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-item {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .timeline-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .timeline-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .timeline-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .timeline-item .t-title {
+    font-size: 0.87rem;
+    font-weight: 800;
+    color: var(--color-wine);
+    line-height: 1.3;
+  }
+
+  .timeline-item .t-sub {
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.1rem;
+  }
+
+  .values {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+    color: #fff;
+  }
+
+  .values-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+  }
+
+  .values-head .eyebrow {
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .values-head .eyebrow::before {
+    display: none;
+  }
+
+  .values-head .tagline {
+    margin-top: 0.85rem;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+
+  .value-card {
+    background: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .value-card svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-wine);
+    margin-bottom: 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.06rem;
+    color: var(--color-wine);
+  }
+
+  .value-card p {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .cta-band {
+    padding: clamp(3rem, 6vw, 4.4rem) 0;
+  }
+
+  .cta-inner {
+    background: var(--color-wine);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    color: #fff;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    max-width: 20ch;
+  }
+
+  .cta-inner .cta-link {
+    display: inline-block;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+    padding: 1rem 2.1rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.94rem;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+
+  .cta-inner .cta-link:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 980px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+      order: -1;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      min-height: 0;
+    }
+
     .parcours-grid {
       grid-template-columns: 1fr;
     }
 
-    .valeurs-grid {
+    .values-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
     }
   }
 </style>

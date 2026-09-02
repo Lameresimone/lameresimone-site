@@ -1,0 +1,54 @@
+<button class="scroll-top" aria-label="Remonter en haut de la page" id="scroll-top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5" />
+    <polyline points="5 12 12 5 19 12" />
+  </svg>
+</button>
+
+<script>
+  const button = document.getElementById('scroll-top');
+
+  button?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+<style>
+  .scroll-top {
+    position: fixed;
+    right: 1.75rem;
+    bottom: 1.75rem;
+    z-index: 40;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-wine);
+    border: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .scroll-top:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .scroll-top svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 560px) {
+    .scroll-top {
+      right: 1rem;
+      bottom: 1rem;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>

@@ -1,10 +1,12 @@
 ---
-import { nav, navCta } from '../data/site';
+import { nav, navCta, brandBarMessage } from '../data/site';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="brand-bar"></div>
+<div class="brand-bar" class:list={{ 'has-message': Boolean(brandBarMessage) }}>
+  {brandBarMessage && <p>{brandBarMessage}</p>}
+</div>
 <header>
   <nav class="nav container">
     <a href="/" class="logo">
@@ -20,12 +22,10 @@ const currentPath = Astro.url.pathname;
           </li>
         ))
       }
-      <li>
-        <a href={navCta.href} class="nav-cta">
-          {navCta.label}
-        </a>
-      </li>
     </ul>
+    <a href={navCta.href} class="nav-cta" id="nav-cta">
+      {navCta.label}
+    </a>
     <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
@@ -35,17 +35,36 @@ const currentPath = Astro.url.pathname;
 <script>
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('nav-links');
+  const navCta = document.getElementById('nav-cta');
 
   burger?.addEventListener('click', () => {
     const isOpen = navLinks?.classList.toggle('open');
+    navCta?.classList.toggle('open', Boolean(isOpen));
     burger.setAttribute('aria-expanded', String(Boolean(isOpen)));
   });
 </script>
 
 <style>
   .brand-bar {
-    height: 5px;
+    min-height: 5px;
     background: var(--color-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-bar.has-message {
+    min-height: 38px;
+    padding: 0.4rem 1.25rem;
+  }
+
+  .brand-bar p {
+    margin: 0;
   }
 
   header {
@@ -54,9 +73,10 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
+    column-gap: 1.5rem;
     padding-block: 1rem;
   }
 
@@ -78,6 +98,7 @@ const currentPath = Astro.url.pathname;
   .nav-links {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.75rem;
     font-size: 0.9rem;
     font-weight: 700;
@@ -112,19 +133,19 @@ const currentPath = Astro.url.pathname;
 
   .nav-cta {
     background: var(--color-olive);
-    color: #fff !important;
-    padding: 0.75rem 1.5rem !important;
+    color: #fff;
+    padding: 0.9rem 1.75rem;
     border-radius: var(--radius-md);
+    font-size: 0.87rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    justify-self: end;
     transition: background var(--transition), transform var(--transition);
-  }
-
-  .nav-cta::after {
-    display: none !important;
   }
 
   .nav-cta:hover {
     background: var(--color-olive-dark);
-    color: #fff;
     transform: translateY(-1px);
   }
 
@@ -146,35 +167,34 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 900px) {
-    .nav-links {
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links,
+    .nav-cta {
       display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--color-cream);
-      border-bottom: 1px solid var(--color-line);
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
-      padding: 1rem clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
     }
 
     .nav-links.open {
       display: flex;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-line);
     }
 
-    .nav-links li {
-      width: 100%;
-    }
-
-    .nav-cta {
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
-
-    .nav {
-      position: relative;
+    .nav-cta.open {
+      display: inline-flex;
+      flex-basis: 100%;
+      justify-self: auto;
+      margin-top: 0.75rem;
     }
 
     .burger {

@@ -51,6 +51,8 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
     </div>
   </section>
 
+  <div class="light-band"></div>
+
   <section class="how">
     <div class="container">
       <div class="how-head">
@@ -128,14 +130,14 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   .page-header {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding-block: clamp(3.5rem, 8vw, 5.5rem);
+    padding: clamp(1.5rem, 4vw, 1.85rem) 0 clamp(1.85rem, 4vw, 2.15rem);
   }
 
   .ph-grid {
     display: grid;
     grid-template-columns: 1fr 0.85fr;
-    gap: 3.5rem;
-    align-items: start;
+    gap: 2.25rem;
+    align-items: stretch;
   }
 
   .eyebrow {
@@ -152,40 +154,41 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   }
 
   .ph-copy h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+    margin-top: 0.5rem;
+    font-size: clamp(1.5rem, 2.8vw, 2.125rem);
     color: #fff;
   }
 
   .ph-copy .intro {
-    margin-top: 1.25rem;
-    font-size: 1.05rem;
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
-    line-height: 1.65;
+    line-height: 1.45;
     max-width: 42ch;
   }
 
   .ph-region {
-    margin-top: 1.4rem;
+    margin-top: 0.6rem;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.75);
   }
 
   .ph-region svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 
   .ph-photo {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    max-height: 460px;
     width: 100%;
+    height: 100%;
+    min-height: 280px;
     object-fit: cover;
     transition: transform var(--transition);
   }
@@ -195,20 +198,20 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   }
 
   .benefit-list {
-    margin-top: 1.75rem;
+    margin-top: 0.6rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.4rem;
   }
 
   .benefit-row {
     display: flex;
     align-items: flex-start;
-    gap: 0.85rem;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-md);
-    padding: 0.9rem 1.15rem;
+    padding: 0.5rem 0.9rem;
     transition: background var(--transition), transform var(--transition), border-color var(--transition);
   }
 
@@ -219,18 +222,18 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   }
 
   .benefit-row :global(svg) {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    margin-top: 0.1rem;
+    margin-top: 0.15rem;
     color: var(--color-cream);
   }
 
   .benefit-row span {
-    font-size: 0.92rem;
+    font-size: 0.81rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.94);
-    line-height: 1.4;
+    line-height: 1.3;
   }
 
   .benefit-row.highlight {
@@ -238,7 +241,9 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
     border-color: var(--color-wine-deepest);
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.75rem 1.5rem;
+    padding: 0.85rem 1rem;
+    width: 220px;
+    max-width: 100%;
   }
 
   .benefit-row.highlight:hover {
@@ -246,18 +251,23 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   }
 
   .benefit-row.highlight .pct {
-    font-size: 2.75rem;
+    font-size: 1.85rem;
     font-weight: 900;
     line-height: 1;
     color: var(--color-cream);
   }
 
   .benefit-row.highlight .desc {
-    margin-top: 0.65rem;
-    font-size: 0.92rem;
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
     font-weight: 500;
     color: rgba(247, 240, 230, 0.85);
-    line-height: 1.4;
+    line-height: 1.35;
+  }
+
+  .light-band {
+    height: 56px;
+    background: var(--color-cream);
   }
 
   .how {
@@ -293,14 +303,14 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   }
 
   .pricing {
-    padding: clamp(4rem, 8vw, 6rem) 0;
+    padding: clamp(2rem, 5vw, 2.5rem) 0;
   }
 
   .pricing-toggle {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.15rem;
     flex-wrap: wrap;
   }
 
@@ -345,12 +355,12 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
   .pricing-head {
     text-align: center;
     max-width: 600px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 0.85rem;
   }
 
   .pricing-head h2 {
-    margin-top: 0.75rem;
-    font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+    margin-top: 0.5rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
     color: var(--color-wine);
   }
 
@@ -358,13 +368,13 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
-    max-width: 920px;
+    max-width: 1140px;
     margin: 0 auto;
   }
 
   .pricing-cta {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 1.25rem;
   }
 
   .cta-link {
@@ -392,6 +402,9 @@ import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, eng
 
     .ph-photo {
       order: -1;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      min-height: 0;
       max-width: 320px;
       margin: 0 auto;
     }

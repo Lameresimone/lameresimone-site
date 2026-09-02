@@ -18,12 +18,30 @@ export const nav = [
   { label: "L'offre", href: '/offre' },
   { label: 'Qui suis-je', href: '/qui-suis-je' },
   { label: "Crédit d'impôt", href: '/credit-impot' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];
 
 export const navCta = { label: 'Demander mon devis', href: '/contact' };
 
-export const footerNav = nav.filter((item) => item.href !== '/contact');
+/** Message ponctuel affiché dans le bandeau du haut (promo, annonce...). Laisser vide si aucun message actif. */
+export const brandBarMessage = '';
+
+export const footerSiteLinks = [
+  { label: 'Accueil', href: '/' },
+  { label: "L'offre", href: '/offre' },
+  { label: 'Qui suis-je', href: '/qui-suis-je' },
+  { label: "Crédit d'impôt", href: '/credit-impot' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Avis', href: '/#avis' },
+];
+
+export const footerLegalLinks = [
+  { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'CGV', href: '/mentions-legales' },
+  { label: 'Politique de confidentialité', href: '/politique-confidentialite' },
+  { label: 'Cookies', href: '/cookies' },
+];
 
 export const creditImpot = {
   taux: 50,
@@ -44,7 +62,7 @@ export const trustMini = [
 
 export const beneficesOffre = [
   'Cuisine maison — produits frais et de saison',
-  'Moins de temps en cuisine, plus de temps en famille',
+  'Plus de temps pour vous, en famille...',
   "Des recettes qui s'adaptent à vos envies",
   "Pas envie de faire les courses ? Je m'en occupe",
 ];
@@ -138,14 +156,41 @@ export const parcours = [
 export const valeursCuisine = [
   {
     titre: 'Fait avec amour',
-    texte: "J'adore faire plaisir et rendre service.\nChez vous, je cuisine comme je le ferais pour ma propre famille.",
+    texte: "J'adore faire plaisir et rendre service. Chez vous, je cuisine comme je le ferais pour ma propre famille.",
+    icone: 'M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10Z',
   },
   {
     titre: 'Bon pour le corps',
-    texte: 'Produits frais, de saison, cuisinés sans superflu. Et une vraie spécialité pour les recettes sans gluten',
+    texte: 'Produits frais, de saison, cuisinés sans superflu. Et une vraie spécialité pour les recettes sans gluten.',
+    icone: 'M4 11h16a8 8 0 0 1-7 8h-2a8 8 0 0 1-7-8Z M8 11c0-3 1.5-5 2-6M12 11c0-3.5.5-5.5 1.5-7M16 11c0-2.5-.5-4-1.5-5.5',
   },
   {
     titre: 'Bon pour la tête',
-    texte: "Manger bien sans y penser, c'est un luxe que vous méritez.\nJe m'occupe de tout pour que vous profitiez.",
+    texte: "Manger bien sans y penser, c'est un luxe que vous méritez. Je m'occupe de tout pour que vous profitiez.",
+    icone: 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.5.5.8 1 .9 1.7l.1.8h6l.1-.8c.1-.7.4-1.2.9-1.7A6 6 0 0 0 12 3Z',
+  },
+];
+
+export const avisClients = [
+  {
+    note: 5,
+    texte:
+      "[Exemple à remplacer] Un accompagnement bienveillant, des plats savoureux et une vraie tranquillité d'esprit pour toute la semaine.",
+    nom: 'Prénom N.',
+    placeholder: true,
+  },
+  {
+    note: 5,
+    texte:
+      "[Exemple à remplacer] Ponctuelle, à l'écoute de nos goûts et de nos allergies. On adore retrouver le frigo plein le dimanche soir !",
+    nom: 'Prénom N.',
+    placeholder: true,
+  },
+  {
+    note: 5,
+    texte:
+      "[Exemple à remplacer] Un vrai gain de temps, une cuisine impeccable en partant, et des recettes qu'on n'aurait jamais osé faire nous-mêmes.",
+    nom: 'Prénom N.',
+    placeholder: true,
   },
 ];
