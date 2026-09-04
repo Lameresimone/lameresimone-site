@@ -1,31 +1,154 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { creditImpot, contact } from '../data/site';
+import { creditImpot, creditImpotEtapes, creditImpotFaq, formules } from '../data/site';
+
+const confort = formules[0];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: creditImpotFaq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.reponse,
+    },
+  })),
+};
 ---
 
 <BaseLayout
-  title="Crédit d'impôt"
-  description="Comprendre le crédit d'impôt de 50% sur les services de batchcooking à domicile."
+  title="Crédit d'impôt & avance immédiate"
+  description="50% de crédit d'impôt sur vos repas faits maison, avec avance immédiate Urssaf : ne payez que votre part, sans avance de trésorerie ni déclaration."
+  canonicalPath="/credit-impot"
+  jsonLd={jsonLd}
 >
   <section class="page-header">
     <div class="container">
       <p class="eyebrow">
         <span class="rule"></span>
-        Bon à savoir
+        Aide financière
+        <span class="rule"></span>
       </p>
-      <h1>Crédit d&rsquo;impôt de {creditImpot.taux}%</h1>
-      <p class="intro">Cette page est en cours de rédaction — le détail arrive bientôt.</p>
+      <h1>Crédit d&rsquo;impôt &amp; avance immédiate</h1>
+      <p class="intro">
+        {creditImpot.taux}% du coût de la prestation vous est remboursé — et grâce à l&rsquo;avance immédiate,
+        vous n&rsquo;avancez même pas cette somme : vous ne payez que votre part, dès le départ.
+      </p>
     </div>
   </section>
 
-  <section class="content">
+  <section class="principe">
+    <div class="container principe-grid">
+      <div class="principe-text">
+        <p class="eyebrow">Le principe</p>
+        <h2>Un service à la personne, à moitié prix</h2>
+        <p>
+          En tant que prestataire agréée <strong>services à la personne</strong>, mes prestations de préparation
+          de repas à domicile ouvrent droit à un crédit d&rsquo;impôt de <strong>{creditImpot.taux}%</strong> du
+          montant payé.
+        </p>
+        <p>
+          Concrètement : sur une prestation à {confort.prix.ponctuel.avant}&euro;, vous ne payez au final que
+          <strong>{confort.prix.ponctuel.client}&euro;</strong> — que vous soyez imposable ou non. Ce n&rsquo;est
+          pas une réduction d&rsquo;impôt réservée aux foyers qui paient déjà des impôts, c&rsquo;est un crédit
+          remboursable pour tous.
+        </p>
+        <p>
+          L&rsquo;avance immédiate est un service <strong>optionnel et gratuit</strong>, proposé par
+          l&rsquo;Urssaf : elle déduit automatiquement votre crédit d&rsquo;impôt du coût de la prestation, sans
+          que vous ayez à avancer la somme.
+        </p>
+      </div>
+      <div class="stat-card">
+        <span class="pct">{creditImpot.taux}%</span>
+        <p class="desc">
+          du montant de la prestation remboursé sous forme de crédit d&rsquo;impôt, quel que soit votre niveau
+          d&rsquo;imposition.
+        </p>
+        <p class="ceiling">{creditImpot.plafond}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
     <div class="container">
-      <p>
-        En tant que service à la personne agréé, la prestation de batchcooking à domicile ouvre droit à un
-        crédit d&rsquo;impôt de {creditImpot.taux}% sur son montant. En attendant le détail complet de cette page,
-        n&rsquo;hésitez pas à me contacter directement pour toute question :
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+      <div class="how-head">
+        <p class="eyebrow eyebrow-light">L&rsquo;avance immédiate</p>
+        <h2>Pas d&rsquo;avance, pas de paperasse</h2>
+      </div>
+      <div class="steps-grid">
+        {
+          creditImpotEtapes.map((etape, i) => (
+            <div class="step-card">
+              <span class="num">{i + 1}</span>
+              <div class="num-line" />
+              <h3>{etape.titre}</h3>
+              <p>{etape.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="exemple">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">En pratique</p>
+        <h2>Un exemple concret</h2>
+      </div>
+      <div class="example-card">
+        <div class="example-row">
+          <span class="label">{confort.nom} — {confort.nbPlats} plats</span>
+          <span class="value">{confort.prix.ponctuel.avant}&euro;</span>
+        </div>
+        <div class="example-row">
+          <span class="label">Crédit d&rsquo;impôt ({creditImpot.taux}%)</span>
+          <span class="value">&minus; {confort.prix.ponctuel.avant - confort.prix.ponctuel.client}&euro;</span>
+        </div>
+        <div class="example-row final">
+          <span class="label">Montant réglé avec l&rsquo;avance immédiate</span>
+          <span class="value">{confort.prix.ponctuel.client}&euro;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eligibilite">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Conditions</p>
+        <h2>Qui peut en bénéficier ?</h2>
+      </div>
+      <div class="faq-list">
+        {
+          creditImpotFaq.map((item) => (
+            <details class="faq-item">
+              <summary>
+                {item.question}
+                <span class="plus">+</span>
+              </summary>
+              <p>{item.reponse}</p>
+            </details>
+          ))
+        }
+      </div>
+      <p class="disclaimer">
+        Ces informations sont données à titre indicatif et peuvent évoluer. Pour toute question sur votre
+        situation personnelle, rapprochez-vous de l&rsquo;<a href="https://www.urssaf.fr" target="_blank" rel="noopener">Urssaf</a>
+        ou consultez <a href="https://www.service-public.fr" target="_blank" rel="noopener">service-public.fr</a>.
       </p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Envie de profiter de l&rsquo;avance immédiate ?</h2>
+        <a href="/contact" class="cta-link">Demander mon devis</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -34,50 +157,393 @@ import { creditImpot, contact } from '../data/site';
   .page-header {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding: clamp(2.25rem, 5vw, 2.75rem) 0 clamp(2.5rem, 5vw, 3rem);
+    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
+    text-align: center;
   }
 
   .eyebrow {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.6rem;
     color: var(--color-cream);
+    font-size: 0.75rem;
+  }
+
+  .page-header .eyebrow {
+    font-size: 0.75rem;
   }
 
   .rule {
     width: 22px;
     height: 1px;
     background: var(--color-cream);
+    flex-shrink: 0;
   }
 
   h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+    margin-top: 0.6rem;
+    font-size: clamp(1.625rem, 3vw, 2.375rem);
     color: #fff;
   }
 
   .intro {
-    margin-top: 1.15rem;
-    font-size: 1.05rem;
+    margin: 0.75rem auto 0;
+    font-size: 0.94rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
-    max-width: 52ch;
+    line-height: 1.55;
+    max-width: 56ch;
   }
 
-  .content {
-    padding: clamp(3rem, 6vw, 4.5rem) 0;
-    min-height: 30vh;
+  .principe {
+    padding: clamp(3rem, 6vw, 4rem) 0;
   }
 
-  .content p {
-    max-width: 60ch;
-    font-size: 1rem;
+  .principe-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .principe-text .eyebrow {
+    justify-content: flex-start;
+    color: var(--color-olive-dark);
+  }
+
+  .principe-text h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-wine);
+    margin-top: 0.5rem;
+  }
+
+  .principe-text p {
+    margin-top: 0.875rem;
+    font-size: 0.94rem;
+    color: var(--color-ink-soft);
     line-height: 1.7;
+  }
+
+  .principe-text p + p {
+    margin-top: 0.75rem;
+  }
+
+  .principe-text strong {
+    color: var(--color-ink);
+  }
+
+  .stat-card {
+    background: var(--color-wine-deepest);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.85rem;
+  }
+
+  .stat-card .pct {
+    font-size: 3.25rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-cream);
+  }
+
+  .stat-card .desc {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: rgba(247, 240, 230, 0.85);
+    line-height: 1.5;
+  }
+
+  .stat-card .ceiling {
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.22);
+    font-size: 0.78rem;
+    color: rgba(247, 240, 230, 0.7);
+    line-height: 1.5;
+  }
+
+  .how {
+    background: var(--color-olive-muted);
+    padding: clamp(3.5rem, 7vw, 4rem) 0;
+    color: #fff;
+  }
+
+  .how-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .eyebrow-light {
+    color: rgba(247, 240, 230, 0.7);
+  }
+
+  .eyebrow-light .rule {
+    background: rgba(247, 240, 230, 0.7);
+  }
+
+  .how-head h2 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: #fff;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.6rem;
+  }
+
+  .step-card .num {
+    font-size: 2.125rem;
+    font-weight: 900;
+    color: var(--color-cream);
+    line-height: 1;
+  }
+
+  .step-card .num-line {
+    width: 30px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    margin: 0.85rem 0;
+  }
+
+  .step-card h3 {
+    font-size: 1.06rem;
+    color: #fff;
+  }
+
+  .step-card p {
+    margin-top: 0.6rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.6;
+  }
+
+  .exemple {
+    padding: clamp(3rem, 6vw, 4rem) 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 2.25rem;
+  }
+
+  .exemple .eyebrow,
+  .eligibilite .eyebrow {
+    justify-content: center;
+    color: var(--color-olive-dark);
+  }
+
+  .exemple .eyebrow .rule,
+  .eligibilite .eyebrow .rule {
+    display: none;
+  }
+
+  .section-head h2 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-wine);
+  }
+
+  .example-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.25rem;
+  }
+
+  .example-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .example-row:last-child {
+    border-bottom: none;
+  }
+
+  .example-row .label {
+    font-size: 0.9rem;
     color: var(--color-ink-soft);
   }
 
-  .content a {
+  .example-row .value {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .example-row.final {
+    padding-top: 1.25rem;
+  }
+
+  .example-row.final .label {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--color-wine);
+  }
+
+  .example-row.final .value {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--color-wine);
+  }
+
+  .eligibilite {
+    background: var(--color-cream-card);
+    padding: clamp(3.5rem, 7vw, 4rem) 0;
+  }
+
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.25rem 1.25rem;
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary .plus {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-olive);
+    color: var(--color-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.94rem;
+    font-weight: 700;
+    transition: transform var(--transition);
+  }
+
+  .faq-item[open] summary .plus {
+    transform: rotate(45deg);
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    padding: 0 0 1.1rem;
+  }
+
+  .disclaimer {
+    max-width: 760px;
+    margin: 1.75rem auto 0;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .disclaimer a {
     color: var(--color-wine);
     font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cta-band {
+    padding: clamp(3rem, 6vw, 4rem) 0 clamp(4rem, 6vw, 5rem);
+  }
+
+  .cta-inner {
+    background: var(--color-wine);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    color: #fff;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    max-width: 22ch;
+  }
+
+  .cta-link {
+    display: inline-block;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+    padding: 1rem 2.1rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.94rem;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+
+  .cta-link:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 980px) {
+    .principe-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .example-card {
+      padding: 1.5rem 1.375rem;
+    }
+
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
+    }
   }
 </style>

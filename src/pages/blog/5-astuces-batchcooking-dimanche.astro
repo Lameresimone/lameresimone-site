@@ -1,0 +1,288 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CheckIcon from '../../components/CheckIcon.astro';
+import { site, blogArticles } from '../../data/site';
+
+const article = blogArticles.find((a) => a.slug === '5-astuces-batchcooking-dimanche')!;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: article.title,
+  description:
+    'Planification, courses, cuisson, conservation : les bons réflexes pour cuisiner efficacement et sans stress votre batchcooking du dimanche.',
+  datePublished: article.dateIso,
+  author: {
+    '@type': 'Person',
+    name: 'Lola',
+  },
+  publisher: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: site.url,
+  },
+  mainEntityOfPage: `${site.url}/blog/${article.slug}`,
+};
+---
+
+<BaseLayout
+  title={article.title}
+  description="Planification, courses, cuisson, conservation : les bons réflexes pour cuisiner efficacement et sans stress votre batchcooking du dimanche."
+  canonicalPath={`/blog/${article.slug}`}
+  jsonLd={jsonLd}
+>
+  <section class="article-header">
+    <div class="container">
+      <a href="/blog" class="back-link">← Retour au blog</a>
+      <p class="eyebrow">{article.tag}</p>
+      <h1>{article.title}</h1>
+      <p class="meta">{article.date} &middot; {article.readTime} de lecture</p>
+    </div>
+  </section>
+
+  <section class="article-content">
+    <div class="container">
+      <img class="article-cover" src="/images/photo-action-2.jpg" alt="Lola, La mère Simone, portionne des plats préparés dans des boîtes de conservation" />
+
+      <div class="article-body">
+        <p>
+          Le batchcooking a mauvaise réputation auprès de ceux qui l&rsquo;ont essayé une fois, un dimanche, en
+          enchaînant les casseroles jusqu&rsquo;à 19h. Pourtant, avec la bonne organisation, deux à trois heures
+          suffisent pour préparer l&rsquo;essentiel des repas de la semaine. Voici les 5 réflexes qui font
+          vraiment la différence.
+        </p>
+
+        <h2>1. Planifier avant de cuisiner</h2>
+        <p>
+          La première erreur est de se lancer sans liste. Prenez 10 minutes en amont pour choisir vos recettes
+          de la semaine, en tenant compte de ce qu&rsquo;il reste déjà dans votre frigo et votre placard.
+          Privilégiez des recettes qui partagent des ingrédients communs — un même légume utilisé dans deux
+          plats, c&rsquo;est moins de découpe et moins de gaspillage.
+        </p>
+
+        <h2>2. Préparer une seule liste de courses groupée</h2>
+        <p>
+          Une fois vos menus fixés, listez tous les ingrédients en une seule fois, classés par rayon. Cela
+          évite les allers-retours au supermarché et les oublis de dernière minute qui font dérailler le
+          planning du dimanche.
+        </p>
+
+        <h2>3. Cuisiner en parallèle, pas les unes après les autres</h2>
+        <p>
+          Le vrai gain de temps du batchcooking vient de la parallélisation : pendant qu&rsquo;un plat mijote
+          ou qu&rsquo;un four chauffe, on découpe les légumes du plat suivant. Quelques repères simples pour
+          démarrer :
+        </p>
+        <ul>
+          <li>
+            <CheckIcon />
+            Lancez d&rsquo;abord tout ce qui cuit longtemps (riz, légumineuses, viandes mijotées).
+          </li>
+          <li>
+            <CheckIcon />
+            Profitez de ce temps de cuisson pour préparer les éléments crus des autres plats.
+          </li>
+          <li>
+            <CheckIcon />
+            Terminez par les cuissons rapides, qui perdent le moins en qualité en attendant d&rsquo;être servies.
+          </li>
+        </ul>
+
+        <h2>4. Bien conserver pour bien profiter</h2>
+        <p>
+          Un plat bien cuisiné mais mal conservé perd tout son intérêt. Laissez toujours refroidir avant de
+          fermer les contenants, portionnez selon vos repas réels plutôt qu&rsquo;en grandes quantités
+          difficiles à réchauffer, et notez la date de préparation sur chaque boîte. La plupart des plats
+          cuisinés se conservent 3 à 4 jours au réfrigérateur — au-delà, direction le congélateur.
+        </p>
+
+        <h2>5. Garder de la variété pour ne pas se lasser</h2>
+        <p>
+          Manger le même plat cinq jours de suite a raison de la motivation la plus solide. Pensez à varier les
+          assaisonnements et les accompagnements d&rsquo;un même repas de base : une base de céréales ou de
+          légumineuses peut se décliner en plusieurs versions simplement en changeant la sauce ou les épices
+          utilisées.
+        </p>
+
+        <p>
+          C&rsquo;est exactement ce que je fais chaque semaine chez mes clients : je prépare 4 à 5 plats
+          différents en une seule session, avec des produits frais et de saison, pour que votre frigo reste
+          varié sans que vous ayez à y penser.
+        </p>
+      </div>
+
+      <div class="article-cta">
+        <h3>Envie de déléguer votre batchcooking ?</h3>
+        <p>Je viens cuisiner directement chez vous, selon vos goûts et vos envies.</p>
+        <a href="/contact">Demander mon devis</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article-header {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .back-link:hover {
+    color: #fff;
+  }
+
+  .eyebrow {
+    color: var(--color-cream);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
+  }
+
+  h1 {
+    margin: 0.75rem auto 0;
+    font-size: clamp(1.625rem, 3.4vw, 2.5rem);
+    color: #fff;
+    max-width: 26ch;
+  }
+
+  .meta {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .article-content {
+    padding: clamp(3rem, 6vw, 3.5rem) 0 clamp(4rem, 7vw, 5rem);
+  }
+
+  .article-cover {
+    max-width: 860px;
+    margin: 0 auto clamp(2rem, 5vw, 3rem);
+    aspect-ratio: 16 / 8;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    display: block;
+  }
+
+  .article-body {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: var(--color-ink);
+    line-height: 1.75;
+  }
+
+  .article-body p {
+    margin-top: 1rem;
+  }
+
+  .article-body p:first-child {
+    margin-top: 0;
+  }
+
+  .article-body h2 {
+    margin-top: 2.75rem;
+    margin-bottom: 0.875rem;
+    font-size: 1.4375rem;
+    color: var(--color-wine);
+  }
+
+  .article-body ul {
+    margin-top: 0.875rem;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    list-style: none;
+  }
+
+  .article-body ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+
+  .article-body ul li :global(svg) {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--color-olive);
+  }
+
+  .article-body strong {
+    color: var(--color-wine);
+  }
+
+  .article-cta {
+    max-width: 680px;
+    margin: 3.5rem auto 0;
+    background: var(--color-cream-card);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.25rem;
+    text-align: center;
+  }
+
+  .article-cta h3 {
+    font-size: 1.25rem;
+    color: var(--color-wine);
+  }
+
+  .article-cta p {
+    margin-top: 0.625rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .article-cta a {
+    display: inline-block;
+    margin-top: 1.25rem;
+    background: var(--color-wine);
+    color: #fff;
+    padding: 0.875rem 1.875rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .article-cta a:hover {
+    background: var(--color-wine-dark);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 560px) {
+    .article-cta {
+      padding: 1.625rem 1.5rem;
+    }
+  }
+</style>

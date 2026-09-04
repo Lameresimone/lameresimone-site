@@ -1,10 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CheckIcon from '../components/CheckIcon.astro';
-import { formules, engagementModes, trustMini } from '../data/site';
+import { site, contact, formules, engagementModes, trustMini } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `Demander mon devis — ${site.name}`,
+  url: `${site.url}/contact`,
+  about: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    email: contact.email,
+    url: site.url,
+  },
+};
 ---
 
-<BaseLayout title="Demander mon devis" description="Demandez votre devis pour une prestation de batchcooking à domicile.">
+<BaseLayout
+  title="Demander mon devis"
+  description="Recevez une proposition personnalisée pour votre batchcooking à domicile à Lille. Réponse sous 48h, sans engagement de votre part."
+  canonicalPath="/contact"
+  jsonLd={jsonLd}
+>
   <section class="page-header">
     <div class="container">
       <p class="eyebrow">

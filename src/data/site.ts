@@ -19,6 +19,7 @@ export const nav = [
   { label: 'Qui suis-je', href: '/qui-suis-je' },
   { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'FAQ', href: '/faq' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -33,6 +34,7 @@ export const footerSiteLinks = [
   { label: 'Qui suis-je', href: '/qui-suis-je' },
   { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'FAQ', href: '/faq' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Avis', href: '/#avis' },
 ];
 
@@ -46,7 +48,55 @@ export const footerLegalLinks = [
 export const creditImpot = {
   taux: 50,
   label: "de crédit d'impôt immédiat sur la prestation",
+  plafond:
+    "Plafond annuel de dépenses ouvrant droit au crédit d'impôt : 12 000€ par foyer fiscal (montant pouvant être majoré selon votre situation — voir avec l'Urssaf).",
 };
+
+export const creditImpotEtapes = [
+  {
+    titre: 'Je vous inscris au service',
+    texte:
+      "Une fois vos conditions d'éligibilité vérifiées, vous recevez un mail de l'Urssaf pour activer votre compte sur particulier.urssaf.fr.",
+  },
+  {
+    titre: 'Après chaque prestation',
+    texte:
+      "J'émets une demande de paiement sur laquelle votre avance de 50% est automatiquement déduite. Vous la validez en ligne (ou elle l'est automatiquement sous 48h).",
+  },
+  {
+    titre: "L'Urssaf gère le règlement",
+    texte:
+      "Elle prélève votre reste à charge sur votre compte, puis me verse directement l'intégralité de la prestation. Rien à déclarer de votre côté.",
+  },
+];
+
+export const creditImpotFaq = [
+  {
+    question: 'Faut-il être imposable pour en bénéficier ?',
+    reponse:
+      "Non. Il s'agit d'un crédit d'impôt, pas d'une simple réduction : il s'applique que vous soyez imposable ou non. Si vous n'êtes pas imposable, l'avantage vous est tout de même accordé grâce à l'avance immédiate.",
+  },
+  {
+    question: 'Quelles conditions dois-je remplir ?',
+    reponse:
+      "Résider en France, disposer d'un numéro fiscal et avoir déjà effectué au moins une déclaration de revenus. Ce sont les conditions de base fixées par l'Urssaf pour activer le service.",
+  },
+  {
+    question: 'Puis-je cumuler avec un autre membre de mon foyer qui utilise déjà l\'avance immédiate ?',
+    reponse:
+      "Non, un seul membre du foyer fiscal peut recourir à des services à la personne avec l'avance immédiate à la fois.",
+  },
+  {
+    question: "Puis-je en bénéficier si je perçois déjà l'APA ou la PCH ?",
+    reponse:
+      "Non, l'avance immédiate n'est pas cumulable avec une prise en charge financière par un tiers, comme l'aide personnalisée d'autonomie (APA) ou la prestation de compensation du handicap (PCH).",
+  },
+  {
+    question: "Comment j'active le service ?",
+    reponse:
+      "Je m'occupe de votre inscription auprès de l'Urssaf. Une fois vos conditions vérifiées, vous recevez un mail pour activer votre compte sur particulier.urssaf.fr — c'est gratuit et rapide.",
+  },
+];
 
 export const trustItems = [
   { titre: 'Produits frais', sousTitre: 'de saison' },
@@ -168,6 +218,19 @@ export const valeursCuisine = [
     titre: 'Bon pour la tête',
     texte: "Manger bien sans y penser, c'est un luxe que vous méritez. Je m'occupe de tout pour que vous profitiez.",
     icone: 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.5.5.8 1 .9 1.7l.1.8h6l.1-.8c.1-.7.4-1.2.9-1.7A6 6 0 0 0 12 3Z',
+  },
+];
+
+export const blogArticles = [
+  {
+    tag: 'Astuces batchcooking',
+    title: '5 astuces pour réussir son batchcooking du dimanche',
+    excerpt:
+      'Planification, courses, cuisson, conservation : les bons réflexes pour cuisiner efficacement et sans stress.',
+    date: '4 septembre 2026',
+    dateIso: '2026-09-04',
+    readTime: '5 min',
+    slug: '5-astuces-batchcooking-dimanche',
   },
 ];
 

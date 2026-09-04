@@ -7,9 +7,18 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  canonicalPath?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description = 'Batchcooking à domicile, secteur Lille et alentours.' } = Astro.props;
+const {
+  title,
+  description = 'Batchcooking à domicile, secteur Lille et alentours.',
+  canonicalPath = Astro.url.pathname,
+  jsonLd,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
@@ -19,7 +28,9 @@ const { title, description = 'Batchcooking à domicile, secteur Lille et alentou
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title} | La mère Simone</title>
+    {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <Header />

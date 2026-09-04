@@ -1,9 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { parcours, valeursCuisine } from '../data/site';
+import { site, parcours, valeursCuisine } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lola',
+  jobTitle: 'Cheffe cuisinière à domicile',
+  description:
+    "Diplômée d'un CAP Cuisine (Major de Promo, École Hôtelière de Cannes) et formée HACCP, Lola cuisine des repas faits maison au domicile de ses clients à Lille et alentours.",
+  url: `${site.url}/qui-suis-je`,
+  worksFor: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: site.url,
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'École Hôtelière de Cannes',
+  },
+};
 ---
 
-<BaseLayout title="Qui suis-je" description="À la rencontre de Lola, la cuisinière derrière La mère Simone.">
+<BaseLayout
+  title="Qui suis-je"
+  description="CAP Cuisine, formée HACCP, plusieurs années d'expérience en restauration et box de recettes. Découvrez le parcours de Lola, cheffe du batchcooking à domicile à Lille."
+  canonicalPath="/qui-suis-je"
+  jsonLd={jsonLd}
+>
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
