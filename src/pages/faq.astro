@@ -1,26 +1,80 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contact } from '../data/site';
+import { faqGroups } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.reponse,
+      },
+    }))
+  ),
+};
 ---
 
-<BaseLayout title="FAQ" description="Questions fréquentes sur le batchcooking à domicile.">
+<BaseLayout
+  title="FAQ — Questions fréquentes"
+  description="Zone d'intervention, allergies, tarifs, crédit d'impôt, conservation des plats : les réponses aux questions les plus fréquentes sur le batchcooking à domicile."
+  canonicalPath="/faq"
+  jsonLd={jsonLd}
+>
   <section class="page-header">
     <div class="container">
       <p class="eyebrow">
         <span class="rule"></span>
         Questions fréquentes
+        <span class="rule"></span>
       </p>
       <h1>FAQ</h1>
-      <p class="intro">Cette page est en cours de rédaction — le détail arrive bientôt.</p>
+      <p class="intro">
+        Tout ce qu&rsquo;il faut savoir avant de faire appel à La mère Simone — zone d&rsquo;intervention,
+        allergies, tarifs et crédit d&rsquo;impôt.
+      </p>
     </div>
   </section>
 
-  <section class="content">
+  <section class="faq-section">
     <div class="container">
-      <p>
-        En attendant le détail complet de cette page, n&rsquo;hésitez pas à me contacter directement pour
-        toute question : <a href={`mailto:${contact.email}`}>{contact.email}</a>.
-      </p>
+      {
+        faqGroups.map((group) => (
+          <div class="faq-group">
+            <p class="faq-group-title">{group.titre}</p>
+            <div class="faq-list">
+              {group.items.map((item) => (
+                <details class="faq-item">
+                  <summary>
+                    {item.question}
+                    <span class="plus">+</span>
+                  </summary>
+                  <p>
+                    {item.reponse}
+                    {item.lien && (
+                      <>
+                        {' '}
+                        {item.lien.texte}
+                        {' '}
+                        <a href={item.lien.href}>{item.lien.label}</a>.
+                      </>
+                    )}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="faq-cta">
+        <h3>Une autre question ?</h3>
+        <p>N&rsquo;hésitez pas à me contacter directement, je réponds sous 48h.</p>
+        <a href="/contact">Demander mon devis</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -29,50 +83,167 @@ import { contact } from '../data/site';
   .page-header {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding: clamp(2.25rem, 5vw, 2.75rem) 0 clamp(2.5rem, 5vw, 3rem);
+    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
+    text-align: center;
   }
 
   .eyebrow {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.6rem;
     color: var(--color-cream);
+    font-size: 0.75rem;
   }
 
   .rule {
     width: 22px;
     height: 1px;
     background: var(--color-cream);
+    flex-shrink: 0;
   }
 
   h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+    margin-top: 0.6rem;
+    font-size: clamp(1.625rem, 3vw, 2.375rem);
     color: #fff;
   }
 
   .intro {
-    margin-top: 1.15rem;
-    font-size: 1.05rem;
+    margin: 0.75rem auto 0;
+    font-size: 0.94rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
-    max-width: 52ch;
+    line-height: 1.55;
+    max-width: 56ch;
   }
 
-  .content {
-    padding: clamp(3rem, 6vw, 4.5rem) 0;
-    min-height: 30vh;
+  .faq-section {
+    padding: clamp(3rem, 6vw, 4rem) 0 clamp(4.5rem, 7vw, 5.5rem);
   }
 
-  .content p {
-    max-width: 60ch;
-    font-size: 1rem;
-    line-height: 1.7;
+  .faq-group {
+    max-width: 760px;
+    margin: 0 auto clamp(2.5rem, 5vw, 3rem);
+  }
+
+  .faq-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .faq-group-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-wine);
+    margin-bottom: 1rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.25rem 1.25rem;
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary .plus {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-olive);
+    color: var(--color-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.94rem;
+    font-weight: 700;
+    transition: transform var(--transition);
+  }
+
+  .faq-item[open] summary .plus {
+    transform: rotate(45deg);
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
     color: var(--color-ink-soft);
+    line-height: 1.6;
+    padding: 0 0 1.1rem;
   }
 
-  .content a {
+  .faq-item p a {
     color: var(--color-wine);
     font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-cta {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--color-cream-card);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.25rem;
+  }
+
+  .faq-cta h3 {
+    font-size: 1.1875rem;
+    color: var(--color-wine);
+  }
+
+  .faq-cta p {
+    margin-top: 0.625rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .faq-cta a {
+    display: inline-block;
+    margin-top: 1.25rem;
+    background: var(--color-wine);
+    color: #fff;
+    padding: 0.875rem 1.875rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .faq-cta a:hover {
+    background: var(--color-wine-dark);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 560px) {
+    .faq-cta {
+      padding: 1.625rem 1.5rem;
+    }
   }
 </style>

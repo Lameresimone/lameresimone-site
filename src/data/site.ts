@@ -98,6 +98,86 @@ export const creditImpotFaq = [
   },
 ];
 
+export const faqGroups = [
+  {
+    titre: 'Le service',
+    items: [
+      {
+        question: 'Comment se déroule une prestation de batchcooking ?',
+        reponse:
+          "Après un premier échange sur vos goûts, intolérances et habitudes alimentaires, je compose vos menus, je peux faire vos courses si vous le souhaitez, puis je viens cuisiner directement chez vous. À la fin de la prestation, vous retrouvez 4 à 5 plats faits maison dans votre frigo et une cuisine propre et rangée.",
+      },
+      {
+        question: 'Dans quelles villes intervenez-vous ?',
+        reponse:
+          "J'interviens à Lille et dans les communes alentours. Si vous avez un doute sur votre secteur, contactez-moi directement, je vous confirmerai rapidement si je peux me déplacer chez vous.",
+      },
+      {
+        question: 'Prenez-vous en compte les allergies et intolérances ?',
+        reponse:
+          "Oui, c'est même l'un des points abordés dès notre premier échange. Je m'adapte à vos allergies, intolérances et préférences alimentaires, avec une vraie spécialité pour les recettes sans gluten.",
+      },
+      {
+        question: 'Que se passe-t-il si je ne suis pas chez moi pendant la prestation ?',
+        reponse:
+          "Il suffit de me laisser un accès à votre domicile (clé, digicode, boîte à clés...) le temps de la prestation. Nous en discutons ensemble en amont pour que tout se passe simplement.",
+      },
+      {
+        question: "Travaillez-vous dans le respect des normes d'hygiène ?",
+        reponse:
+          "Oui, je suis formée HACCP (normes d'hygiène alimentaire professionnelles) et je travaille chez vous exactement comme en cuisine professionnelle.",
+      },
+    ],
+  },
+  {
+    titre: 'Tarifs & engagement',
+    items: [
+      {
+        question: 'Quelles sont les formules proposées ?',
+        reponse:
+          "Deux formules : Confort (4 plats cuisinés, à partir de 85€ après crédit d'impôt) et Sérénité (5 plats cuisinés, à partir de 99€ après crédit d'impôt). Les deux incluent une cuisine propre et rangée en fin de prestation.",
+        lien: { texte: 'Détail complet sur la page', label: "L'offre", href: '/offre' },
+      },
+      {
+        question: 'Le prix affiché inclut-il les courses ?',
+        reponse:
+          "Non, le tarif affiché concerne uniquement la prestation de cuisine. Vous pouvez faire vos courses vous-même en amont, ou choisir l'option \"je fais vos courses\" (+20€, soit 40€ avant crédit d'impôt) — les courses elles-mêmes ne sont pas éligibles au crédit d'impôt.",
+      },
+      {
+        question: "Puis-je m'abonner pour bénéficier d'une réduction ?",
+        reponse:
+          "Oui : -5% sur un rythme de 2 prestations par mois, et -8% sur un rythme de 4 prestations par mois. Sans engagement reste possible si vous préférez tester ponctuellement.",
+      },
+      {
+        question: "Comment fonctionne le crédit d'impôt de 50% ?",
+        reponse:
+          "En tant que prestataire agréée services à la personne, mes prestations ouvrent droit à un crédit d'impôt de 50%. Grâce à l'avance immédiate de l'Urssaf, vous ne payez que votre part dès le départ, sans avance de trésorerie ni déclaration à faire.",
+        lien: { texte: 'Tous les détails sur la page', label: "Crédit d'impôt", href: '/credit-impot' },
+      },
+      {
+        question: 'Puis-je annuler ou reporter une prestation ?',
+        reponse:
+          "Oui, contactez-moi dès que possible. Une prestation peut généralement être reportée sous réserve de disponibilité — je fais au maximum pour m'adapter à vos imprévus.",
+      },
+    ],
+  },
+  {
+    titre: 'Pratique',
+    items: [
+      {
+        question: 'Dois-je fournir du matériel de cuisine particulier ?',
+        reponse:
+          "Non, je m'adapte à votre équipement habituel. Si un ustensile précis venait à manquer pour une recette, nous en discutons en amont.",
+      },
+      {
+        question: 'Comment sont conservés les plats préparés ?',
+        reponse:
+          "Les plats sont conditionnés dans des contenants adaptés et placés directement dans votre réfrigérateur. Ils se conservent généralement 3 à 4 jours ; au-delà, je vous conseille de les congeler.",
+      },
+    ],
+  },
+];
+
 export const trustItems = [
   { titre: 'Produits frais', sousTitre: 'de saison' },
   { titre: 'Fait maison', sousTitre: 'avec amour' },
