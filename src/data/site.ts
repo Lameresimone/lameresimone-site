@@ -20,6 +20,7 @@ export const nav = [
   { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
   { label: 'Contact', href: '/contact' },
 ];
 
