@@ -35,6 +35,7 @@ export const footerSiteLinks = [
   { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
   { label: 'Avis', href: '/#avis' },
 ];
 
@@ -175,6 +176,47 @@ export const faqGroups = [
           "Les plats sont conditionnés dans des contenants adaptés et placés directement dans votre réfrigérateur. Ils se conservent généralement 3 à 4 jours ; au-delà, je vous conseille de les congeler.",
       },
     ],
+  },
+];
+
+export const regimes = [
+  {
+    titre: 'Sans gluten',
+    texte:
+      "C'est le régime que je pratique moi-même au quotidien. Je connais les bonnes alternatives, les pièges à éviter, et je cuisine des plats sans gluten aussi gourmands que les autres — sans jamais donner l'impression d'un régime de contrainte.",
+    icone: 'M12 3a9 9 0 0 0 0 18',
+    iconeCercle: true,
+    badge: 'Ma spécialité',
+  },
+  {
+    titre: 'Sans lactose',
+    texte:
+      "Je m'adapte avec des alternatives végétales et des recettes pensées sans produits laitiers, sans perdre en gourmandise.",
+    icone: 'M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z',
+  },
+  {
+    titre: 'Végétarien & flexitarien',
+    texte:
+      "Des repas riches en protéines végétales, savoureux et équilibrés, que vous soyez végétarien·ne au quotidien ou simplement en réduction de viande.",
+    icone: 'M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 3 17 3s.5 5-3 10c0 0 5-2 7-8 0 0 3 12-10 15Z',
+  },
+  {
+    titre: 'Vegan',
+    texte:
+      "Des repas 100% végétaux, pensés pour rester complets et équilibrés, sans aucun produit d'origine animale.",
+    icone: 'M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5Z',
+  },
+  {
+    titre: 'IG bas & diabète',
+    texte:
+      "Des repas pensés pour limiter les pics glycémiques, avec des associations d'aliments qui stabilisent l'énergie sur la durée.",
+    icone: 'M3 3v18h18M7 14l4-4 3 3 5-6',
+  },
+  {
+    titre: 'Anti-inflammatoire',
+    texte:
+      'Le régime que je pratique moi-même : des produits frais, peu transformés, riches en oméga-3, fruits et légumes de saison.',
+    icone: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
   },
 ];
 

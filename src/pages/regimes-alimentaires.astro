@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, regimes } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Régimes alimentaires & sans gluten',
+  description:
+    "Sans gluten, sans lactose, végétarien, IG bas, anti-inflammatoire : comment La mère Simone accompagne vos besoins alimentaires spécifiques en cuisine.",
+  url: `${site.url}/regimes-alimentaires`,
+  about: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: site.url,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: regimes.map((regime, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: regime.titre,
+      description: regime.texte,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title="Régimes alimentaires & sans gluten"
+  description="Sans gluten, sans lactose, végétarien, IG bas, anti-inflammatoire : mon histoire avec l'alimentation, et comment j'accompagne vos besoins spécifiques en cuisine."
+  canonicalPath="/regimes-alimentaires"
+  jsonLd={jsonLd}
+>
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="rule"></span>
+        Alimentation &amp; bien-être
+        <span class="rule"></span>
+      </p>
+      <h1>Régimes alimentaires &amp; sans gluten</h1>
+      <p class="intro">
+        Mon histoire avec l&rsquo;alimentation, et comment j&rsquo;accompagne vos besoins spécifiques en
+        cuisine.
+      </p>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="container story-grid">
+      <img class="story-photo" src="/images/photo-action-1.jpg" alt="Lola, La mère Simone, en cuisine" />
+      <div class="story-text">
+        <p class="eyebrow">Mon histoire</p>
+        <h2>Pourquoi l&rsquo;alimentation, pour moi, c&rsquo;est essentiel</h2>
+        <p>
+          Je vis avec une maladie chronique inflammatoire. Pour moi, l&rsquo;alimentation a toujours été mon
+          <strong>premier médicament</strong> : depuis plusieurs années, je suis un mode alimentaire
+          anti-inflammatoire et sans gluten.
+        </p>
+        <p>
+          Je reste une gourmande, qui aime se faire plaisir à table. Bien manger et faire du bien à son corps
+          ne sont pas incompatibles — pour moi, les deux vont ensemble.
+        </p>
+        <p>
+          Je sais aussi à quel point il peut être difficile de changer d&rsquo;alimentation du jour au
+          lendemain. On ne sait pas par où commencer, on ne connaît pas les bons réflexes — je suis passée par
+          là, et ce n&rsquo;est pas simple. C&rsquo;est pour ça que je crois profondément en
+          l&rsquo;accompagnement : c&rsquo;est ce que j&rsquo;essaie d&rsquo;apporter à chacun de mes clients.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="regimes">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Ce que je cuisine</p>
+        <h2>Les régimes que j&rsquo;accompagne</h2>
+      </div>
+      <div class="regime-grid">
+        {
+          regimes.map((regime) => (
+            <div class="regime-card">
+              {regime.badge && <span class="regime-badge">{regime.badge}</span>}
+              <div class="regime-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  {regime.iconeCercle && <circle cx="12" cy="12" r="9" />}
+                  <path d={regime.icone} />
+                </svg>
+              </div>
+              <h3>{regime.titre}</h3>
+              <p>{regime.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="accompagnement">
+    <div class="container accompagnement-inner">
+      <p class="eyebrow">Pourquoi se faire accompagner</p>
+      <h2>Vous n&rsquo;avez pas à faire ça seul&middot;e</h2>
+      <p>
+        Changer d&rsquo;alimentation demande du temps, des essais, et parfois des erreurs avant de trouver ses
+        repères. Je suis passée par là, et c&rsquo;est exactement pour ça que je propose cet accompagnement :
+        vous n&rsquo;avez pas à réinventer la roue ni à y penser seul&middot;e — je m&rsquo;occupe de la
+        cuisine, vous profitez des repas.
+      </p>
+      <p class="disclaimer">
+        Ces informations reflètent mon expérience personnelle et ma pratique culinaire — elles ne remplacent
+        pas un avis médical. Si vous avez une pathologie ou des besoins spécifiques, parlez-en avec votre
+        médecin ou un&middot;e diététicien&middot;ne, en complément de nos échanges sur vos préférences
+        alimentaires.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <h3>Une alimentation spécifique à prendre en compte ?</h3>
+        <a href="/contact" class="cta-link">Demander mon devis</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: var(--color-cream);
+    font-size: 0.75rem;
+  }
+
+  .rule {
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
+    flex-shrink: 0;
+  }
+
+  .page-header h1 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.625rem, 3vw, 2.375rem);
+    color: #fff;
+  }
+
+  .intro {
+    margin: 0.75rem auto 0;
+    font-size: 0.94rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.55;
+    max-width: 56ch;
+  }
+
+  .story {
+    background: #fff;
+    padding: clamp(2.5rem, 5vw, 2.75rem) 0;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 2.25rem;
+    align-items: center;
+  }
+
+  .story-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition);
+  }
+
+  .story-photo:hover {
+    transform: translateY(-4px);
+  }
+
+  .story-text .eyebrow {
+    justify-content: flex-start;
+    color: var(--color-olive-dark);
+  }
+
+  .story-text .rule {
+    display: none;
+  }
+
+  .story-text h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.5625rem);
+    color: var(--color-wine);
+  }
+
+  .story-text p {
+    margin-top: 0.625rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .story-text p + p {
+    margin-top: 0.625rem;
+  }
+
+  .story-text strong {
+    color: var(--color-ink);
+  }
+
+  .regimes {
+    background: var(--color-cream-card);
+    padding: clamp(3.5rem, 7vw, 4rem) 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 2.75rem;
+  }
+
+  .section-head .eyebrow {
+    justify-content: center;
+    color: var(--color-olive-dark);
+  }
+
+  .section-head .rule {
+    display: none;
+  }
+
+  .section-head h2 {
+    margin-top: 0.625rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-wine);
+  }
+
+  .regime-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.375rem;
+  }
+
+  .regime-card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.5rem;
+    position: relative;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .regime-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .regime-badge {
+    position: absolute;
+    top: 1.375rem;
+    right: 1.375rem;
+    background: var(--color-olive);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.625rem;
+    border-radius: 20px;
+  }
+
+  .regime-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-cream-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.875rem;
+  }
+
+  .regime-icon svg {
+    width: 19px;
+    height: 19px;
+    color: var(--color-wine);
+  }
+
+  .regime-card h3 {
+    font-size: 1.03rem;
+    color: var(--color-wine);
+    padding-right: 4.375rem;
+  }
+
+  .regime-card p {
+    margin-top: 0.5rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+  }
+
+  .accompagnement {
+    background: #fff;
+    padding: clamp(3.5rem, 7vw, 4rem) 0;
+  }
+
+  .accompagnement-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .accompagnement-inner .eyebrow {
+    justify-content: center;
+    color: var(--color-olive-dark);
+  }
+
+  .accompagnement-inner .rule {
+    display: none;
+  }
+
+  .accompagnement h2 {
+    margin-top: 0.625rem;
+    font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+    color: var(--color-wine);
+  }
+
+  .accompagnement p {
+    margin-top: 1rem;
+    font-size: 0.94rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+  }
+
+  .disclaimer {
+    max-width: 720px;
+    margin: 2rem auto 0;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
+    background: var(--color-cream-card);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.5rem;
+  }
+
+  .cta-band {
+    padding: 0 0 clamp(4rem, 7vw, 5rem);
+  }
+
+  .cta-inner {
+    background: var(--color-wine);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    color: #fff;
+  }
+
+  .cta-inner h3 {
+    color: #fff;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    max-width: 22ch;
+  }
+
+  .cta-link {
+    display: inline-block;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+    padding: 0.9375rem 1.875rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+
+  .cta-link:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 980px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .story-photo {
+      order: -1;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .regime-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .regime-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+  }
+</style>
