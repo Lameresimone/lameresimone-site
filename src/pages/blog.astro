@@ -46,7 +46,7 @@ const jsonLd = {
           <div class="articles-grid">
             {blogArticles.map((article) => (
               <a href={`/blog/${article.slug}`} class="article-card">
-                <img class="article-img" src="/images/photo-action-2.jpg" alt="" />
+                <img class="article-img" src="/images/photo-action-2.webp" alt={article.title} />
                 <div class="article-body">
                   <span class="article-tag">{article.tag}</span>
                   <h2 class="article-title">{article.title}</h2>

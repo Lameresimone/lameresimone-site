@@ -3,7 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CheckIcon from '../components/CheckIcon.astro';
 import StepCard from '../components/StepCard.astro';
 import PricingPlan from '../components/PricingPlan.astro';
-import { site, creditImpot, beneficesOffre, etapesCommentCaMarche, formules, engagementModes } from '../data/site';
+import {
+  site,
+  creditImpot,
+  beneficesOffre,
+  etapesCommentCaMarche,
+  formules,
+  engagementModes,
+  advantageItems,
+  profilsOffre,
+} from '../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -87,7 +96,7 @@ const jsonLd = {
         </div>
       </div>
 
-      <img class="ph-photo" src="/images/photo-offre.jpg" alt="Lola, La mère Simone, range les plats préparés au réfrigérateur" />
+      <img class="ph-photo" src="/images/photo-offre.webp" alt="Lola, La mère Simone, range les plats préparés au réfrigérateur" />
     </div>
   </section>
 
@@ -127,6 +136,58 @@ const jsonLd = {
 
       <div class="pricing-cta">
         <a href="/contact" class="cta-link">Demander mon devis</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="advantage-banner">
+    <div class="container advantage-row">
+      {
+        advantageItems.map((item, i) => (
+          <>
+            <div class="advantage-item">
+              <div class="advantage-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={item.icone} />
+                </svg>
+              </div>
+              <div>
+                <div class="t">{item.titre}</div>
+                <div class="s">{item.soustitre}</div>
+              </div>
+            </div>
+            {i < advantageItems.length - 1 && <div class="advantage-divider" />}
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="pour-qui">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Pour qui ?</p>
+        <h2>Un service pensé pour chaque quotidien</h2>
+      </div>
+      <div class="profil-grid">
+        {
+          profilsOffre.map((profil) => (
+            <div class="profil-card">
+              <div class="profil-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={profil.icone} />
+                </svg>
+              </div>
+              <h3>{profil.titre}</h3>
+              <p class="profil-pain">{profil.pain}</p>
+              <p class="profil-solution">
+                {profil.solutionAvant}
+                <strong>{profil.solutionStrong}</strong>
+                {profil.solutionApres}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -444,7 +505,169 @@ const jsonLd = {
     box-shadow: var(--shadow-md);
   }
 
+  .advantage-banner {
+    background: var(--color-olive-muted);
+    padding: clamp(2.5rem, 5vw, 3rem) 0;
+  }
+
+  .advantage-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+  }
+
+  .advantage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.25rem;
+    min-width: 0;
+  }
+
+  .advantage-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .advantage-icon svg {
+    width: 19px;
+    height: 19px;
+    color: var(--color-wine);
+  }
+
+  .advantage-item .t {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+  }
+
+  .advantage-item .s {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 0.2rem;
+    line-height: 1.35;
+  }
+
+  .advantage-divider {
+    width: 1px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.28);
+    flex-shrink: 0;
+  }
+
+  .pour-qui {
+    background: #fff;
+    padding: clamp(3.5rem, 7vw, 4rem) 0;
+  }
+
+  .pour-qui .section-head {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 2.75rem;
+  }
+
+  .pour-qui .eyebrow {
+    justify-content: center;
+    color: var(--color-olive-dark);
+  }
+
+  .pour-qui .rule {
+    display: none;
+  }
+
+  .pour-qui .section-head h2 {
+    margin-top: 0.625rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-wine);
+  }
+
+  .profil-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.625rem;
+  }
+
+  .profil-card {
+    background: var(--color-cream-card);
+    border-radius: var(--radius-md);
+    padding: 1.875rem 1.625rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .profil-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .profil-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-wine);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .profil-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+
+  .profil-card h3 {
+    font-size: 1.125rem;
+    color: var(--color-wine);
+  }
+
+  .profil-pain {
+    margin-top: 0.625rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .profil-solution {
+    margin-top: 0.625rem;
+    font-size: 0.84rem;
+    color: var(--color-ink);
+    line-height: 1.55;
+  }
+
+  .profil-solution strong {
+    color: var(--color-wine);
+  }
+
   @media (max-width: 980px) {
+    .advantage-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .advantage-divider {
+      display: none;
+    }
+
+    .advantage-item {
+      padding: 0;
+    }
+
+    .profil-grid {
+      grid-template-columns: 1fr;
+    }
+
     .concept-grid {
       grid-template-columns: 1fr;
     }

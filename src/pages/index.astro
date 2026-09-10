@@ -49,7 +49,7 @@ const jsonLd = {
       </div>
 
       <div class="hero-photo-col">
-        <img class="hero-photo" src="/images/photo-hero-landscape.jpg" alt="Lola, La mère Simone, dans sa cuisine" />
+        <img class="hero-photo" src="/images/photo-hero-landscape.webp" alt="Lola, La mère Simone, dans sa cuisine" />
         <div class="hero-credit">
           <span class="pct">{creditImpot.taux}%</span>
           <span class="desc">{creditImpot.label}</span>
@@ -81,7 +81,7 @@ const jsonLd = {
 
   <section class="about-teaser">
     <div class="container about-grid">
-      <img class="about-photo" src="/images/photo-portrait.jpg" alt="Lola, La mère Simone, en cuisine" />
+      <img class="about-photo" src="/images/photo-portrait.webp" alt="Lola, La mère Simone, en cuisine" />
       <div class="about-copy">
         <p class="eyebrow">Qui suis-je</p>
         <h2>Une cheffe formée, à votre service</h2>
@@ -92,6 +92,27 @@ const jsonLd = {
         </p>
         <a href="/qui-suis-je" class="about-cta">En savoir plus sur mon parcours →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="guide-banner">
+    <div class="container guide-banner-inner">
+      <div class="guide-banner-text">
+        <p class="eyebrow">Guide offert</p>
+        <h2>Téléchargez votre guide pour tout savoir sur le batchcooking à domicile</h2>
+        <p>
+          Le concept, les tarifs, et comment profiter de {creditImpot.taux}% de crédit d&rsquo;impôt immédiat
+          — en un seul PDF.
+        </p>
+      </div>
+      <button type="button" class="guide-banner-btn" id="open-guide-modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Télécharger le guide
+      </button>
     </div>
   </section>
 
@@ -115,9 +136,51 @@ const jsonLd = {
           ))
         }
       </div>
+      <div class="avis-cta">
+        <a href="#avis">Lire tous les avis →</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<div class="guide-modal-overlay" id="guide-modal-overlay">
+  <div class="guide-modal">
+    <button type="button" class="guide-modal-close" id="guide-modal-close" aria-label="Fermer">×</button>
+    <h3>Recevez votre guide gratuit</h3>
+    <p>Le concept, les tarifs et le crédit d&rsquo;impôt, en un seul PDF. Indiquez votre email pour le télécharger.</p>
+    <form name="guide" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci-guide">
+      <input type="hidden" name="form-name" value="guide" />
+      <p class="honeypot"><label>Ne pas remplir : <input name="bot-field" /></label></p>
+      <div class="form-group">
+        <label for="guide-prenom">Prénom</label>
+        <input type="text" id="guide-prenom" name="prenom" required />
+      </div>
+      <div class="form-group">
+        <label for="guide-email">Email</label>
+        <input type="email" id="guide-email" name="email" required />
+      </div>
+      <button type="submit" class="guide-modal-submit">Recevoir mon guide</button>
+      <p class="note">Pas de spam, juste votre guide — et éventuellement quelques conseils cuisine plus tard.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const guideOverlay = document.getElementById('guide-modal-overlay');
+  const guideClose = document.getElementById('guide-modal-close');
+  const guideOpen = document.getElementById('open-guide-modal');
+
+  guideOpen?.addEventListener('click', () => guideOverlay?.classList.add('active'));
+  guideClose?.addEventListener('click', () => guideOverlay?.classList.remove('active'));
+
+  guideOverlay?.addEventListener('click', (event) => {
+    if (event.target === guideOverlay) guideOverlay.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') guideOverlay?.classList.remove('active');
+  });
+</script>
 
 <style>
   .hero {
@@ -413,6 +476,92 @@ const jsonLd = {
     width: fit-content;
   }
 
+  .avis-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .avis-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1.5px solid var(--color-line);
+    border-radius: 30px;
+    padding: 0.875rem 1.625rem;
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--color-wine);
+    text-decoration: none;
+    transition: border-color var(--transition), background var(--transition);
+  }
+
+  .avis-cta a:hover {
+    border-color: var(--color-wine);
+    background: var(--color-cream-card);
+  }
+
+  .guide-banner {
+    background: var(--color-olive);
+    padding: 3rem 0;
+  }
+
+  .guide-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .guide-banner-text {
+    max-width: 520px;
+  }
+
+  .guide-banner-text .eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .guide-banner-text h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+    color: #fff;
+  }
+
+  .guide-banner-text p {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+  }
+
+  .guide-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    background: var(--color-cream);
+    color: var(--color-olive-dark);
+    padding: 1rem 1.75rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .guide-banner-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .guide-banner-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
   @media (max-width: 980px) {
     .hero-grid {
       grid-template-columns: 1fr;
@@ -450,5 +599,142 @@ const jsonLd = {
     .avis-grid {
       grid-template-columns: 1fr;
     }
+
+    .guide-banner-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .guide-banner-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .guide-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 33, 24, 0.55);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+
+  .guide-modal-overlay.active {
+    display: flex;
+  }
+
+  .guide-modal {
+    background: #fff;
+    border-radius: var(--radius-md);
+    max-width: 440px;
+    width: 100%;
+    padding: 2.25rem 2rem;
+    position: relative;
+  }
+
+  .guide-modal-close {
+    position: absolute;
+    top: 0.875rem;
+    right: 0.875rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-cream-card);
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    line-height: 1;
+    transition: background var(--transition);
+  }
+
+  .guide-modal-close:hover {
+    background: var(--color-line);
+  }
+
+  .guide-modal h3 {
+    font-size: 1.25rem;
+    color: var(--color-wine);
+    max-width: 26ch;
+  }
+
+  .guide-modal p {
+    margin-top: 0.625rem;
+    font-size: 0.875rem;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+  }
+
+  .guide-modal form {
+    margin-top: 1.375rem;
+  }
+
+  .guide-modal .form-group {
+    margin-bottom: 0.875rem;
+  }
+
+  .guide-modal label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.375rem;
+  }
+
+  .guide-modal input[type='text'],
+  .guide-modal input[type='email'] {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    background: var(--color-cream);
+    transition: border-color var(--transition), background var(--transition);
+  }
+
+  .guide-modal input:focus {
+    outline: none;
+    border-color: var(--color-wine);
+    background: #fff;
+  }
+
+  .guide-modal-submit {
+    width: 100%;
+    margin-top: 0.375rem;
+    background: var(--color-wine);
+    color: #fff;
+    border: none;
+    padding: 0.9375rem;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .guide-modal-submit:hover {
+    background: var(--color-wine-dark);
+    transform: translateY(-1px);
+  }
+
+  .guide-modal .note {
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    text-align: center;
+  }
+
+  .guide-modal .honeypot {
+    position: absolute;
+    left: -9999px;
   }
 </style>

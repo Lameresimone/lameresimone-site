@@ -260,6 +260,58 @@ export const etapesCommentCaMarche = [
   },
 ];
 
+export const advantageItems = [
+  {
+    titre: '5h de temps retrouvé',
+    soustitre: 'pour vous, pour votre famille',
+    icone: 'M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11Z M8 15c1 2 3 3 4 3',
+  },
+  {
+    titre: 'Fini la charge mentale',
+    soustitre: 'adieu le "on mange quoi ce soir ?"',
+    icone:
+      'M9.5 2A5.5 5.5 0 0 0 4 7.5v.379a5.5 5.5 0 0 0 0 8.242V16.5A5.5 5.5 0 0 0 9.5 22h.5v-2.5 M14.5 2A5.5 5.5 0 0 1 20 7.5v.379a5.5 5.5 0 0 1 0 8.242V16.5A5.5 5.5 0 0 1 14.5 22H14v-2.5 M10 19.5h4',
+  },
+  {
+    titre: "50% de crédit d'impôt",
+    soustitre: 'avec avance immédiate',
+    icone: 'M19 5 5 19 M6.5 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z M17.5 17.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+  },
+  {
+    titre: 'Repas sains et gourmands',
+    soustitre: 'qui s\'adaptent à vos préférences',
+    icone:
+      'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
+  },
+];
+
+export const profilsOffre = [
+  {
+    titre: 'Familles',
+    pain: 'Le soir, vous passez en moyenne 1h à cuisiner — du temps pris sur celui avec vos enfants.',
+    solutionAvant: 'Avec La mère Simone, plus besoin de cuisiner : vous réchauffez, vous mangez, et vous profitez ',
+    solutionStrong: 'en famille',
+    solutionApres: '.',
+    icone: 'M3 21V10l9-6 9 6v11 M9 21v-6h6v6',
+  },
+  {
+    titre: 'Entrepreneurs & actifs',
+    pain: "Journées à mille à l'heure, beaucoup de travail — le soir, vous voulez enfin souffler.",
+    solutionAvant: "Je m'occupe de vos repas de la semaine pour que vous ",
+    solutionStrong: 'gagniez du temps pour vous',
+    solutionApres: ', sans sacrifier une alimentation saine.',
+    icone: 'M2 7h20v14H2z M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16',
+  },
+  {
+    titre: 'Personnes âgées',
+    pain: "Des difficultés à préparer vos repas, ou simplement l'envie d'une présence pour papoter ?",
+    solutionAvant: 'Je viens cuisiner chez vous avec plaisir, et je peux aussi ',
+    solutionStrong: 'faire vos courses',
+    solutionApres: ' si besoin.',
+    icone: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
+  },
+];
+
 export const engagementModes = [
   { id: 'ponctuel', label: 'Sans engagement', remise: null },
   { id: 'mensuel2', label: '2x / mois', remise: '-5%' },
