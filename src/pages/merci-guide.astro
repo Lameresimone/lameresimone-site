@@ -1,82 +1,142 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
 ---
 
-<BaseLayout
-  title="Merci !"
-  description="Votre demande de guide a bien été reçue."
-  canonicalPath="/merci-guide"
->
-  <section class="merci">
-    <div class="container merci-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="robots" content="noindex" />
+    <title>Votre guide est prêt | La mère Simone</title>
+  </head>
+  <body>
+    <div class="merci-card">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </div>
       <h1>Merci !</h1>
       <p>
-        Votre demande a bien été reçue. Vous recevrez votre guide sur le batchcooking à domicile par email
-        très prochainement.
+        Votre guide "Tout savoir sur le batchcooking à domicile" est prêt. Le téléchargement démarre
+        automatiquement — sinon, cliquez sur le bouton ci-dessous.
       </p>
-      <a href="/" class="cta-link">Retour à l&rsquo;accueil</a>
+      <a href="/guide-batchcooking-domicile.pdf" download class="download-btn" id="download-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Télécharger le guide (PDF)
+      </a>
+      <a href="/" class="back-link">← Retour au site</a>
     </div>
-  </section>
-</BaseLayout>
+
+    <script>
+      window.addEventListener('load', () => {
+        document.getElementById('download-link')?.click();
+      });
+    </script>
+  </body>
+</html>
 
 <style>
-  .merci {
-    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
-    color: #fff;
-    padding: clamp(4rem, 10vw, 6rem) 0;
-    min-height: 50vh;
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
   }
 
-  .merci-inner {
+  a {
+    color: inherit;
+  }
+
+  .merci-card {
     max-width: 480px;
-    margin: 0 auto;
+    width: 100%;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    padding: 3rem 2.5rem;
     text-align: center;
   }
 
-  .merci-inner svg {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto;
-    padding: 0.75rem;
+  .icon-circle {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--color-cream);
+    background: var(--color-cream-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .merci-inner h1 {
-    margin-top: 1.25rem;
-    font-size: clamp(1.75rem, 3.4vw, 2.375rem);
-    color: #fff;
+  .icon-circle svg {
+    width: 30px;
+    height: 30px;
+    color: var(--color-wine);
   }
 
-  .merci-inner p {
-    margin-top: 0.875rem;
-    font-size: 0.94rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.88);
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-wine);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin-top: 0.75rem;
+    font-size: 0.906rem;
+    color: var(--color-ink-soft);
     line-height: 1.6;
   }
 
-  .cta-link {
-    display: inline-block;
-    margin-top: 1.75rem;
-    background: var(--color-cream);
-    color: var(--color-wine-deeper);
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    background: var(--color-wine);
+    color: #fff;
+    text-decoration: none;
     padding: 0.9375rem 1.875rem;
     border-radius: var(--radius-md);
     font-weight: 800;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: transform var(--transition), box-shadow var(--transition);
+    font-size: 0.906rem;
+    transition: background var(--transition), transform var(--transition);
   }
 
-  .cta-link:hover {
+  .download-btn:hover {
+    background: var(--color-wine-dark);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+  }
+
+  .download-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-olive-dark);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--color-wine);
   }
 </style>

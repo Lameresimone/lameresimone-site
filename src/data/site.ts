@@ -8,8 +8,8 @@ export const site = {
 
 export const contact = {
   email: 'lameresimone.pro@gmail.com',
-  instagram: '@la_mere_simone_',
-  instagramUrl: 'https://www.instagram.com/la_mere_simone_/',
+  instagram: '@batchcooking_la_mere_simone_',
+  instagramUrl: 'https://www.instagram.com/batchcooking_la_mere_simone_/',
   siret: '98938305400016',
 };
 
@@ -20,7 +20,6 @@ export const nav = [
   { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -37,7 +36,6 @@ export const footerSiteLinks = [
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
   { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
-  { label: 'Avis', href: '/#avis' },
 ];
 
 export const footerLegalLinks = [
@@ -51,7 +49,7 @@ export const creditImpot = {
   taux: 50,
   label: "de crédit d'impôt immédiat sur la prestation",
   plafond:
-    "Plafond annuel de dépenses ouvrant droit au crédit d'impôt : 12 000€ par foyer fiscal (montant pouvant être majoré selon votre situation — voir avec l'Urssaf).",
+    "Plafond annuel de dépenses ouvrant droit au crédit d'impôt : 12 000€ par foyer fiscal (montant pouvant être majoré selon votre situation, à voir avec l'Urssaf).",
 };
 
 export const creditImpotEtapes = [
@@ -96,7 +94,7 @@ export const creditImpotFaq = [
   {
     question: "Comment j'active le service ?",
     reponse:
-      "Je m'occupe de votre inscription auprès de l'Urssaf. Une fois vos conditions vérifiées, vous recevez un mail pour activer votre compte sur particulier.urssaf.fr — c'est gratuit et rapide.",
+      "Je m'occupe de votre inscription auprès de l'Urssaf. Une fois vos conditions vérifiées, vous recevez un mail pour activer votre compte sur particulier.urssaf.fr. C'est gratuit et rapide.",
   },
 ];
 
@@ -107,22 +105,53 @@ export const faqGroups = [
       {
         question: 'Comment se déroule une prestation de batchcooking ?',
         reponse:
-          "Après un premier échange sur vos goûts, intolérances et habitudes alimentaires, je compose vos menus, je peux faire vos courses si vous le souhaitez, puis je viens cuisiner directement chez vous. À la fin de la prestation, vous retrouvez 4 à 5 plats faits maison dans votre frigo et une cuisine propre et rangée.",
+          "Après un premier échange sur vos goûts, intolérances et habitudes alimentaires, vous sélectionnez vos recettes parmi la carte du moment, ou vous me laissez carte blanche. Je peux faire vos courses si vous le souhaitez, puis je viens cuisiner directement chez vous. À la fin de la prestation, vous retrouvez 4 à 5 plats faits maison dans votre frigo et une cuisine propre et rangée.",
+      },
+      {
+        question: 'Comment choisir mes plats ?',
+        reponse:
+          "Vous sélectionnez vos recettes parmi la carte du moment. Les cartes changent à chaque saison et proposent de nombreux types de plats : mijotés, gratinés, healthy, express, sans gluten, veggie... Vous pouvez aussi me laisser carte blanche. Les options petit déjeuner et goûter sont disponibles si besoin.",
+      },
+      {
+        question: 'Combien de temps dure une prestation ?',
+        reponse: 'La prestation dure environ 3h, selon le nombre et le type de plats sélectionnés.',
+      },
+      {
+        question: "Combien de temps à l'avance dois-je réserver ?",
+        reponse:
+          'Contactez-moi dès que possible : nous échangeons sur vos besoins et je vous confirme mes disponibilités.',
       },
       {
         question: 'Dans quelles villes intervenez-vous ?',
         reponse:
-          "J'interviens à Lille et dans les communes alentours. Si vous avez un doute sur votre secteur, contactez-moi directement, je vous confirmerai rapidement si je peux me déplacer chez vous.",
+          "J'interviens dans la métropole lilloise : La Madeleine, Marcq-en-Barœul, Saint-André-lez-Lille, Marquette-lez-Lille, Bondues, Croix, Mouvaux, Lille... Il n'y a pas de frais de déplacement dans un rayon d'environ 10 km autour de mon domicile. Au-delà, des frais kilométriques de 0,50€ par km s'appliquent. Si vous avez un doute sur votre secteur, contactez-moi directement.",
       },
+      {
+        question: 'Que se passe-t-il si je ne suis pas chez moi pendant la prestation ?',
+        reponse:
+          "Il suffit de me laisser un accès à votre domicile (clé, digicode, boîte à clés...) le temps de la prestation. Nous en discutons ensemble en amont pour que tout se passe simplement.",
+      },
+      {
+        question: 'Accompagnez-vous les jeunes parents (pré et post-partum) ?',
+        reponse:
+          "Oui. Les semaines autour de la naissance sont intenses : je cuisine chez vous des repas faits maison et équilibrés pour prendre soin de la maman et des jeunes parents, avec du temps gagné et la charge mentale du « qu'est-ce qu'on mange ? » en moins.",
+        lien: { texte: 'Détail sur la page', label: "L'offre", href: '/offre' },
+      },
+    ],
+  },
+  {
+    titre: 'Régimes & allergies',
+    items: [
       {
         question: 'Prenez-vous en compte les allergies et intolérances ?',
         reponse:
           "Oui, c'est même l'un des points abordés dès notre premier échange. Je m'adapte à vos allergies, intolérances et préférences alimentaires, avec une vraie spécialité pour les recettes sans gluten.",
       },
       {
-        question: 'Que se passe-t-il si je ne suis pas chez moi pendant la prestation ?',
+        question: 'Proposez-vous des plats sans gluten, végétariens ou vegan ?',
         reponse:
-          "Il suffit de me laisser un accès à votre domicile (clé, digicode, boîte à clés...) le temps de la prestation. Nous en discutons ensemble en amont pour que tout se passe simplement.",
+          'Oui. Le sans gluten est ma spécialité, et je cuisine aussi sans lactose, végétarien et flexitarien, à index glycémique bas ou vegan.',
+        lien: { texte: 'Retrouvez le détail sur la page', label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
       },
       {
         question: "Travaillez-vous dans le respect des normes d'hygiène ?",
@@ -143,12 +172,17 @@ export const faqGroups = [
       {
         question: 'Le prix affiché inclut-il les courses ?',
         reponse:
-          "Non, le tarif affiché concerne uniquement la prestation de cuisine. Vous pouvez faire vos courses vous-même en amont, ou choisir l'option \"je fais vos courses\" (+20€, soit 40€ avant crédit d'impôt) — les courses elles-mêmes ne sont pas éligibles au crédit d'impôt.",
+          "Non, le tarif affiché concerne uniquement la prestation de cuisine. Vous pouvez faire vos courses vous-même en amont, ou choisir l'option « je fais vos courses » (+20€, soit 40€ avant crédit d'impôt). Les courses elles-mêmes ne sont pas éligibles au crédit d'impôt.",
+      },
+      {
+        question: 'Pour combien de personnes sont prévus les plats ?',
+        reponse:
+          "Les plats sont généreux et pensés pour 4 personnes. Si vous êtes moins nombreux, vous en profitez sur plusieurs repas. Si vous êtes plus nombreux, la préparation demande plus de temps : un supplément s'applique, que je vous indique dans votre devis.",
       },
       {
         question: "Puis-je m'abonner pour bénéficier d'une réduction ?",
         reponse:
-          "Oui : -5% sur un rythme de 2 prestations par mois, et -8% sur un rythme de 4 prestations par mois. Sans engagement reste possible si vous préférez tester ponctuellement.",
+          "Oui : -5% sur un rythme de 2 prestations par mois, et -8% sur un rythme de 4 prestations par mois. Le sans engagement reste possible si vous préférez tester ponctuellement.",
       },
       {
         question: "Comment fonctionne le crédit d'impôt de 50% ?",
@@ -157,9 +191,15 @@ export const faqGroups = [
         lien: { texte: 'Tous les détails sur la page', label: "Crédit d'impôt", href: '/credit-impot' },
       },
       {
-        question: 'Puis-je annuler ou reporter une prestation ?',
+        question: 'Comment obtenir un devis ?',
+        reponse: 'Il suffit de me contacter via le bouton « Demander mon devis » ou la',
+        lien: { texte: 'page', label: 'Contact', href: '/contact' },
+        lienApres: ' Je vous réponds sous 48h.',
+      },
+      {
+        question: 'Puis-je offrir une prestation en bon cadeau ?',
         reponse:
-          "Oui, contactez-moi dès que possible. Une prestation peut généralement être reportée sous réserve de disponibilité — je fais au maximum pour m'adapter à vos imprévus.",
+          "Oui, vous pouvez offrir une prestation avec un bon cadeau, par exemple à de futurs parents. Retrouvez toutes les informations sur la page Bon cadeau (bientôt disponible).",
       },
     ],
   },
@@ -172,9 +212,19 @@ export const faqGroups = [
           "Non, je m'adapte à votre équipement habituel. Si un ustensile précis venait à manquer pour une recette, nous en discutons en amont.",
       },
       {
+        question: 'Que dois-je prévoir avant votre arrivée ?',
+        reponse:
+          "Prévoyez simplement de la place dans votre réfrigérateur et votre congélateur pour ranger les plats une fois cuisinés. Si vous avez fait vos courses, sortez les produits secs sur le plan de travail et laissez les produits frais au frigo. À la fin, la cuisine est rangée.",
+      },
+      {
         question: 'Comment sont conservés les plats préparés ?',
         reponse:
-          "Les plats sont conditionnés dans des contenants adaptés et placés directement dans votre réfrigérateur. Ils se conservent généralement 3 à 4 jours ; au-delà, je vous conseille de les congeler.",
+          "Les plats sont conditionnés dans des contenants adaptés. Certains sont à consommer dans les premiers jours suivant la prestation, les autres sont à congeler pour être dégustés plus tard. Je vous indique pour chaque plat ce qu'il en est. Je recommande aussi l'achat de contenants en verre avec système de mise sous vide, pour une meilleure conservation.",
+      },
+      {
+        question: 'Comment consommer et réchauffer les plats ?',
+        reponse:
+          "Vous recevez une fiche avec les indications de consommation de chaque plat. Un plat décongelé ne doit pas être recongelé.",
       },
     ],
   },
@@ -184,8 +234,8 @@ export const regimes = [
   {
     titre: 'Sans gluten',
     texte:
-      "C'est le régime que je pratique moi-même au quotidien. Je connais les bonnes alternatives, les pièges à éviter, et je cuisine des plats sans gluten aussi gourmands que les autres — sans jamais donner l'impression d'un régime de contrainte.",
-    icone: 'M12 3a9 9 0 0 0 0 18',
+      "C'est le régime que je pratique moi-même au quotidien. Je connais les bonnes alternatives, les pièges à éviter, et je cuisine des plats sans gluten aussi gourmands que les autres, sans jamais donner l'impression d'un régime de contrainte.",
+    icone: 'M5.6 5.6 18.4 18.4',
     iconeCercle: true,
     badge: 'Ma spécialité',
   },
@@ -198,7 +248,7 @@ export const regimes = [
   {
     titre: 'Végétarien & flexitarien',
     texte:
-      "Des repas riches en protéines végétales, savoureux et équilibrés, que vous soyez végétarien·ne au quotidien ou simplement en réduction de viande.",
+      "Des repas riches en protéines végétales, savoureux et équilibrés, que vous soyez végétarien au quotidien ou simplement en réduction de viande.",
     icone: 'M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 3 17 3s.5 5-3 10c0 0 5-2 7-8 0 0 3 12-10 15Z',
   },
   {
@@ -220,6 +270,13 @@ export const regimes = [
     icone: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
   },
 ];
+
+export const regimeClassique = {
+  titre: 'Pas de régime particulier ? Aucun problème.',
+  texte:
+    'Je cuisine aussi une cuisine classique, familiale et gourmande, avec des produits frais et de saison : mijotés, gratinés, plats healthy ou express. Vous choisissez dans la carte du moment, ou vous me laissez carte blanche.',
+  icone: 'M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 9.18 0A4 4 0 0 1 18 13.87V21H6Z M6 17h12',
+};
 
 export const trustItems = [
   { titre: 'Produits frais', sousTitre: 'de saison' },
@@ -352,7 +409,7 @@ export const portionsNote =
 
 export const parcours = [
   {
-    titre: 'CAP Cuisine - Major de Promo',
+    titre: 'CAP Cuisine, Major de Promo',
     soustitre: 'Ecole Hôtelière de Cannes',
     icone: '/images/icons/cap.png',
   },
@@ -406,29 +463,5 @@ export const blogArticles = [
     dateIso: '2026-09-04',
     readTime: '5 min',
     slug: '5-astuces-batchcooking-dimanche',
-  },
-];
-
-export const avisClients = [
-  {
-    note: 5,
-    texte:
-      "[Exemple à remplacer] Un accompagnement bienveillant, des plats savoureux et une vraie tranquillité d'esprit pour toute la semaine.",
-    nom: 'Prénom N.',
-    placeholder: true,
-  },
-  {
-    note: 5,
-    texte:
-      "[Exemple à remplacer] Ponctuelle, à l'écoute de nos goûts et de nos allergies. On adore retrouver le frigo plein le dimanche soir !",
-    nom: 'Prénom N.',
-    placeholder: true,
-  },
-  {
-    note: 5,
-    texte:
-      "[Exemple à remplacer] Un vrai gain de temps, une cuisine impeccable en partant, et des recettes qu'on n'aurait jamais osé faire nous-mêmes.",
-    nom: 'Prénom N.',
-    placeholder: true,
   },
 ];

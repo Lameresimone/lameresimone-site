@@ -56,7 +56,7 @@ const jsonLd = {
         <p>
           La première erreur est de se lancer sans liste. Prenez 10 minutes en amont pour choisir vos recettes
           de la semaine, en tenant compte de ce qu&rsquo;il reste déjà dans votre frigo et votre placard.
-          Privilégiez des recettes qui partagent des ingrédients communs — un même légume utilisé dans deux
+          Privilégiez des recettes qui partagent des ingrédients communs : un même légume utilisé dans deux
           plats, c&rsquo;est moins de découpe et moins de gaspillage.
         </p>
 
@@ -93,7 +93,7 @@ const jsonLd = {
           Un plat bien cuisiné mais mal conservé perd tout son intérêt. Laissez toujours refroidir avant de
           fermer les contenants, portionnez selon vos repas réels plutôt qu&rsquo;en grandes quantités
           difficiles à réchauffer, et notez la date de préparation sur chaque boîte. La plupart des plats
-          cuisinés se conservent 3 à 4 jours au réfrigérateur — au-delà, direction le congélateur.
+          cuisinés se conservent 3 à 4 jours au réfrigérateur. Au-delà, direction le congélateur.
         </p>
 
         <h2>5. Garder de la variété pour ne pas se lasser</h2>
@@ -124,8 +124,7 @@ const jsonLd = {
   .article-header {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
-    text-align: center;
+    padding: 3.5rem 0 4rem;
   }
 
   .back-link {
@@ -146,15 +145,13 @@ const jsonLd = {
 
   .eyebrow {
     color: var(--color-cream);
-    font-size: 0.75rem;
+    font-size: 0.84rem;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.6rem;
   }
 
-  .eyebrow::before,
-  .eyebrow::after {
+  .eyebrow::before {
     content: '';
     width: 22px;
     height: 1px;
@@ -162,16 +159,17 @@ const jsonLd = {
   }
 
   h1 {
-    margin: 0.75rem auto 0;
-    font-size: clamp(1.625rem, 3.4vw, 2.5rem);
+    margin-top: 1.125rem;
+    font-size: clamp(2rem, 4.2vw, 3.375rem);
     color: #fff;
-    max-width: 26ch;
+    max-width: 22ch;
+    line-height: 1.08;
   }
 
   .meta {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.75);
+    margin-top: 1.25rem;
+    font-size: 0.906rem;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .article-content {
@@ -278,6 +276,12 @@ const jsonLd = {
   .article-cta a:hover {
     background: var(--color-wine-dark);
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 980px) {
+    .article-header {
+      padding: 2.5rem 0 3rem;
+    }
   }
 
   @media (max-width: 560px) {

@@ -34,7 +34,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container footer-bottom">
-    <span>&copy; {year} La mère Simone — SIRET {contact.siret}</span>
+    <span>&copy; {year} La mère Simone · SIRET {contact.siret}</span>
     <div class="footer-legal">
       {footerLegalLinks.map((item) => <a href={item.href}>{item.label}</a>)}
     </div>
@@ -75,7 +75,7 @@ const year = new Date().getFullYear();
     gap: 0.5rem;
     margin-top: 1.4rem;
     border: 1px solid rgba(247, 240, 230, 0.28);
-    border-radius: 30px;
+    border-radius: var(--radius-md);
     padding: 0.6rem 1.1rem;
     font-size: 0.82rem;
     font-weight: 700;
@@ -132,7 +132,7 @@ const year = new Date().getFullYear();
     font-weight: 800;
     font-size: 0.82rem;
     padding: 0.75rem 1.5rem;
-    border-radius: 30px;
+    border-radius: var(--radius-md);
     border-bottom: 2px solid var(--color-olive);
     transition: background var(--transition), transform var(--transition);
   }

@@ -8,7 +8,7 @@ const jsonLd = {
   name: 'Lola',
   jobTitle: 'Cheffe cuisinière à domicile',
   description:
-    "Diplômée d'un CAP Cuisine (Major de Promo, École Hôtelière de Cannes) et formée HACCP, Lola cuisine des repas faits maison au domicile de ses clients à Lille et alentours.",
+    "Diplômée d'un CAP Cuisine (Major de Promo, École Hôtelière de Cannes) et formée HACCP, Lola cuisine des repas faits maison au domicile de ses clients dans la métropole lilloise.",
   url: `${site.url}/qui-suis-je`,
   worksFor: {
     '@type': 'LocalBusiness',
@@ -24,7 +24,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Qui suis-je"
-  description="CAP Cuisine, formée HACCP, plusieurs années d'expérience en restauration et box de recettes. Découvrez le parcours de Lola, cheffe du batchcooking à domicile à Lille."
+  description="CAP Cuisine, formée HACCP, plusieurs années d'expérience en restauration et box de recettes. Découvrez le parcours de Lola, cheffe du batchcooking à domicile dans la métropole lilloise."
   canonicalPath="/qui-suis-je"
   jsonLd={jsonLd}
 >
@@ -120,20 +120,21 @@ const jsonLd = {
   .hero {
     background: var(--color-olive-muted);
     color: #fff;
-    padding: clamp(2.25rem, 5vw, 2.85rem) 0 clamp(2.75rem, 5vw, 3.35rem);
+    padding: 3.5rem 0 4rem;
   }
 
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: stretch;
+    gap: 3.5rem;
+    align-items: center;
   }
 
   .hero-copy {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 560px;
   }
 
   .eyebrow {
@@ -141,6 +142,7 @@ const jsonLd = {
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    font-size: 0.84rem;
   }
 
   .hero-copy .eyebrow::before {
@@ -151,29 +153,30 @@ const jsonLd = {
   }
 
   .hero-copy h1 {
-    margin-top: 0.9rem;
-    font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+    margin-top: 1.125rem;
+    font-size: clamp(2rem, 3.6vw, 3.125rem);
     color: #fff;
   }
 
   .bio {
-    margin-top: 1.15rem;
-    font-size: 0.97rem;
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.92);
     line-height: 1.6;
-    max-width: 46ch;
   }
 
   .bio p + p {
-    margin-top: 0.75rem;
+    margin-top: 1rem;
   }
 
   .hero-photo {
     width: 100%;
-    height: 100%;
-    min-height: 320px;
+    max-width: 520px;
+    justify-self: center;
+    aspect-ratio: 8 / 7;
     object-fit: cover;
+    object-position: top center;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     transition: transform var(--transition);
@@ -381,9 +384,16 @@ const jsonLd = {
 
     .hero-photo {
       order: -1;
-      height: auto;
-      aspect-ratio: 3 / 4;
-      min-height: 0;
+      aspect-ratio: 16 / 11;
+      max-width: none;
+    }
+
+    .hero-copy {
+      max-width: none;
+    }
+
+    .bio {
+      font-size: 1.03rem;
     }
 
     .parcours-grid {

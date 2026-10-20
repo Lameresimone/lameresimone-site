@@ -29,11 +29,10 @@ const jsonLd = {
       <p class="eyebrow">
         <span class="rule"></span>
         Aide financière
-        <span class="rule"></span>
       </p>
       <h1>Crédit d&rsquo;impôt &amp; avance immédiate</h1>
       <p class="intro">
-        {creditImpot.taux}% du coût de la prestation vous est remboursé — et grâce à l&rsquo;avance immédiate,
+        {creditImpot.taux}% du coût de la prestation vous est remboursé. Grâce à l&rsquo;avance immédiate,
         vous n&rsquo;avancez même pas cette somme : vous ne payez que votre part, dès le départ.
       </p>
     </div>
@@ -51,7 +50,7 @@ const jsonLd = {
         </p>
         <p>
           Concrètement : sur une prestation à {confort.prix.ponctuel.avant}&euro;, vous ne payez au final que
-          <strong>{confort.prix.ponctuel.client}&euro;</strong> — que vous soyez imposable ou non. Ce n&rsquo;est
+          <strong>{confort.prix.ponctuel.client}&euro;</strong>, que vous soyez imposable ou non. Ce n&rsquo;est
           pas une réduction d&rsquo;impôt réservée aux foyers qui paient déjà des impôts, c&rsquo;est un crédit
           remboursable pour tous.
         </p>
@@ -101,7 +100,7 @@ const jsonLd = {
       </div>
       <div class="example-card">
         <div class="example-row">
-          <span class="label">{confort.nom} — {confort.nbPlats} plats</span>
+          <span class="label">{confort.nom} ({confort.nbPlats} plats)</span>
           <span class="value">{confort.prix.ponctuel.avant}&euro;</span>
         </div>
         <div class="example-row">
@@ -157,21 +156,19 @@ const jsonLd = {
   .page-header {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
-    text-align: center;
+    padding: 4rem 0 4.5rem;
   }
 
   .eyebrow {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.6rem;
     color: var(--color-cream);
-    font-size: 0.75rem;
+    font-size: 0.84rem;
   }
 
   .page-header .eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.84rem;
   }
 
   .rule {
@@ -182,18 +179,20 @@ const jsonLd = {
   }
 
   h1 {
-    margin-top: 0.6rem;
-    font-size: clamp(1.625rem, 3vw, 2.375rem);
+    margin-top: 1.125rem;
+    font-size: clamp(2.125rem, 4.6vw, 3.75rem);
     color: #fff;
+    max-width: 18ch;
+    line-height: 1.05;
   }
 
   .intro {
-    margin: 0.75rem auto 0;
-    font-size: 0.94rem;
+    margin-top: 1.375rem;
+    font-size: 1.1875rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.55;
-    max-width: 56ch;
+    max-width: 60ch;
   }
 
   .principe {
@@ -526,6 +525,14 @@ const jsonLd = {
   }
 
   @media (max-width: 980px) {
+    .page-header {
+      padding: 2.75rem 0 3.25rem;
+    }
+
+    .page-header .intro {
+      font-size: 1.03rem;
+    }
+
     .principe-grid {
       grid-template-columns: 1fr;
     }

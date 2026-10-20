@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, contact, creditImpot, trustItems, avisClients } from '../data/site';
+import { site, contact, creditImpot, trustItems } from '../data/site';
 
 const trustIconPaths = [
   'M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11Z M8 15c1 2 3 3 4 3',
@@ -116,31 +116,6 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="avis" id="avis">
-    <div class="container">
-      <div class="avis-head">
-        <p class="eyebrow">Avis clients</p>
-        <h2>Vos avis, ma plus belle vitrine</h2>
-      </div>
-      <div class="avis-grid">
-        {
-          avisClients.map((avis) => (
-            <div class="avis-card">
-              <div class="avis-stars">{'★'.repeat(avis.note)}{'☆'.repeat(5 - avis.note)}</div>
-              <p class="avis-text">{avis.texte}</p>
-              <p class="avis-author">
-                <strong>{avis.nom}</strong>
-              </p>
-              {avis.placeholder && <span class="avis-placeholder-tag">Exemple à remplacer</span>}
-            </div>
-          ))
-        }
-      </div>
-      <div class="avis-cta">
-        <a href="#avis">Lire tous les avis →</a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <div class="guide-modal-overlay" id="guide-modal-overlay">
@@ -406,100 +381,6 @@ const jsonLd = {
     color: var(--color-wine-dark);
   }
 
-  .avis {
-    padding: clamp(4rem, 8vw, 5.5rem) 0;
-  }
-
-  .avis-head {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 3rem;
-  }
-
-  .avis-head h2 {
-    margin-top: 0.75rem;
-    font-size: clamp(1.85rem, 3.2vw, 2.4rem);
-    color: var(--color-wine);
-  }
-
-  .avis-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .avis-card {
-    background: #fff;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
-    padding: 1.85rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .avis-stars {
-    color: var(--color-olive);
-    font-size: 0.95rem;
-    letter-spacing: 2px;
-  }
-
-  .avis-text {
-    margin-top: 1rem;
-    font-size: 0.92rem;
-    color: var(--color-ink);
-    line-height: 1.65;
-    flex-grow: 1;
-  }
-
-  .avis-author {
-    margin-top: 1.25rem;
-    font-size: 0.85rem;
-    color: var(--color-ink-soft);
-  }
-
-  .avis-author strong {
-    color: var(--color-wine);
-    font-weight: 800;
-  }
-
-  .avis-placeholder-tag {
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-olive-dark);
-    background: var(--color-cream-card);
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    width: fit-content;
-  }
-
-  .avis-cta {
-    text-align: center;
-    margin-top: 2.5rem;
-  }
-
-  .avis-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1.5px solid var(--color-line);
-    border-radius: 30px;
-    padding: 0.875rem 1.625rem;
-    font-size: 0.875rem;
-    font-weight: 800;
-    color: var(--color-wine);
-    text-decoration: none;
-    transition: border-color var(--transition), background var(--transition);
-  }
-
-  .avis-cta a:hover {
-    border-color: var(--color-wine);
-    background: var(--color-cream-card);
-  }
-
   .guide-banner {
     background: var(--color-olive);
     padding: 3rem 0;
@@ -594,10 +475,6 @@ const jsonLd = {
 
     .about-photo {
       aspect-ratio: 16 / 10;
-    }
-
-    .avis-grid {
-      grid-template-columns: 1fr;
     }
 
     .guide-banner-inner {
