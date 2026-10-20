@@ -18,6 +18,7 @@ export const nav = [
   { label: "L'offre", href: '/offre' },
   { label: 'Qui suis-je', href: '/qui-suis-je' },
   { label: "Crédit d'impôt", href: '/credit-impot' },
+  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
