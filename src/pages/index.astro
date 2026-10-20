@@ -17,8 +17,8 @@ const jsonLd = {
   email: contact.email,
   priceRange: '€€',
   areaServed: {
-    '@type': 'City',
-    name: 'Lille',
+    '@type': 'AdministrativeArea',
+    name: 'Métropole lilloise',
   },
   address: {
     '@type': 'PostalAddress',
@@ -31,8 +31,8 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="Batchcooking à domicile à Lille"
-  description="Repas faits maison, cuisinés chez vous par une cheffe formée. Produits frais et de saison, sur mesure, 50% de crédit d'impôt immédiat. Secteur Lille et alentours."
+  title="Batchcooking à domicile dans la métropole lilloise"
+  description="Repas faits maison, cuisinés chez vous par une cheffe formée. Produits frais et de saison, sur mesure, 50% de crédit d'impôt immédiat. Métropole lilloise."
   canonicalPath="/"
   jsonLd={jsonLd}
 >
@@ -44,7 +44,7 @@ const jsonLd = {
           {site.secteur}
         </p>
         <h1>{site.tagline}</h1>
-        <p class="sub">{site.description}</p>
+        <p class="sub">Cuisine à domicile : des repas faits maison,<br />cuisinés chez vous par une cheffe.</p>
         <a href="/offre" class="cta-link">Découvrir l&rsquo;offre</a>
       </div>
 
@@ -90,7 +90,7 @@ const jsonLd = {
           frais et de saison. Je viens directement chez vous préparer les repas de la semaine, dans le
           respect de vos goûts et de vos éventuelles allergies.
         </p>
-        <a href="/qui-suis-je" class="about-cta">En savoir plus sur mon parcours →</a>
+        <a href="/qui-suis-je" class="about-cta">En savoir plus sur mon parcours</a>
       </div>
     </div>
   </section>
@@ -102,7 +102,7 @@ const jsonLd = {
         <h2>Téléchargez votre guide pour tout savoir sur le batchcooking à domicile</h2>
         <p>
           Le concept, les tarifs, et comment profiter de {creditImpot.taux}% de crédit d&rsquo;impôt immédiat
-          — en un seul PDF.
+          en un seul PDF.
         </p>
       </div>
       <button type="button" class="guide-banner-btn" id="open-guide-modal">
@@ -135,7 +135,7 @@ const jsonLd = {
         <input type="email" id="guide-email" name="email" required />
       </div>
       <button type="submit" class="guide-modal-submit">Recevoir mon guide</button>
-      <p class="note">Pas de spam, juste votre guide — et éventuellement quelques conseils cuisine plus tard.</p>
+      <p class="note">Pas de spam, juste votre guide, et éventuellement quelques conseils cuisine plus tard.</p>
     </form>
   </div>
 </div>
@@ -199,11 +199,10 @@ const jsonLd = {
 
   .sub {
     margin-top: 1.35rem;
-    font-size: 1.3rem;
+    font-size: 1.3125rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
     line-height: 1.5;
-    max-width: 34ch;
   }
 
   .cta-link {
@@ -249,7 +248,7 @@ const jsonLd = {
   }
 
   .hero-credit {
-    background: var(--color-wine-deepest);
+    background: var(--color-cream);
     border-radius: var(--radius-md);
     padding: 2rem 1.75rem;
     width: 100%;
@@ -262,7 +261,7 @@ const jsonLd = {
     font-weight: 900;
     line-height: 1;
     display: block;
-    color: var(--color-cream);
+    color: var(--color-wine);
   }
 
   .hero-credit .desc {
@@ -271,7 +270,7 @@ const jsonLd = {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.4;
-    color: rgba(247, 240, 230, 0.85);
+    color: var(--color-ink-soft);
   }
 
   .trust {
@@ -325,7 +324,7 @@ const jsonLd = {
   }
 
   .about-teaser {
-    padding: clamp(4rem, 8vw, 5.5rem) 0;
+    padding: 3.5rem 0;
     background: var(--color-cream-card);
   }
 
@@ -338,7 +337,7 @@ const jsonLd = {
 
   .about-photo {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 8 / 7;
     object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -367,22 +366,26 @@ const jsonLd = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 1.65rem;
+    margin-top: 1.625rem;
+    background: var(--color-olive-muted);
+    color: var(--color-cream);
+    padding: 1.125rem 2.25rem;
+    border-radius: var(--radius-md);
     font-weight: 800;
-    font-size: 0.9rem;
-    color: var(--color-wine);
+    font-size: 1rem;
     text-decoration: none;
-    border-bottom: 2px solid var(--color-olive);
-    padding-bottom: 0.2rem;
-    transition: color var(--transition);
+    border-bottom: 3px solid var(--color-olive);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   }
 
   .about-cta:hover {
-    color: var(--color-wine-dark);
+    background: var(--color-olive);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 
   .guide-banner {
-    background: var(--color-olive);
+    background: var(--color-wine);
     padding: 3rem 0;
   }
 
@@ -421,7 +424,7 @@ const jsonLd = {
     gap: 0.5rem;
     flex-shrink: 0;
     background: var(--color-cream);
-    color: var(--color-olive-dark);
+    color: var(--color-wine-dark);
     padding: 1rem 1.75rem;
     border-radius: var(--radius-md);
     font-weight: 800;

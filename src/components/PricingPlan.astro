@@ -1,6 +1,5 @@
 ---
-import CheckIcon from './CheckIcon.astro';
-import { optionsFormules, portionsNote, formules } from '../data/site';
+import { optionsFormules, formules } from '../data/site';
 
 type Formule = (typeof formules)[number];
 
@@ -14,212 +13,148 @@ const { ponctuel, mensuel2, mensuel4 } = formule.prix;
 
 <div class="plan" data-plan={formule.id}>
   <h3>{formule.nom}</h3>
-  <div class="price-box">
-    <p class="from">à partir de</p>
-    <div class="price-row-main">
-      <div class="price" data-client={ponctuel.client} data-client2={mensuel2.client} data-client4={mensuel4.client}>
-        {ponctuel.client}&euro;
-      </div>
-    </div>
-    <p class="price-note">
-      soit <strong data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>{ponctuel.avant}&euro;</strong>
-      avant crédit d&rsquo;impôt* — tarif hors prix des courses (courses non éligibles au crédit d&rsquo;impôt)
-    </p>
+  <span class="from">à partir de</span>
+  <div class="price" data-client={ponctuel.client} data-client2={mensuel2.client} data-client4={mensuel4.client}>
+    {ponctuel.client}&euro;
   </div>
+  <p class="price-note">
+    soit <strong data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>{ponctuel.avant}&euro;</strong>
+    avant crédit d&rsquo;impôt*
+  </p>
   <div class="price-savings-slot"></div>
   <ul class="plan-features">
-    {
-      formule.avantages.map((avantage) => (
-        <li>
-          <CheckIcon />
-          {avantage}
-        </li>
-      ))
-    }
+    {formule.avantages.map((avantage) => <li>{avantage}</li>)}
   </ul>
-  <p class="options-label">En option</p>
-  <ul class="plan-options">
-    {
-      optionsFormules.map((option) => (
-        <li>
-          <span class="plus">+</span> {option.label} <span class="opt-price">{option.prix}</span>
-        </li>
-      ))
-    }
-  </ul>
-  <p class="plan-footnote">*Tarif pour {formule.nbPlats} plats de {formule.nbPortions} portions</p>
-  <p class="portions-note">
-    {
-      portionsNote.split('\n').map((ligne, i) => (
-        <>
-          {i > 0 && <br />}
-          {ligne}
-        </>
-      ))
-    }
-  </p>
+  <div class="plan-more">
+    <p class="options-title">Options disponibles</p>
+    <ul class="plan-options">
+      {
+        optionsFormules.map((option) => (
+          <li>
+            {option.label} <span class="opt-price">{option.prix}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </div>
 
 <style>
   .plan {
     background: var(--color-wine);
     color: #fff;
-    border-radius: var(--radius-lg);
-    padding: 1.4rem 1.75rem;
+    border-radius: var(--radius-md);
+    padding: 2.25rem 2.25rem 1.875rem;
     position: relative;
-    overflow: hidden;
     border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   }
 
   .plan:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
     border-color: var(--color-olive);
   }
 
   .plan h3 {
-    font-size: 1.03rem;
-    letter-spacing: 0.04em;
+    font-size: 0.9375rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-cream);
     font-weight: 800;
   }
 
-  .price-box {
-    margin-top: 0.75rem;
-    background: var(--color-cream);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: var(--radius-md);
-    padding: 0.85rem 1.1rem;
-  }
-
   .from {
-    font-size: 0.8rem;
-    color: var(--color-ink-soft);
-  }
-
-  .price-row-main {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    margin-top: 1.375rem;
   }
 
   .price {
-    font-size: 2.5rem;
+    margin-top: 0.25rem;
+    font-size: 4.75rem;
     font-weight: 900;
     line-height: 1;
-    color: var(--color-wine);
+    color: #fff;
+    letter-spacing: -0.02em;
   }
 
   .price-note {
-    margin-top: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--color-ink-soft);
+    margin-top: 0.625rem;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.4;
   }
 
   .price-note strong {
-    color: var(--color-ink);
+    color: #fff;
   }
 
   .price-savings-slot :global(.price-savings) {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--color-cream);
-    background: var(--color-olive-dark);
+    background: var(--color-olive);
     display: inline-block;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
-    margin-top: 0.65rem;
+    margin-top: 0.75rem;
   }
 
   .plan-features {
-    margin-top: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .plan-features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.55rem;
-    font-size: 0.84rem;
-    color: rgba(255, 255, 255, 0.92);
-    line-height: 1.35;
+    padding: 0.8125rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #fff;
   }
 
-  .plan-features li :global(svg) {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-    color: var(--color-cream);
+  .plan-more {
+    margin-top: 1rem;
   }
 
-  .options-label {
-    margin-top: 0.75rem;
-    padding-top: 0.65rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.22);
-    font-size: 0.65rem;
+  .options-title {
+    font-size: 0.75rem;
     font-weight: 800;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .plan-options {
-    margin-top: 0.45rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .plan-options li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: 0.81rem;
-    color: rgba(255, 255, 255, 0.92);
-    line-height: 1.35;
-  }
-
-  .plus {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    margin-top: 0.05rem;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.68rem;
-    font-weight: 700;
     color: rgba(255, 255, 255, 0.7);
   }
 
+  .plan-options {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .plan-options li {
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.4;
+  }
+
   .opt-price {
+    display: block;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.65);
   }
 
-  .plan-footnote {
-    margin-top: 0.65rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.22);
-    font-size: 0.68rem;
-    color: rgba(255, 255, 255, 0.55);
-    font-style: italic;
-  }
+  @media (max-width: 560px) {
+    .plan {
+      padding: 1.875rem 1.5rem;
+    }
 
-  .portions-note {
-    margin-top: 0.4rem;
-    font-size: 0.71rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.45;
-    font-style: italic;
+    .price {
+      font-size: 4rem;
+    }
   }
 </style>

@@ -3,7 +3,7 @@ export const site = {
   tagline: 'Batchcooking à domicile',
   description: 'Des repas faits maison, cuisinés chez vous par une cheffe.',
   url: 'https://lameresimone.fr',
-  secteur: 'Lille et alentours',
+  secteur: 'Métropole lilloise',
 };
 
 export const contact = {
@@ -199,7 +199,8 @@ export const faqGroups = [
       {
         question: 'Puis-je offrir une prestation en bon cadeau ?',
         reponse:
-          "Oui, vous pouvez offrir une prestation avec un bon cadeau, par exemple à de futurs parents. Retrouvez toutes les informations sur la page Bon cadeau (bientôt disponible).",
+          'Oui, vous pouvez offrir une prestation avec un bon cadeau, par exemple à de futurs parents. Retrouvez toutes les informations sur la',
+        lien: { texte: 'page', label: 'Bon cadeau', href: '/bon-cadeau' },
       },
     ],
   },
@@ -345,7 +346,7 @@ export const advantageItems = [
 export const profilsOffre = [
   {
     titre: 'Familles',
-    pain: 'Le soir, vous passez en moyenne 1h à cuisiner — du temps pris sur celui avec vos enfants.',
+    pain: 'Le soir, vous passez en moyenne 1h à cuisiner : du temps pris sur celui avec vos enfants.',
     solutionAvant: 'Avec La mère Simone, plus besoin de cuisiner : vous réchauffez, vous mangez, et vous profitez ',
     solutionStrong: 'en famille',
     solutionApres: '.',
@@ -353,7 +354,7 @@ export const profilsOffre = [
   },
   {
     titre: 'Entrepreneurs & actifs',
-    pain: "Journées à mille à l'heure, beaucoup de travail — le soir, vous voulez enfin souffler.",
+    pain: "Journées à mille à l'heure, beaucoup de travail : le soir, vous voulez enfin souffler.",
     solutionAvant: "Je m'occupe de vos repas de la semaine pour que vous ",
     solutionStrong: 'gagniez du temps pour vous',
     solutionApres: ', sans sacrifier une alimentation saine.',
@@ -368,6 +369,16 @@ export const profilsOffre = [
     icone: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
   },
 ];
+
+export const profilJeunesParents = {
+  titre: 'Jeunes parents : pré & post-partum',
+  texte1:
+    "Les semaines autour de la naissance sont intenses : fatigue, nuits courtes, et pourtant il faut continuer à bien manger. Je cuisine chez vous des repas faits maison et équilibrés pour ",
+  texte1Strong: 'prendre soin de la maman',
+  texte1Apres:
+    " et des jeunes parents : du temps gagné, et la charge mentale du « qu'est-ce qu'on mange ? » en moins.",
+  texte2: 'Vous pouvez aussi offrir cette prestation à de futurs parents avec un bon cadeau.',
+};
 
 export const engagementModes = [
   { id: 'ponctuel', label: 'Sans engagement', remise: null },
@@ -400,12 +411,9 @@ export const formules = [
 ] as const;
 
 export const optionsFormules = [
-  { label: 'Je fais vos courses', prix: "(+20€, soit 40€ avant crédit d'impôt)" },
-  { label: 'Goûter, petit déjeuner', prix: "(+7,50€/unité, soit 15€ avant crédit d'impôt)" },
+  { label: 'Je fais vos courses', prix: "+20€, soit 40€ avant crédit d'impôt" },
+  { label: 'Goûter, petit déjeuner', prix: "+7,50€/unité, soit 15€ avant crédit d'impôt" },
 ];
-
-export const portionsNote =
-  'Plats généreux pensés pour 4 personnes — si vous êtes moins nombreux, vous en profitez sur plusieurs repas.\nSupplément +10€ au-delà de 4 personnes (soit 20€ avant crédit d\'impôt).';
 
 export const parcours = [
   {

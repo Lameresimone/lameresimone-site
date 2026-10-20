@@ -1,17 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CheckIcon from '../components/CheckIcon.astro';
 import StepCard from '../components/StepCard.astro';
 import PricingPlan from '../components/PricingPlan.astro';
 import {
   site,
   creditImpot,
-  beneficesOffre,
   etapesCommentCaMarche,
   formules,
   engagementModes,
   advantageItems,
   profilsOffre,
+  profilJeunesParents,
 } from '../data/site';
 
 const jsonLd = {
@@ -24,8 +23,8 @@ const jsonLd = {
     url: site.url,
   },
   areaServed: {
-    '@type': 'City',
-    name: 'Lille',
+    '@type': 'AdministrativeArea',
+    name: 'Métropole lilloise',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -48,55 +47,49 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="L'offre"
-  description="Découvrez les formules de batchcooking à domicile de La mère Simone."
+  title="L&rsquo;offre"
+  description="Formules Confort et Sérénité : repas faits maison chez vous dès 85€ après crédit d&rsquo;impôt. Sans engagement ou en abonnement, métropole lilloise."
   canonicalPath="/offre"
   jsonLd={jsonLd}
 >
-  <section class="page-header">
-    <div class="container">
-      <p class="eyebrow">
-        <span class="rule"></span>
-        Le concept
-        <span class="rule"></span>
-      </p>
-      <h1>{site.tagline}</h1>
-      <p class="intro">
-        Je viens cuisiner chez vous tous vos repas de la semaine ! Vous choisissez votre formule et je
-        m&rsquo;occupe du reste.
-      </p>
-      <div class="ph-region">
-        <svg viewBox="0 0 20 20" fill="none">
-          <path
-            d="M10 18s6-5.5 6-10.2A6 6 0 0 0 4 7.8C4 12.5 10 18 10 18Z"
-            stroke="currentColor"
-            stroke-width="1.4"
-          />
-          <circle cx="10" cy="7.8" r="2.1" stroke="currentColor" stroke-width="1.4" />
-        </svg>
-        Secteur {site.secteur}
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="rule"></span>
+          L&rsquo;offre
+        </p>
+        <h1>Batchcooking à domicile</h1>
+        <p class="intro">
+          Je viens cuisiner chez vous tous vos repas de la semaine ! Vous choisissez votre formule et je
+          m&rsquo;occupe du reste.
+        </p>
+        <ul class="hero-benefits">
+          <li>Cuisine maison, produits frais et de saison</li>
+          <li>Plus de temps pour vous, en famille&hellip;</li>
+          <li>Des recettes qui s&rsquo;adaptent à vos envies</li>
+          <li>Pas envie de faire les courses ? Je m&rsquo;en occupe</li>
+        </ul>
+        <div class="region-tag">
+          <svg viewBox="0 0 20 20" fill="none">
+            <path
+              d="M10 18s6-5.5 6-10.2A6 6 0 0 0 4 7.8C4 12.5 10 18 10 18Z"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <circle cx="10" cy="7.8" r="2.1" stroke="currentColor" stroke-width="1.4" />
+          </svg>
+          {site.secteur}
+        </div>
       </div>
-    </div>
-  </section>
 
-  <section class="concept-details">
-    <div class="container concept-grid">
-      <div class="benefit-list">
-        {
-          beneficesOffre.map((benefice) => (
-            <div class="benefit-row">
-              <CheckIcon />
-              <span>{benefice}</span>
-            </div>
-          ))
-        }
-        <div class="benefit-row highlight">
+      <div class="hero-photo-col">
+        <img class="hero-photo" src="/images/photo-offre.webp" alt="Lola, La mère Simone, range les plats préparés au réfrigérateur" />
+        <div class="hero-credit">
           <span class="pct">{creditImpot.taux}%</span>
           <span class="desc">{creditImpot.label}</span>
         </div>
       </div>
-
-      <img class="ph-photo" src="/images/photo-offre.webp" alt="Lola, La mère Simone, range les plats préparés au réfrigérateur" />
     </div>
   </section>
 
@@ -133,6 +126,13 @@ const jsonLd = {
       <div class="plans">
         {formules.map((formule) => <PricingPlan formule={formule} />)}
       </div>
+
+      <p class="plans-note">
+        *Tarifs pour 4 plats (Confort) ou 5 plats (Sérénité) de 4 portions, hors prix des courses (non
+        éligibles au crédit d&rsquo;impôt).<br />
+        Plats généreux pensés pour 4 personnes : si vous êtes moins nombreux, vous en profitez sur plusieurs
+        repas. Supplément +10€ au-delà de 4 personnes (soit 20€ avant crédit d&rsquo;impôt).
+      </p>
 
       <div class="pricing-cta">
         <a href="/contact" class="cta-link">Demander mon devis</a>
@@ -189,6 +189,28 @@ const jsonLd = {
           ))
         }
       </div>
+
+      <div class="profil-wide">
+        <div class="profil-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="13" r="8" />
+            <path d="M12 5c-.2-1.6.6-2.6 2.2-2.6" />
+            <circle cx="9.2" cy="12.4" r=".6" fill="currentColor" />
+            <circle cx="14.8" cy="12.4" r=".6" fill="currentColor" />
+            <path d="M10 16c1.2 1 2.8 1 4 0" />
+          </svg>
+        </div>
+        <div>
+          <h3>{profilJeunesParents.titre}</h3>
+          <p>
+            {profilJeunesParents.texte1}
+            <strong>{profilJeunesParents.texte1Strong}</strong>
+            {profilJeunesParents.texte1Apres}
+          </p>
+          <p>{profilJeunesParents.texte2}</p>
+        </div>
+        <a href="/bon-cadeau" class="gift-btn">Offrir un bon cadeau</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -226,20 +248,30 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-header {
+  .hero {
     background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
     color: #fff;
-    padding: clamp(1.85rem, 4vw, 2.1rem) 0 clamp(2.1rem, 4vw, 2.4rem);
-    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+    padding-block: clamp(3.5rem, 7vw, 4rem);
+  }
+
+  .hero-copy {
+    max-width: 600px;
   }
 
   .eyebrow {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.6rem;
     color: var(--color-cream);
-    font-size: 0.75rem;
+    font-size: 0.84rem;
   }
 
   .rule {
@@ -249,131 +281,111 @@ const jsonLd = {
     flex-shrink: 0;
   }
 
-  .page-header h1 {
-    margin-top: 0.6rem;
-    font-size: clamp(1.625rem, 3vw, 2.375rem);
+  .hero-copy h1 {
+    margin-top: 1.125rem;
+    font-size: clamp(2.125rem, 3.5vw, 3.125rem);
     color: #fff;
   }
 
   .intro {
-    margin: 0.75rem auto 0;
-    font-size: 0.94rem;
+    margin-top: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.88);
-    line-height: 1.55;
-    max-width: 56ch;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
   }
 
-  .ph-region {
-    margin: 0.9rem auto 0;
+  .hero-benefits {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .hero-benefits li {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .hero-benefits li::before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--color-cream)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237D394D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 14px 14px no-repeat;
+  }
+
+  .region-tag {
+    margin-top: 1.75rem;
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
     width: fit-content;
-    font-size: 0.8125rem;
+    font-size: 0.84rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.85);
   }
 
-  .ph-region svg {
-    width: 14px;
-    height: 14px;
+  .region-tag svg {
+    width: 15px;
+    height: 15px;
   }
 
-  .concept-details {
-    background: #fff;
-    padding: clamp(3rem, 6vw, 3.5rem) 0;
-  }
-
-  .concept-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.25rem;
+  .hero-photo-col {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-self: center;
+    gap: 1.125rem;
+    width: 400px;
+    max-width: 100%;
   }
 
-  .ph-photo {
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+  .hero-photo {
     width: 100%;
-    aspect-ratio: 4 / 5;
-    max-height: 400px;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     transition: transform var(--transition);
   }
 
-  .ph-photo:hover {
+  .hero-photo-col:hover .hero-photo {
     transform: translateY(-4px);
   }
 
-  .benefit-list {
-    display: grid;
-    grid-template-columns: max-content;
-    gap: 0.4rem;
-  }
-
-  .benefit-row {
-    max-width: 100%;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    background: var(--color-cream-card);
-    border: 1px solid var(--color-line);
+  .hero-credit {
+    background: var(--color-cream);
     border-radius: var(--radius-md);
-    padding: 0.5rem 0.9rem;
-    transition: background var(--transition), transform var(--transition), border-color var(--transition);
+    padding: 2rem 1.75rem;
+    width: 100%;
+    text-align: left;
+    box-shadow: var(--shadow-md);
   }
 
-  .benefit-row:hover {
-    background: #fff;
-    transform: translateX(4px);
-    border-color: var(--color-wine);
-  }
-
-  .benefit-row :global(svg) {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    margin-top: 0.15rem;
+  .hero-credit .pct {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    display: block;
     color: var(--color-wine);
   }
 
-  .benefit-row span {
-    font-size: 0.81rem;
-    font-weight: 600;
-    color: var(--color-ink);
-    line-height: 1.3;
-  }
-
-  .benefit-row.highlight {
-    background: var(--color-wine);
-    border-color: var(--color-wine);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.85rem 1rem;
-    width: 220px;
-    max-width: 100%;
-    margin-top: 1rem;
-  }
-
-  .benefit-row.highlight:hover {
-    transform: none;
-  }
-
-  .benefit-row.highlight .pct {
-    font-size: 1.85rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--color-cream);
-  }
-
-  .benefit-row.highlight .desc {
-    margin-top: 0.3rem;
-    font-size: 0.78rem;
+  .hero-credit .desc {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: rgba(247, 240, 230, 0.85);
-    line-height: 1.35;
+    line-height: 1.4;
+    color: var(--color-ink-soft);
   }
 
   .how {
@@ -409,7 +421,7 @@ const jsonLd = {
   }
 
   .pricing {
-    padding: clamp(2rem, 5vw, 2.5rem) 0;
+    padding: clamp(3rem, 6vw, 3.5rem) 0;
   }
 
   .pricing-toggle {
@@ -424,9 +436,9 @@ const jsonLd = {
     background: var(--color-cream-card);
     border: 1px solid var(--color-line);
     color: var(--color-ink-soft);
-    padding: 0.7rem 1.35rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
+    padding: 0.7rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.8125rem;
     font-weight: 700;
     font-family: inherit;
     cursor: pointer;
@@ -461,11 +473,16 @@ const jsonLd = {
   .pricing-head {
     text-align: center;
     max-width: 600px;
-    margin: 0 auto 0.85rem;
+    margin: 0 auto 0.875rem;
   }
 
   .pricing-head .eyebrow {
+    justify-content: center;
     color: var(--color-olive-dark);
+  }
+
+  .pricing-head .rule {
+    display: none;
   }
 
   .pricing-head h2 {
@@ -478,8 +495,18 @@ const jsonLd = {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
-    max-width: 1140px;
+    max-width: 1040px;
     margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .plans-note {
+    max-width: 1040px;
+    margin: 1.375rem auto 0;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
   }
 
   .pricing-cta {
@@ -491,10 +518,10 @@ const jsonLd = {
     display: inline-block;
     background: var(--color-wine);
     color: #fff;
-    padding: 1.1rem 2.6rem;
+    padding: 1.125rem 2.625rem;
     border-radius: var(--radius-md);
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: 0.97rem;
     text-decoration: none;
     transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   }
@@ -649,7 +676,95 @@ const jsonLd = {
     color: var(--color-wine);
   }
 
+  .profil-wide {
+    margin-top: 1.625rem;
+    background: var(--color-cream-card);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.625rem;
+    align-items: center;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .profil-wide:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .profil-wide .profil-icon {
+    margin: 0;
+    width: 56px;
+    height: 56px;
+  }
+
+  .profil-wide .profil-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profil-wide h3 {
+    font-size: 1.25rem;
+    color: var(--color-wine);
+  }
+
+  .profil-wide p {
+    margin-top: 0.625rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    max-width: 84ch;
+  }
+
+  .profil-wide p strong {
+    color: var(--color-wine);
+  }
+
+  .gift-btn {
+    background: var(--color-wine);
+    color: var(--color-cream);
+    padding: 1rem 1.75rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+
+  .gift-btn:hover {
+    background: var(--color-wine-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
   @media (max-width: 980px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      padding-top: 2.5rem;
+      row-gap: 2rem;
+    }
+
+    .hero-photo-col {
+      order: -1;
+      margin-inline: auto;
+    }
+
+    .hero-copy {
+      max-width: none;
+    }
+
+    .profil-wide {
+      grid-template-columns: 1fr;
+      padding: 1.875rem 1.625rem;
+      gap: 1.125rem;
+    }
+
+    .gift-btn {
+      text-align: center;
+    }
+
     .advantage-row {
       flex-direction: column;
       align-items: flex-start;
@@ -666,19 +781,6 @@ const jsonLd = {
 
     .profil-grid {
       grid-template-columns: 1fr;
-    }
-
-    .concept-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .ph-photo {
-      order: -1;
-      height: auto;
-      aspect-ratio: 3 / 4;
-      min-height: 0;
-      max-width: 320px;
-      margin: 0 auto;
     }
 
     .steps-grid {
