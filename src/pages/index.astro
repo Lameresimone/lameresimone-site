@@ -44,7 +44,7 @@ const jsonLd = {
           {site.secteur}
         </p>
         <h1>{site.tagline}</h1>
-        <p class="sub">Cuisine à domicile : des repas faits maison,<br />cuisinés chez vous par une cheffe.</p>
+        <p class="sub">Cuisine à domicile : des repas faits maison, <br />cuisinés chez vous par une cheffe.</p>
         <a href="/offre" class="cta-link">Découvrir l&rsquo;offre</a>
       </div>
 
@@ -448,19 +448,27 @@ const jsonLd = {
 
   @media (max-width: 980px) {
     .hero-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       min-height: auto;
       padding-top: 3rem;
     }
 
     .hero-photo-col {
       order: -1;
+      width: 100%;
+      max-width: 400px;
+      min-width: 0;
       margin-inline: auto;
       padding-top: 0.5rem;
     }
 
     .hero-copy {
       max-width: none;
+      min-width: 0;
+    }
+
+    .hero-copy .sub br {
+      display: none;
     }
 
     .trust-row {

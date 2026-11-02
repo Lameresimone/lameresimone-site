@@ -131,7 +131,8 @@ const jsonLd = {
         *Tarifs pour 4 plats (Confort) ou 5 plats (Sérénité) de 4 portions, hors prix des courses (non
         éligibles au crédit d&rsquo;impôt).<br />
         Plats généreux pensés pour 4 personnes : si vous êtes moins nombreux, vous en profitez sur plusieurs
-        repas. Supplément +10€ au-delà de 4 personnes (soit 20€ avant crédit d&rsquo;impôt).
+        repas. Supplément de +10€ par personne en plus au-delà de 4 personnes, soit 20€ avant crédit
+        d&rsquo;impôt.
       </p>
 
       <div class="pricing-cta">
@@ -741,18 +742,22 @@ const jsonLd = {
 
   @media (max-width: 980px) {
     .hero-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       padding-top: 2.5rem;
       row-gap: 2rem;
     }
 
     .hero-photo-col {
       order: -1;
+      width: 100%;
+      max-width: 400px;
+      min-width: 0;
       margin-inline: auto;
     }
 
     .hero-copy {
       max-width: none;
+      min-width: 0;
     }
 
     .profil-wide {

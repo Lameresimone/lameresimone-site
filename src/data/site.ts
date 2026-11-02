@@ -17,8 +17,9 @@ export const nav = [
   { label: 'Accueil', href: '/' },
   { label: "L'offre", href: '/offre' },
   { label: 'Qui suis-je', href: '/qui-suis-je' },
-  { label: "Crédit d'impôt", href: '/credit-impot' },
   { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
+  { label: "Crédit d'impôt", href: '/credit-impot' },
+  { label: 'Bon cadeau', href: '/bon-cadeau' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
@@ -33,10 +34,11 @@ export const footerSiteLinks = [
   { label: 'Accueil', href: '/' },
   { label: "L'offre", href: '/offre' },
   { label: 'Qui suis-je', href: '/qui-suis-je' },
+  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
   { label: "Crédit d'impôt", href: '/credit-impot' },
+  { label: 'Bon cadeau', href: '/bon-cadeau' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Régimes alimentaires', href: '/regimes-alimentaires' },
 ];
 
 export const footerLegalLinks = [
@@ -178,7 +180,7 @@ export const faqGroups = [
       {
         question: 'Pour combien de personnes sont prévus les plats ?',
         reponse:
-          "Les plats sont généreux et pensés pour 4 personnes. Si vous êtes moins nombreux, vous en profitez sur plusieurs repas. Si vous êtes plus nombreux, la préparation demande plus de temps : un supplément s'applique, que je vous indique dans votre devis.",
+          "Les plats sont généreux et pensés pour 4 personnes. Si vous êtes moins nombreux, vous en profitez sur plusieurs repas. Si vous êtes plus nombreux, la préparation demande plus de temps : un supplément de 10€ par personne en plus s'applique au-delà de 4 personnes, soit 20€ avant crédit d'impôt.",
       },
       {
         question: "Puis-je m'abonner pour bénéficier d'une réduction ?",
