@@ -185,10 +185,11 @@ export function renderInternalCopyHtml(data) {
 }
 
 /**
- * E-mail d'alerte envoyé si l'envoi du bon échoue, avec la soumission brute
- * pour pouvoir renvoyer le bon à la main.
+ * E-mail d'alerte envoyé si le traitement automatique d'une soumission
+ * échoue (bon cadeau ou devis), avec la soumission brute pour pouvoir
+ * répondre à la main.
  */
-export function renderFailureNoticeHtml(rawFields, errorMessage) {
+export function renderFailureNoticeHtml(formLabel, rawFields, errorMessage) {
   const rows = Object.entries(rawFields)
     .map(
       ([key, value]) =>
@@ -199,14 +200,60 @@ export function renderFailureNoticeHtml(rawFields, errorMessage) {
   return `<!doctype html>
 <html lang="fr">
   <body style="margin:0;padding:24px;background:#fff;font-family:Arial,sans-serif;color:${COLORS.ink};">
-    <h1 style="font-size:20px;color:#B3261E;">Échec de l&rsquo;envoi d&rsquo;un bon cadeau</h1>
+    <h1 style="font-size:20px;color:#B3261E;">Échec du traitement automatique (${escapeHtml(formLabel)})</h1>
     <p style="font-size:14px;color:${COLORS.inkSoft};">
-      Une soumission du formulaire Bon cadeau n&rsquo;a pas pu être traitée automatiquement. Erreur :
-      <strong>${escapeHtml(errorMessage)}</strong>
+      Une soumission du formulaire ${escapeHtml(formLabel)} n&rsquo;a pas pu être traitée automatiquement.
+      Erreur : <strong>${escapeHtml(errorMessage)}</strong>
     </p>
     <p style="font-size:14px;color:${COLORS.inkSoft};">Voici la soumission complète, à traiter manuellement :</p>
     <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;font-size:13px;border-collapse:collapse;">
       ${rows}
+    </table>
+  </body>
+</html>`;
+}
+
+/**
+ * Accusé de réception automatique envoyé au demandeur de devis.
+ */
+export function renderDevisAckHtml(fields) {
+  const formuleLabel = fields.formule === 'serenite' ? 'Formule Sérénité' : 'Formule Confort';
+  const engagementLabel =
+    fields.engagement === 'mensuel4' ? '4x / mois' : fields.engagement === 'mensuel2' ? '2x / mois' : 'Sans engagement';
+
+  return `<!doctype html>
+<html lang="fr">
+  <body style="margin:0;padding:24px 16px;background:#E9E1D8;font-family:Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:${COLORS.cream};border-radius:8px;overflow:hidden;">
+            <tr>
+              <td style="padding:32px 32px 8px;">
+                <img src="${LOGO_URL}" alt="La mère Simone" height="40" style="display:block;height:40px;width:auto;border:0;" />
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:16px 32px 32px;color:${COLORS.ink};">
+                <h1 style="margin:0;font-size:22px;color:${COLORS.wine};">Bien reçu, ${escapeHtml(fields.prenom ?? '')} !</h1>
+                <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:${COLORS.inkSoft};">
+                  Votre demande de devis a bien été transmise. Je vous réponds sous 48h par mail ou par
+                  téléphone, avec une proposition adaptée à vos besoins.
+                </p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;border-top:1px solid ${COLORS.line};font-size:14px;">
+                  <tr><td style="padding:10px 0;border-bottom:1px solid ${COLORS.line};color:${COLORS.inkSoft};">Ville</td><td style="padding:10px 0;border-bottom:1px solid ${COLORS.line};text-align:right;font-weight:bold;color:${COLORS.ink};">${escapeHtml(fields.ville ?? '')}</td></tr>
+                  <tr><td style="padding:10px 0;border-bottom:1px solid ${COLORS.line};color:${COLORS.inkSoft};">Formule souhaitée</td><td style="padding:10px 0;border-bottom:1px solid ${COLORS.line};text-align:right;font-weight:bold;color:${COLORS.ink};">${escapeHtml(formuleLabel)}</td></tr>
+                  <tr><td style="padding:10px 0;color:${COLORS.inkSoft};">Rythme souhaité</td><td style="padding:10px 0;text-align:right;font-weight:bold;color:${COLORS.ink};">${escapeHtml(engagementLabel)}</td></tr>
+                </table>
+                <p style="margin:20px 0 0;font-size:13px;color:${COLORS.inkSoft};">
+                  Pensez à vérifier vos courriers indésirables si vous ne voyez rien arriver. Une question
+                  avant ma réponse ? Écrivez-moi à lameresimone.pro@gmail.com.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
     </table>
   </body>
 </html>`;

@@ -2,10 +2,27 @@ import { getStore } from '@netlify/blobs';
 import { Resend } from 'resend';
 import { computeBonCadeau } from './lib/pricing.js';
 import { generateUniqueCode, formatValidityDate } from './lib/voucher-code.js';
-import { renderVoucherEmailHtml, renderInternalCopyHtml, renderFailureNoticeHtml } from './lib/email-template.js';
+import {
+  renderVoucherEmailHtml,
+  renderInternalCopyHtml,
+  renderFailureNoticeHtml,
+  renderDevisAckHtml,
+} from './lib/email-template.js';
 
 const OWNER_EMAIL = 'lameresimone.pro@gmail.com';
 const FROM_ADDRESS = 'La mère Simone <bons@lameresimone.fr>';
+
+// Le SDK Resend ne lève PAS d'exception sur un échec d'envoi (clé invalide,
+// domaine non vérifié, adresse refusée...) : il retourne { error } sans
+// rejeter la promesse. Sans ce garde-fou, un envoi silencieusement raté
+// serait traité comme un succès partout dans ce fichier.
+async function sendOrThrow(resend, params) {
+  const { data, error } = await resend.emails.send(params);
+  if (error) {
+    throw new Error(`Échec de l'envoi Resend (${params.subject}) : ${error.message ?? JSON.stringify(error)}`);
+  }
+  return data;
+}
 
 function formatDateFr(date) {
   const dd = String(date.getDate()).padStart(2, '0');
@@ -14,25 +31,113 @@ function formatDateFr(date) {
   return `${dd}/${mm}/${yyyy}`;
 }
 
-async function notifyOwnerOfFailure(resend, rawFields, error) {
+async function notifyOwnerOfFailure(resend, formLabel, rawFields, error) {
   try {
-    await resend.emails.send({
+    await sendOrThrow(resend, {
       from: FROM_ADDRESS,
       to: OWNER_EMAIL,
-      subject: "Échec de l'envoi d'un bon cadeau — à renvoyer à la main",
-      html: renderFailureNoticeHtml(rawFields, error instanceof Error ? error.message : String(error)),
+      subject: `Échec du traitement automatique (${formLabel}), à traiter à la main`,
+      html: renderFailureNoticeHtml(formLabel, rawFields, error instanceof Error ? error.message : String(error)),
     });
   } catch (notifyError) {
     // Dernier recours : si même la notification d'échec échoue (Resend down, clé
     // invalide...), on le trace dans les logs de la fonction, qui restent consultables
     // depuis le tableau de bord Netlify.
-    console.error('Bon cadeau : échec du traitement ET de la notification de secours.', {
+    console.error(`${formLabel} : échec du traitement ET de la notification de secours.`, {
       originalError: error,
       notifyError,
       rawFields,
     });
   }
 }
+
+/**
+ * Formulaire bon-cadeau : recalcule les montants, génère un code unique,
+ * envoie le bon par mail et une copie de suivi au propriétaire du site.
+ */
+async function handleBonCadeau(resend, fields) {
+  if (!fields.prenom_beneficiaire || !fields.prenom_offrant || !fields.email_offrant) {
+    throw new Error('Champs obligatoires manquants dans la soumission (bénéficiaire, offrant ou email).');
+  }
+
+  const computed = computeBonCadeau(fields);
+
+  const issueDate = new Date();
+  const store = getStore('bons-cadeaux');
+  const code = await generateUniqueCode(issueDate, async (candidate) => (await store.get(candidate)) !== null);
+  const validite = formatValidityDate(issueDate);
+
+  const emailData = {
+    ...computed,
+    code,
+    validite,
+    issuedAtFr: formatDateFr(issueDate),
+    prenomBeneficiaire: fields.prenom_beneficiaire,
+    prenomOffrant: fields.prenom_offrant,
+    emailOffrant: fields.email_offrant,
+    message: fields.message ?? '',
+  };
+
+  // On envoie d'abord le bon à la personne qui l'offre : c'est l'envoi qui
+  // compte vraiment. Le code n'est marqué comme utilisé qu'une fois cet envoi
+  // confirmé, pour ne jamais laisser de code "orphelin" réservé pour un bon
+  // jamais réellement délivré.
+  await sendOrThrow(resend, {
+    from: FROM_ADDRESS,
+    to: fields.email_offrant,
+    replyTo: OWNER_EMAIL,
+    subject: 'Votre bon cadeau La mère Simone',
+    html: renderVoucherEmailHtml(emailData),
+  });
+
+  await store.setJSON(code, {
+    code,
+    issuedAt: issueDate.toISOString(),
+    validUntil: validite,
+    ...computed,
+    prenomBeneficiaire: fields.prenom_beneficiaire,
+    prenomOffrant: fields.prenom_offrant,
+    emailOffrant: fields.email_offrant,
+  });
+
+  // Copie de suivi : son échec ne doit pas faire échouer l'envoi déjà réussi
+  // au client, donc on l'isole dans son propre try/catch.
+  try {
+    await sendOrThrow(resend, {
+      from: FROM_ADDRESS,
+      to: OWNER_EMAIL,
+      subject: `Bon cadeau émis : ${code}`,
+      html: renderInternalCopyHtml(emailData),
+    });
+  } catch (copyError) {
+    console.error('Bon cadeau : le bon a bien été envoyé au client, mais la copie de suivi a échoué.', copyError);
+  }
+}
+
+/**
+ * Formulaire devis (page Contact) : accusé de réception automatique envoyé
+ * au demandeur. La notification du propriétaire du site passe par les
+ * notifications natives de Netlify Forms (voir netlify/functions/README.md),
+ * pas par cette fonction.
+ */
+async function handleDevis(resend, fields) {
+  if (!fields.email || !fields.prenom) {
+    throw new Error('Champs obligatoires manquants dans la soumission (prénom ou email).');
+  }
+
+  await sendOrThrow(resend, {
+    from: FROM_ADDRESS,
+    to: fields.email,
+    replyTo: OWNER_EMAIL,
+    subject: 'Votre demande de devis La mère Simone',
+    html: renderDevisAckHtml(fields),
+  });
+}
+
+const FORM_HANDLERS = {
+  'bon-cadeau': { run: handleBonCadeau, label: 'Bon cadeau' },
+  devis: { run: handleDevis, label: 'Devis' },
+};
 
 export const handler = async (event) => {
   let payload;
@@ -42,10 +147,11 @@ export const handler = async (event) => {
     return { statusCode: 200, body: 'ignored: invalid payload' };
   }
 
-  // submission-created se déclenche pour TOUS les formulaires du site (ex: le
-  // formulaire "guide" de l'accueil) : on ne traite que le formulaire bon-cadeau.
-  if (!payload || payload.form_name !== 'bon-cadeau') {
-    return { statusCode: 200, body: 'ignored: not the bon-cadeau form' };
+  // submission-created se déclenche pour TOUS les formulaires du site : on
+  // ignore ceux qu'on ne traite pas automatiquement.
+  const formConfig = payload && FORM_HANDLERS[payload.form_name];
+  if (!formConfig) {
+    return { statusCode: 200, body: `ignored: unhandled form (${payload?.form_name ?? 'unknown'})` };
   }
 
   const fields = payload.data ?? {};
@@ -56,72 +162,16 @@ export const handler = async (event) => {
   } catch (configError) {
     // Si la clé Resend elle-même manque ou est invalide, on ne peut même pas
     // envoyer de mail d'alerte : seule la trace dans les logs Netlify reste.
-    console.error('Bon cadeau : Resend mal configuré (RESEND_API_KEY manquante ou invalide).', configError, { fields });
+    console.error(`${formConfig.label} : Resend mal configuré (RESEND_API_KEY manquante ou invalide).`, configError, { fields });
     return { statusCode: 200, body: 'misconfigured' };
   }
 
   try {
-    if (!fields.prenom_beneficiaire || !fields.prenom_offrant || !fields.email_offrant) {
-      throw new Error('Champs obligatoires manquants dans la soumission (bénéficiaire, offrant ou email).');
-    }
-
-    const computed = computeBonCadeau(fields);
-
-    const issueDate = new Date();
-    const store = getStore('bons-cadeaux');
-    const code = await generateUniqueCode(issueDate, async (candidate) => (await store.get(candidate)) !== null);
-    const validite = formatValidityDate(issueDate);
-
-    const emailData = {
-      ...computed,
-      code,
-      validite,
-      issuedAtFr: formatDateFr(issueDate),
-      prenomBeneficiaire: fields.prenom_beneficiaire,
-      prenomOffrant: fields.prenom_offrant,
-      emailOffrant: fields.email_offrant,
-      message: fields.message ?? '',
-    };
-
-    // On envoie d'abord le bon à la personne qui l'offre : c'est l'envoi qui
-    // compte vraiment. Le code n'est marqué comme utilisé qu'une fois cet envoi
-    // confirmé, pour ne jamais laisser de code "orphelin" réservé pour un bon
-    // jamais réellement délivré.
-    await resend.emails.send({
-      from: FROM_ADDRESS,
-      to: fields.email_offrant,
-      replyTo: OWNER_EMAIL,
-      subject: 'Votre bon cadeau La mère Simone',
-      html: renderVoucherEmailHtml(emailData),
-    });
-
-    await store.setJSON(code, {
-      code,
-      issuedAt: issueDate.toISOString(),
-      validUntil: validite,
-      ...computed,
-      prenomBeneficiaire: fields.prenom_beneficiaire,
-      prenomOffrant: fields.prenom_offrant,
-      emailOffrant: fields.email_offrant,
-    });
-
-    // Copie de suivi : son échec ne doit pas faire échouer l'envoi déjà réussi
-    // au client, donc on l'isole dans son propre try/catch.
-    try {
-      await resend.emails.send({
-        from: FROM_ADDRESS,
-        to: OWNER_EMAIL,
-        subject: `Bon cadeau émis : ${code}`,
-        html: renderInternalCopyHtml(emailData),
-      });
-    } catch (copyError) {
-      console.error('Bon cadeau : le bon a bien été envoyé au client, mais la copie de suivi a échoué.', copyError);
-    }
-
+    await formConfig.run(resend, fields);
     return { statusCode: 200, body: 'ok' };
   } catch (error) {
-    console.error('Bon cadeau : échec du traitement de la soumission.', error);
-    await notifyOwnerOfFailure(resend, fields, error);
+    console.error(`${formConfig.label} : échec du traitement de la soumission.`, error);
+    await notifyOwnerOfFailure(resend, formConfig.label, fields, error);
     return { statusCode: 200, body: 'handled failure' };
   }
 };
