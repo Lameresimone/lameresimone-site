@@ -2,12 +2,7 @@ import { getStore } from '@netlify/blobs';
 import { Resend } from 'resend';
 import { computeBonCadeau } from './lib/pricing.js';
 import { generateUniqueCode, formatValidityDate } from './lib/voucher-code.js';
-import {
-  renderVoucherEmailHtml,
-  renderInternalCopyHtml,
-  renderFailureNoticeHtml,
-  renderDevisAckHtml,
-} from './lib/email-template.js';
+import { renderVoucherEmailHtml, renderInternalCopyHtml, renderFailureNoticeHtml } from './lib/email-template.js';
 
 const OWNER_EMAIL = 'lameresimone.pro@gmail.com';
 const FROM_ADDRESS = 'La mère Simone <bons@lameresimone.fr>';
@@ -114,29 +109,16 @@ async function handleBonCadeau(resend, fields) {
   }
 }
 
-/**
- * Formulaire devis (page Contact) : accusé de réception automatique envoyé
- * au demandeur. La notification du propriétaire du site passe par les
- * notifications natives de Netlify Forms (voir netlify/functions/README.md),
- * pas par cette fonction.
- */
-async function handleDevis(resend, fields) {
-  if (!fields.email || !fields.prenom) {
-    throw new Error('Champs obligatoires manquants dans la soumission (prénom ou email).');
-  }
-
-  await sendOrThrow(resend, {
-    from: FROM_ADDRESS,
-    to: fields.email,
-    replyTo: OWNER_EMAIL,
-    subject: 'Votre demande de devis La mère Simone',
-    html: renderDevisAckHtml(fields),
-  });
-}
+// Le formulaire devis (page Contact) n'a volontairement aucun traitement
+// automatique ici : pas de mail au demandeur (la confirmation affichée sur
+// la page suffit), pas de mail au propriétaire du site (ça passe par les
+// notifications natives de Netlify Forms, voir netlify/functions/README.md).
+// submission-created se déclenchant pour tous les formulaires du site, il
+// est donc simplement ignoré plus bas, comme n'importe quel autre formulaire
+// non listé dans FORM_HANDLERS.
 
 const FORM_HANDLERS = {
   'bon-cadeau': { run: handleBonCadeau, label: 'Bon cadeau' },
-  devis: { run: handleDevis, label: 'Devis' },
 };
 
 export const handler = async (event) => {

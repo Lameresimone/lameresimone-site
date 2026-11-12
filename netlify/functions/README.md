@@ -1,23 +1,19 @@
-# Fonction d'envoi automatique (bon cadeau, devis)
+# Fonction d'envoi automatique du bon cadeau
 
 `submission-created.js` se déclenche automatiquement à chaque soumission
-d'un formulaire Netlify Forms du site. Elle ne traite que les formulaires
-qu'elle connaît (`bon-cadeau` et `devis`) et ignore silencieusement tous les
-autres.
+d'un formulaire Netlify Forms du site, mais ne traite que le formulaire
+`bon-cadeau` : recalcule tous les montants côté serveur (jamais de
+confiance dans les valeurs envoyées par le navigateur), génère un code
+unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre,
+envoie une copie de suivi à `lameresimone.pro@gmail.com`, et prévient par
+mail en cas d'échec avec la soumission complète pour un envoi manuel.
 
-- **`bon-cadeau`** : recalcule tous les montants côté serveur (jamais de
-  confiance dans les valeurs envoyées par le navigateur), génère un code
-  unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre,
-  envoie une copie de suivi à `lameresimone.pro@gmail.com`, et prévient par
-  mail en cas d'échec avec la soumission complète pour un envoi manuel.
-- **`devis`** (page Contact) : envoie un accusé de réception automatique au
-  demandeur (« Bien reçu, je vous réponds sous 48h »). **La notification de
-  la demande à `lameresimone.pro@gmail.com` ne passe pas par cette
-  fonction** : elle utilise les notifications natives de Netlify Forms, à
-  activer dans le tableau de bord (voir plus bas).
-
-Sur un échec de traitement, les deux formulaires envoient une alerte par
-mail avec la soumission complète, pour un traitement manuel.
+Le formulaire `devis` (page Contact) est volontairement ignoré par cette
+fonction : **aucun mail automatique n'est envoyé au demandeur**, la
+confirmation affichée dans la page suffit. La notification de la demande à
+`lameresimone.pro@gmail.com` passe uniquement par les notifications
+natives de Netlify Forms, à activer dans le tableau de bord (voir plus
+bas) — ce n'est pas ce code qui l'envoie.
 
 ## À configurer avant la mise en ligne
 
