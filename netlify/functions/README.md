@@ -25,7 +25,7 @@ bas) — ce n'est pas ce code qui l'envoie.
 2. **Variable d'environnement Netlify** : dans l'interface Netlify du site →
    *Site configuration* → *Environment variables*, ajouter :
    - `RESEND_API_KEY` : la clé API générée dans Resend. Ne jamais la mettre
-     dans le code ni la committer.
+     dans le code ni la committer. ✅ Configurée.
 3. **Adresse d'expédition** : le code envoie depuis
    `bons@lameresimone.fr` (modifiable dans `submission-created.js`,
    constante `FROM_ADDRESS`). Cette adresse doit appartenir au domaine
