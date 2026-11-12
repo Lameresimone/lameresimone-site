@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SapLogo from '../components/SapLogo.astro';
 import { creditImpot, creditImpotEtapes, creditImpotFaq, formules } from '../data/site';
 
 const confort = formules[0];
@@ -60,13 +61,16 @@ const jsonLd = {
           que vous ayez à avancer la somme.
         </p>
       </div>
-      <div class="stat-card">
-        <span class="pct">{creditImpot.taux}%</span>
-        <p class="desc">
-          du montant de la prestation remboursé sous forme de crédit d&rsquo;impôt, quel que soit votre niveau
-          d&rsquo;imposition.
-        </p>
-        <p class="ceiling">{creditImpot.plafond}</p>
+      <div class="principe-side">
+        <div class="stat-card">
+          <span class="pct">{creditImpot.taux}%</span>
+          <p class="desc">
+            du montant de la prestation remboursé sous forme de crédit d&rsquo;impôt, quel que soit votre niveau
+            d&rsquo;imposition.
+          </p>
+          <p class="ceiling">{creditImpot.plafond}</p>
+        </div>
+        <SapLogo width={120} margin="1.75rem auto 0" />
       </div>
     </div>
   </section>
@@ -230,6 +234,10 @@ const jsonLd = {
 
   .principe-text strong {
     color: var(--color-ink);
+  }
+
+  .principe-side {
+    min-width: 0;
   }
 
   .stat-card {

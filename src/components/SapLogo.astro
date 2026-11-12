@@ -1,0 +1,38 @@
+---
+// Logo officiel « Services à la personne » (traceur DGE) : ne jamais le
+// déformer, le recolorer ni séparer ses éléments. `width`/`margin` sont
+// passés en style inline (plutôt qu'en classes) car ce composant est
+// utilisé depuis plusieurs pages dont les styles scopés Astro ne
+// s'appliqueraient pas aux éléments qu'il rend lui-même.
+interface Props {
+  width: number;
+  margin?: string;
+}
+
+const { width, margin } = Astro.props;
+const style = [`width:${width}px`, margin ? `margin:${margin}` : null].filter(Boolean).join(';');
+---
+
+<a
+  href="https://www.servicesalapersonne.gouv.fr"
+  target="_blank"
+  rel="noopener"
+  class="sap-logo"
+  style={style}
+  aria-label="Services à la personne, site officiel de l'État"
+>
+  <img src="/images/logo-services-a-la-personne.png" alt="Services à la personne" width="130" height="108" loading="lazy" />
+</a>
+
+<style>
+  .sap-logo {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .sap-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

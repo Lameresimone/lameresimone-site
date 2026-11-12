@@ -1,5 +1,6 @@
 ---
 import { site, contact, footerSiteLinks, footerLegalLinks } from '../data/site';
+import SapLogo from './SapLogo.astro';
 
 const year = new Date().getFullYear();
 ---
@@ -7,9 +8,12 @@ const year = new Date().getFullYear();
 <footer>
   <div class="container footer-top">
     <div class="footer-brand">
-      <a href="/" class="logo">
-        <img src="/images/logo-on-dark.png" alt="La mère Simone" />
-      </a>
+      <div class="footer-logos">
+        <a href="/" class="logo">
+          <img src="/images/logo-on-dark.png" alt="La mère Simone" />
+        </a>
+        <SapLogo width={100} />
+      </div>
       <p class="footer-tagline">{site.description}</p>
       <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" class="footer-social">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -59,6 +63,13 @@ const year = new Date().getFullYear();
   .footer-brand .logo img {
     height: 2.5rem;
     width: auto;
+  }
+
+  .footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
   }
 
   .footer-tagline {

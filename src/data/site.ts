@@ -8,8 +8,8 @@ export const site = {
 
 export const contact = {
   email: 'lameresimone.pro@gmail.com',
-  instagram: '@batchcooking_la_mere_simone_',
-  instagramUrl: 'https://www.instagram.com/batchcooking_la_mere_simone_/',
+  instagram: '@batchcooking_lameresimone',
+  instagramUrl: 'https://instagram.com/batchcooking_lameresimone',
   siret: '98938305400016',
 };
 
