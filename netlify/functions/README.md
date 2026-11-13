@@ -20,14 +20,15 @@ bas) — ce n'est pas ce code qui l'envoie.
 1. **Compte Resend** (ou équivalent) : créer un compte sur
    [resend.com](https://resend.com), ajouter le domaine `lameresimone.fr` et
    suivre les instructions pour configurer les enregistrements DNS **SPF**,
-   **DKIM** et **DMARC** — sans ça, les mails partiront en spam ou seront
-   refusés par les boîtes des destinataires.
+   **DKIM** et **DMARC**, sans quoi les mails partiront en spam ou seront
+   refusés par les boîtes des destinataires. ✅ Domaine vérifié (région
+   Ireland).
 2. **Variable d'environnement Netlify** : dans l'interface Netlify du site →
    *Site configuration* → *Environment variables*, ajouter :
    - `RESEND_API_KEY` : la clé API générée dans Resend. Ne jamais la mettre
      dans le code ni la committer. ✅ Configurée.
 3. **Adresse d'expédition** : le code envoie depuis
-   `bons@lameresimone.fr` (modifiable dans `submission-created.js`,
+   `bonjour@lameresimone.fr` (modifiable dans `submission-created.js`,
    constante `FROM_ADDRESS`). Cette adresse doit appartenir au domaine
    vérifié dans Resend. La réponse (reply-to) part vers
    `lameresimone.pro@gmail.com`.

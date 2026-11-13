@@ -5,7 +5,7 @@ import { generateUniqueCode, formatValidityDate } from './lib/voucher-code.js';
 import { renderVoucherEmailHtml, renderInternalCopyHtml, renderFailureNoticeHtml } from './lib/email-template.js';
 
 const OWNER_EMAIL = 'lameresimone.pro@gmail.com';
-const FROM_ADDRESS = 'La mère Simone <bons@lameresimone.fr>';
+const FROM_ADDRESS = 'La mère Simone <bonjour@lameresimone.fr>';
 
 // Le SDK Resend ne lève PAS d'exception sur un échec d'envoi (clé invalide,
 // domaine non vérifié, adresse refusée...) : il retourne { error } sans
@@ -14,6 +14,9 @@ const FROM_ADDRESS = 'La mère Simone <bons@lameresimone.fr>';
 async function sendOrThrow(resend, params) {
   const { data, error } = await resend.emails.send(params);
   if (error) {
+    // Message complet de l'erreur Resend (nom, code, détail) dans les logs de
+    // la fonction, avant de la relayer comme exception à la logique appelante.
+    console.error(`Resend a renvoyé une erreur pour l'envoi "${params.subject}" (destinataire : ${params.to}) :`, error);
     throw new Error(`Échec de l'envoi Resend (${params.subject}) : ${error.message ?? JSON.stringify(error)}`);
   }
   return data;
