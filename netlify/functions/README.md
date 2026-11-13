@@ -33,8 +33,13 @@ bas) — ce n'est pas ce code qui l'envoie.
    vérifié dans Resend. La réponse (reply-to) part vers
    `lameresimone.pro@gmail.com`.
 4. **Netlify Blobs** : utilisé pour garantir l'unicité des codes de bons.
-   Aucune configuration requise — disponible automatiquement sur les sites
-   déployés sur Netlify.
+   Aucune configuration de compte requise. Cette fonction utilise le format
+   de handler "v1" (`exports.handler` / `export const handler` recevant un
+   `event` au format API Gateway), où Blobs n'est pas configuré
+   automatiquement contrairement au format v2 : le code appelle
+   `connectLambda(event)` juste avant le premier `getStore(...)`, ce qui
+   suffit. Sans cet appel, `getStore()` lève
+   `MissingBlobsEnvironmentError` une fois déployé.
 5. **Notification de devis par mail** (dashboard Netlify, pas dans le code) :
    Netlify → le site → *Forms* → *Settings and usage* → *Form notifications*
    → *Add notification* → *Email notification* → entrer l'adresse

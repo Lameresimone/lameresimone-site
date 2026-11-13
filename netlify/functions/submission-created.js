@@ -1,4 +1,4 @@
-import { getStore } from '@netlify/blobs';
+import { connectLambda, getStore } from '@netlify/blobs';
 import { Resend } from 'resend';
 import { computeBonCadeau } from './lib/pricing.js';
 import { generateUniqueCode, formatValidityDate } from './lib/voucher-code.js';
@@ -53,13 +53,20 @@ async function notifyOwnerOfFailure(resend, formLabel, rawFields, error) {
  * Formulaire bon-cadeau : recalcule les montants, génère un code unique,
  * envoie le bon par mail et une copie de suivi au propriétaire du site.
  */
-async function handleBonCadeau(resend, fields) {
+async function handleBonCadeau(resend, fields, event) {
   if (!fields.prenom_beneficiaire || !fields.prenom_offrant || !fields.email_offrant) {
     throw new Error('Champs obligatoires manquants dans la soumission (bénéficiaire, offrant ou email).');
   }
 
   const computed = computeBonCadeau(fields);
 
+  // Cette fonction utilise le format "v1" (handler recevant un event au
+  // format API Gateway) : Netlify Blobs n'y est pas configuré automatiquement
+  // comme en v2, il faut l'initialiser explicitement à partir de l'event
+  // avant le premier getStore(). Appelé ici (et non en tête du handler) pour
+  // qu'un échec reste couvert par le même traitement d'erreur que le reste
+  // de cette fonction (notification au propriétaire du site).
+  connectLambda(event);
   const issueDate = new Date();
   const store = getStore('bons-cadeaux');
   const code = await generateUniqueCode(issueDate, async (candidate) => (await store.get(candidate)) !== null);
@@ -152,7 +159,7 @@ export const handler = async (event) => {
   }
 
   try {
-    await formConfig.run(resend, fields);
+    await formConfig.run(resend, fields, event);
     return { statusCode: 200, body: 'ok' };
   } catch (error) {
     console.error(`${formConfig.label} : échec du traitement de la soumission.`, error);
