@@ -1,38 +1,539 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contact } from '../data/site';
+import CheckIcon from '../components/CheckIcon.astro';
+import { site, contact, formules, engagementModes, trustMini } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `Demander mon devis — ${site.name}`,
+  url: `${site.url}/contact`,
+  about: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    email: contact.email,
+    url: site.url,
+  },
+};
 ---
 
-<BaseLayout title="Contact" description="Demandez votre devis pour une prestation de batchcooking à domicile.">
-  <section class="contact">
+<BaseLayout
+  title="Demander mon devis"
+  description="Recevez une proposition personnalisée pour votre batchcooking à domicile à Lille. Réponse sous 48h, sans engagement de votre part."
+  canonicalPath="/contact"
+  jsonLd={jsonLd}
+>
+  <section class="page-header">
     <div class="container">
-      <h1>Demander mon devis</h1>
-      <p>
-        Cette page est en cours de construction. En attendant, contactez-moi directement par email à
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+      <p class="eyebrow">
+        <span class="rule"></span>
+        Devis gratuit
+        <span class="rule"></span>
       </p>
+      <h1>Demander mon devis</h1>
+      <p class="intro">
+        Quelques informations pour que je puisse revenir vers vous rapidement avec une proposition adaptée à vos
+        besoins.
+      </p>
+    </div>
+  </section>
+
+  <section class="trust-mini-section">
+    <div class="container">
+      <div class="trust-mini">
+        {
+          trustMini.map((item) => (
+            <span>
+              <span class="icon-circle">
+                <CheckIcon />
+              </span>
+              {item}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container">
+      <form class="form-card" name="devis" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="devis-form">
+        <input type="hidden" name="form-name" value="devis" />
+        <p class="hp"><label>Ne pas remplir <input name="bot-field" /></label></p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prenom">Prénom <span class="req">*</span></label>
+            <input type="text" id="prenom" name="prenom" required />
+          </div>
+          <div class="form-group">
+            <label for="nom">Nom <span class="req">*</span></label>
+            <input type="text" id="nom" name="nom" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="telephone">Téléphone <span class="req">*</span></label>
+            <input type="tel" id="telephone" name="telephone" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ville">Ville <span class="req">*</span></label>
+          <input type="text" id="ville" name="ville" placeholder="Ex. Lille, Villeneuve-d'Ascq, Mons-en-Barœul..." required />
+        </div>
+
+        <p class="section-title">Formule souhaitée</p>
+        <div class="formula-grid">
+          {
+            formules.map((formule, i) => (
+              <label class="formula-card" class:list={{ selected: i === 0 }} data-formula={formule.id}>
+                <input type="radio" name="formule" value={formule.id} checked={i === 0} />
+                <div class="f-name">{formule.nom}</div>
+                <div class="f-detail">
+                  {formule.nbPlats} plats — à partir de {formule.prix.ponctuel.client}&euro;
+                </div>
+              </label>
+            ))
+          }
+        </div>
+
+        <p class="section-title">Rythme souhaité</p>
+        <div class="engagement-row">
+          {
+            engagementModes.map((mode, i) => (
+              <label class="engagement-pill" class:list={{ selected: i === 0 }} data-mode={mode.id}>
+                <input type="radio" name="engagement" value={mode.id} checked={i === 0} />
+                {mode.label}
+                {mode.remise && ` (${mode.remise})`}
+              </label>
+            ))
+          }
+        </div>
+
+        <p class="section-title">Votre message</p>
+        <div class="form-group">
+          <label for="message">Précisions, allergies, envies particulières</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Régime alimentaire, intolérances, nombre de personnes, disponibilités..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="devis-submit">Envoyer ma demande</button>
+        <p class="form-note" id="devis-note">Réponse sous 48h, sans engagement de votre part.</p>
+        <p class="form-note devis-err" id="devis-err" hidden>
+          Une erreur est survenue. Réessayez, ou écrivez-moi à {contact.email}.
+        </p>
+
+        <div class="devis-sent" id="devis-sent" hidden>
+          <span class="sent-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </span>
+          <h2>Votre demande est bien envoyée</h2>
+          <p>
+            Merci ! Je vous réponds sous 48h par mail ou par téléphone. Pensez à vérifier vos courriers
+            indésirables si vous ne voyez rien arriver.
+          </p>
+        </div>
+      </form>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  document.querySelectorAll<HTMLLabelElement>('.formula-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.formula-card').forEach((c) => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const input = card.querySelector<HTMLInputElement>('input');
+      if (input) input.checked = true;
+    });
+  });
+
+  document.querySelectorAll<HTMLLabelElement>('.engagement-pill').forEach((pill) => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.engagement-pill').forEach((p) => p.classList.remove('selected'));
+      pill.classList.add('selected');
+      const input = pill.querySelector<HTMLInputElement>('input');
+      if (input) input.checked = true;
+    });
+  });
+
+  const form = document.getElementById('devis-form') as HTMLFormElement | null;
+
+  if (form) {
+    const btn = document.getElementById('devis-submit') as HTMLButtonElement | null;
+    const err = document.getElementById('devis-err') as HTMLElement | null;
+    const sent = document.getElementById('devis-sent') as HTMLElement | null;
+
+    function showSent() {
+      form?.classList.add('is-sent');
+      if (sent) {
+        sent.hidden = false;
+        sent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !btn) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+      if (err) err.hidden = true;
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString(),
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error('submit failed');
+          showSent();
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = 'Envoyer ma demande';
+          if (err) err.hidden = false;
+        });
+    });
+  }
+</script>
+
 <style>
-  .contact {
+  .page-header {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding: clamp(2rem, 5vw, 2.25rem) 0 clamp(2.25rem, 5vw, 2.5rem);
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: var(--color-cream);
+  }
+
+  .rule {
+    width: 22px;
+    height: 1px;
     background: var(--color-cream);
-    padding-block: var(--space-section);
-    min-height: 40vh;
   }
 
-  .contact h1 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1.25rem;
+  h1 {
+    margin-top: 0.6rem;
+    font-size: clamp(1.625rem, 3vw, 2.25rem);
+    color: #fff;
   }
 
-  .contact p {
-    max-width: 50ch;
+  .intro {
+    margin: 0.75rem auto 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.5;
+    max-width: 52ch;
   }
 
-  .contact a {
-    color: var(--color-burgundy);
+  .trust-mini-section {
+    padding: 2rem 0 0;
+  }
+
+  .trust-mini {
+    display: flex;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-mini span {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 30px;
+    padding: 0.5rem 1.1rem 0.5rem 0.5rem;
+    font-size: 0.81rem;
+    color: var(--color-ink);
     font-weight: 700;
+    box-shadow: 0 2px 10px rgba(42, 33, 24, 0.05);
+  }
+
+  .trust-mini span.icon-circle {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-olive);
+    border: none;
+    padding: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-circle :global(svg) {
+    width: 14px;
+    height: 14px;
+  }
+
+  .form-section {
+    padding: 2rem 0 clamp(4.5rem, 8vw, 6rem);
+  }
+
+  .form-card {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .form-group {
+    margin-bottom: 1.6rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .req {
+    color: var(--color-wine);
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  textarea {
+    width: 100%;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: var(--color-ink);
+    background: var(--color-cream);
+    transition: border-color var(--transition), background var(--transition);
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-wine);
+    background: #fff;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-wine);
+    margin: 2.35rem 0 1.1rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .form-card .form-group:first-of-type,
+  .form-card > .section-title:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+
+  .formula-card {
+    display: block;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .formula-card:hover {
+    border-color: var(--color-mauve);
+  }
+
+  .formula-card.selected {
+    border-color: var(--color-wine);
+    background: var(--color-cream-card);
+  }
+
+  .formula-card input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .f-name {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--color-wine);
+  }
+
+  .f-detail {
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.25rem;
+  }
+
+  .engagement-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .engagement-pill {
+    display: inline-block;
+    border: 2px solid var(--color-line);
+    border-radius: 30px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .engagement-pill:hover {
+    border-color: var(--color-mauve);
+  }
+
+  .engagement-pill.selected {
+    border-color: var(--color-olive);
+    background: var(--color-olive);
+    color: #fff;
+  }
+
+  .engagement-pill input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    background: var(--color-wine);
+    color: #fff;
+    border: none;
+    padding: 1.1rem;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  }
+
+  .submit-btn:hover {
+    background: var(--color-wine-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .form-note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .form-row,
+    .formula-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .devis-err {
+    color: #9b2c2c;
+    font-weight: 600;
+  }
+
+  .devis-err[hidden],
+  .devis-sent[hidden] {
+    display: none;
+  }
+
+  .devis-sent {
+    text-align: center;
+    padding: 1.75rem 0.5rem 0.75rem;
+  }
+
+  .devis-sent .sent-check {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: var(--color-wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .devis-sent .sent-check svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .devis-sent h2 {
+    margin-top: 1.25rem;
+    font-size: clamp(1.375rem, 3vw, 1.75rem);
+    color: var(--color-wine);
+  }
+
+  .devis-sent p {
+    margin: 0.75rem auto 0;
+    max-width: 48ch;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .form-card.is-sent > *:not(.devis-sent) {
+    display: none;
   }
 </style>

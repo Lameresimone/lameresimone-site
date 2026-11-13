@@ -1,86 +1,291 @@
 ---
-import { nav } from '../data/site';
+import { nav, navCta, brandBarMessage } from '../data/site';
 
 const currentPath = Astro.url.pathname;
 ---
 
+<div class="brand-bar" class:list={{ 'has-message': Boolean(brandBarMessage) }}>
+  {brandBarMessage && <p>{brandBarMessage}</p>}
+</div>
 <header>
-  <div class="nav-bar">
-    <nav class="container">
-      <ul>
-        {
-          nav.map((item) => (
-            <li>
-              <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-  </div>
-  <div class="logo-bar">
-    <div class="container">
-      <a href="/" class="logo">
-        <span class="logo-la-mere">La mère</span>
-        <span class="logo-simone">Simone</span>
-      </a>
-    </div>
+  <nav class="nav container">
+    <a href="/" class="logo">
+      <img src="/images/logo.png" alt="La mère Simone" />
+    </a>
+    <ul class="nav-links">
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} class:list={{ active: currentPath === item.href }}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={navCta.href} class="nav-cta">
+      {navCta.label}
+    </a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    {
+      nav.map((item) => (
+        <a href={item.href} class:list={{ active: currentPath === item.href }}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a href={navCta.href} class="mobile-cta">
+      {navCta.label}
+    </a>
   </div>
 </header>
 
+<script>
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  function setOpen(open: boolean) {
+    mobileMenu?.classList.toggle('open', open);
+    burger?.setAttribute('aria-expanded', String(open));
+    burger?.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  }
+
+  burger?.addEventListener('click', () => {
+    setOpen(!mobileMenu?.classList.contains('open'));
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+</script>
+
 <style>
-  .nav-bar {
+  .brand-bar {
+    min-height: 5px;
     background: var(--color-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
-  .nav-bar nav {
-    display: flex;
-    justify-content: flex-end;
+  .brand-bar.has-message {
+    min-height: 38px;
+    padding: 0.4rem 1.25rem;
   }
 
-  .nav-bar ul {
-    list-style: none;
-    display: flex;
-    gap: clamp(1rem, 3vw, 2.25rem);
+  .brand-bar p {
     margin: 0;
-    padding: 0.85rem 0;
   }
 
-  .nav-bar a {
-    color: var(--color-cream);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    opacity: 0.85;
-  }
-
-  .nav-bar a:hover,
-  .nav-bar a[aria-current='page'] {
-    opacity: 1;
-  }
-
-  .logo-bar {
+  header {
     background: var(--color-cream);
-    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 1.5rem;
+    padding-block: 1rem;
   }
 
   .logo {
     display: inline-flex;
-    flex-direction: column;
-    line-height: 0.85;
     text-decoration: none;
-    color: var(--color-burgundy);
+    transition: opacity var(--transition);
   }
 
-  .logo-la-mere {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
+  .logo:hover {
+    opacity: 0.85;
   }
 
-  .logo-simone {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
+  .logo img {
+    height: 2.75rem;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .nav-links a {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.4rem;
+    color: var(--color-olive-dark);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--color-wine);
+  }
+
+  .nav-links a.active {
+    color: var(--color-wine);
+  }
+
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-olive);
+  }
+
+  .nav-cta {
+    background: var(--color-olive);
+    color: #fff;
+    padding: 0.9rem 1.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.87rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    justify-self: end;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .nav-cta:hover {
+    background: var(--color-olive-dark);
+    transform: translateY(-1px);
+  }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+
+  .burger span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-ink);
+    display: block;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  .burger[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .burger[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    border-top: 1px solid var(--color-line);
+    padding: 0.5rem 1.25rem 1.25rem;
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 0.875rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-olive-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .mobile-menu a.active {
+    color: var(--color-wine);
+  }
+
+  .mobile-menu .mobile-cta {
+    display: block;
+    margin-top: 1rem;
+    border: none;
+    background: var(--color-olive);
+    color: #fff;
+    text-align: center;
+    padding: 0.9375rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 1101px) {
+    .mobile-menu,
+    .mobile-menu.open {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1400px) and (min-width: 1101px) {
+    .nav {
+      column-gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1.25rem;
+      font-size: 0.875rem;
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  @media (max-width: 1240px) and (min-width: 1101px) {
+    .nav-links {
+      gap: 0.875rem;
+      font-size: 0.8125rem;
+    }
+
+    .nav-cta {
+      padding: 0.6875rem 1rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .nav {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+    }
+
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .burger {
+      display: flex;
+    }
   }
 </style>

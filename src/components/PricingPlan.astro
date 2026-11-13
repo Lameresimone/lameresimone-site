@@ -1,0 +1,160 @@
+---
+import { optionsFormules, formules } from '../data/site';
+
+type Formule = (typeof formules)[number];
+
+interface Props {
+  formule: Formule;
+}
+
+const { formule } = Astro.props;
+const { ponctuel, mensuel2, mensuel4 } = formule.prix;
+---
+
+<div class="plan" data-plan={formule.id}>
+  <h3>{formule.nom}</h3>
+  <span class="from">à partir de</span>
+  <div class="price" data-client={ponctuel.client} data-client2={mensuel2.client} data-client4={mensuel4.client}>
+    {ponctuel.client}&euro;
+  </div>
+  <p class="price-note">
+    soit <strong data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>{ponctuel.avant}&euro;</strong>
+    avant crédit d&rsquo;impôt*
+  </p>
+  <div class="price-savings-slot"></div>
+  <ul class="plan-features">
+    {formule.avantages.map((avantage) => <li>{avantage}</li>)}
+  </ul>
+  <div class="plan-more">
+    <p class="options-title">Options disponibles</p>
+    <ul class="plan-options">
+      {
+        optionsFormules.map((option) => (
+          <li>
+            {option.label} <span class="opt-price">{option.prix}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .plan {
+    background: var(--color-wine);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 2.25rem 2.25rem 1.875rem;
+    position: relative;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+
+  .plan:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-olive);
+  }
+
+  .plan h3 {
+    font-size: 0.9375rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    font-weight: 800;
+  }
+
+  .from {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    margin-top: 1.375rem;
+  }
+
+  .price {
+    margin-top: 0.25rem;
+    font-size: 4.75rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .price-note {
+    margin-top: 0.625rem;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+  }
+
+  .price-note strong {
+    color: #fff;
+  }
+
+  .price-savings-slot :global(.price-savings) {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-cream);
+    background: var(--color-olive);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-top: 0.75rem;
+  }
+
+  .plan-features {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .plan-features li {
+    padding: 0.8125rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .plan-more {
+    margin-top: 1rem;
+  }
+
+  .options-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .plan-options {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .plan-options li {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.4;
+  }
+
+  .opt-price {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  @media (max-width: 560px) {
+    .plan {
+      padding: 1.875rem 1.5rem;
+    }
+
+    .price {
+      font-size: 4rem;
+    }
+  }
+</style>

@@ -1,197 +1,415 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
-import { parcours, valeursCuisine } from '../data/site';
+import { site, parcours, valeursCuisine } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lola',
+  jobTitle: 'Cheffe cuisinière à domicile',
+  description:
+    "Diplômée d'un CAP Cuisine (Major de Promo, École Hôtelière de Cannes) et formée HACCP, Lola cuisine des repas faits maison au domicile de ses clients dans la métropole lilloise.",
+  url: `${site.url}/qui-suis-je`,
+  worksFor: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: site.url,
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'École Hôtelière de Cannes',
+  },
+};
 ---
 
-<BaseLayout title="Qui suis-je" description="À la rencontre de Lola, la cuisinière derrière La mère Simone.">
-  <section class="bio">
-    <div class="container bio-grid">
-      <div class="bio-text">
-        <p class="eyebrow">QUI SUIS-JE ?</p>
-        <h1>Hello,<br />moi c&rsquo;est Lola</h1>
-        <p>
-          Lilloise, 26 ans, cuisinière de cœur et de métier. J'ai créé La mère Simone parce que bien manger
-          ne devrait pas être une contrainte !
-        </p>
-        <p>
-          Depuis toujours, ma façon de prendre soin des autres passe par la cuisine. Alors, la mère Simone
-          se met au service de votre quotidien.
-        </p>
+<BaseLayout
+  title="Qui suis-je"
+  description="CAP Cuisine, formée HACCP, plusieurs années d'expérience en restauration et box de recettes. Découvrez le parcours de Lola, cheffe du batchcooking à domicile dans la métropole lilloise."
+  canonicalPath="/qui-suis-je"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Qui suis-je</p>
+        <h1>Hello, moi c&rsquo;est Lola</h1>
+        <div class="bio">
+          <p>
+            Lilloise, 26 ans, cuisinière de cœur et de métier.<br />J&rsquo;ai créé La mère Simone parce que
+            bien manger ne devrait pas être une contrainte !
+          </p>
+          <p>Depuis toujours, ma façon de prendre soin des autres passe par la cuisine.</p>
+          <p>Alors, la mère Simone se met au service de votre quotidien.</p>
+        </div>
       </div>
-      <img class="bio-photo" src="/images/placeholder-portrait.svg" alt="Lola, La mère Simone" />
+      <img class="hero-photo" src="/images/photo-portrait.webp" alt="Lola, La mère Simone, dans sa cuisine" />
     </div>
   </section>
 
   <section class="parcours">
     <div class="container parcours-grid">
       <div class="parcours-text">
+        <p class="eyebrow">Mon parcours</p>
         <h2>Faire de ma passion, mon métier</h2>
         <p>
-          Après des études de commerce, j'ai suivi ma vraie vocation : le <strong>CAP Cuisine</strong>, que
-          j'ai obtenu Major de Promo à l'école Hôtelière de Cannes.
+          Après des études de commerce, j&rsquo;ai suivi ma vraie vocation : le <strong>CAP Cuisine</strong>,
+          que j&rsquo;ai obtenu Major de Promo à l&rsquo;École Hôtelière de Cannes.
         </p>
         <p>
-          Depuis, j'ai construit une expérience solide : <strong>chef de produit culinaire</strong> pour une
-          box de recettes à domicile, traiteur, <strong>restaurants gastronomiques</strong> et aujourd'hui
-          créatrice de contenu pour un <strong>magazine de cuisine</strong>.
+          Depuis, j&rsquo;ai construit une expérience solide : <strong>chef de produit culinaire</strong> pour
+          une box de recettes à domicile, traiteur, <strong>restaurants gastronomiques</strong> et
+          aujourd&rsquo;hui créatrice de contenu pour un magazine de cuisine.
         </p>
         <p>
-          Je suis également formée <strong>HACCP</strong>, les normes d'hygiène alimentaire professionnelles.
-          Chez vous, je travaille comme en cuisine professionnelle.
+          Je suis également formée <strong>HACCP</strong>, les normes d&rsquo;hygiène alimentaire
+          professionnelles. Chez vous, je travaille comme en cuisine professionnelle.
         </p>
       </div>
-      <div class="parcours-badges">
+
+      <div class="timeline">
         {
           parcours.map((etape) => (
-            <Card variant="cream">
-              <strong>{etape.titre}</strong>
-              <span>{etape.soustitre}</span>
-            </Card>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="valeurs">
-    <div class="container">
-      <h2>Ma cuisine, c&rsquo;est quoi ?</h2>
-      <p class="valeurs-intro">Du réconfort, de la gourmandise et des plats bons pour le corps et pour la tête.</p>
-      <div class="valeurs-grid">
-        {
-          valeursCuisine.map((valeur) => (
-            <div class="valeur-card">
-              <h3>{valeur.titre}</h3>
-              <p>
-                {
-                  valeur.texte.split('\n').map((ligne, i) => (
-                    <>
-                      {i > 0 && <br />}
-                      {ligne}
-                    </>
-                  ))
-                }
-              </p>
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <img src={etape.icone} alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="t-title">{etape.titre}</div>
+                <div class="t-sub">{etape.soustitre}</div>
+              </div>
             </div>
           ))
         }
       </div>
     </div>
   </section>
+
+  <section class="values">
+    <div class="container">
+      <div class="values-head">
+        <p class="eyebrow">Ma cuisine, c&rsquo;est quoi ?</p>
+        <p class="tagline">Du réconfort, de la gourmandise et des plats bons pour le corps et pour la tête.</p>
+      </div>
+      <div class="values-grid">
+        {
+          valeursCuisine.map((valeur) => (
+            <div class="value-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d={valeur.icone} />
+              </svg>
+              <h3>{valeur.titre}</h3>
+              <p>{valeur.texte}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Envie de soulager votre quotidien ?</h2>
+        <a href="/contact" class="cta-link">Contactez-moi</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .bio {
-    background: var(--color-burgundy);
-    color: var(--color-cream);
-    padding-block: var(--space-section);
+  .hero {
+    background: var(--color-olive-muted);
+    color: #fff;
+    padding: 3.5rem 0 4rem;
   }
 
-  .bio-grid {
+  .hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
     align-items: center;
   }
 
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 560px;
+  }
+
   .eyebrow {
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    color: var(--color-cream);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.84rem;
   }
 
-  .bio-text h1 {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    margin-bottom: 1.25rem;
+  .hero-copy .eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
   }
 
-  .bio-text p {
-    max-width: 42ch;
-    margin-bottom: 1rem;
+  .hero-copy h1 {
+    margin-top: 1.125rem;
+    font-size: clamp(2rem, 3.6vw, 3.125rem);
+    color: #fff;
   }
 
-  .bio-photo {
+  .bio {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+  }
+
+  .bio p + p {
+    margin-top: 1rem;
+  }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 520px;
+    justify-self: center;
+    aspect-ratio: 8 / 7;
+    object-fit: cover;
+    object-position: center 75%;
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition);
+  }
+
+  .hero-photo:hover {
+    transform: translateY(-4px);
   }
 
   .parcours {
+    padding: clamp(2.75rem, 6vw, 3.5rem) 0;
     background: var(--color-cream);
-    padding-block: var(--space-section);
   }
 
   .parcours-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2.5rem;
-    align-items: start;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .parcours-text .eyebrow {
+    color: var(--color-olive-dark);
   }
 
   .parcours-text h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 1.25rem;
+    margin-top: 0.6rem;
+    font-size: clamp(1.5rem, 2.8vw, 1.875rem);
+    color: var(--color-wine);
   }
 
   .parcours-text p {
-    margin-bottom: 1rem;
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: var(--color-ink-soft);
     line-height: 1.6;
   }
 
-  .parcours-badges {
+  .parcours-text strong {
+    color: var(--color-ink);
+  }
+
+  .timeline {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-item {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.1rem;
+    display: flex;
+    align-items: center;
     gap: 1rem;
+    transition: transform var(--transition), box-shadow var(--transition);
   }
 
-  .valeurs {
-    background: var(--color-olive);
-    color: var(--color-cream);
-    padding-block: var(--space-section);
+  .timeline-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
   }
 
-  .valeurs h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    margin-bottom: 0.75rem;
+  .timeline-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
   }
 
-  .valeurs-intro {
+  .timeline-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .timeline-item .t-title {
+    font-size: 0.87rem;
+    font-weight: 800;
+    color: var(--color-wine);
+    line-height: 1.3;
+  }
+
+  .timeline-item .t-sub {
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.1rem;
+  }
+
+  .values {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+    color: #fff;
+  }
+
+  .values-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+  }
+
+  .values-head .eyebrow {
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .values-head .eyebrow::before {
+    display: none;
+  }
+
+  .values-head .tagline {
+    margin-top: 0.85rem;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     font-weight: 600;
-    max-width: 40ch;
-    margin-bottom: 2rem;
+    line-height: 1.5;
+    color: #fff;
   }
 
-  .valeurs-grid {
+  .values-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+
+  .value-card {
+    background: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .value-card svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-wine);
+    margin-bottom: 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.06rem;
+    color: var(--color-wine);
+  }
+
+  .value-card p {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .cta-band {
+    padding: clamp(3rem, 6vw, 4.4rem) 0;
+  }
+
+  .cta-inner {
+    background: var(--color-wine);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 1.5rem;
+    flex-wrap: wrap;
+    color: #fff;
   }
 
-  .valeur-card {
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    max-width: 20ch;
+  }
+
+  .cta-inner .cta-link {
+    display: inline-block;
     background: var(--color-cream);
-    color: var(--color-burgundy);
-    border-radius: var(--radius-lg);
-    padding: 1.75rem;
+    color: var(--color-wine-deeper);
+    padding: 1rem 2.1rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: 0.94rem;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   }
 
-  .valeur-card h3 {
-    font-family: var(--font-body);
-    font-size: 1.15rem;
-    margin-bottom: 0.75rem;
+  .cta-inner .cta-link:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
-  .valeur-card p {
-    opacity: 0.85;
-    line-height: 1.5;
-  }
+  @media (max-width: 980px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
 
-  @media (max-width: 900px) {
-    .bio-grid,
+    .hero-photo {
+      order: -1;
+      aspect-ratio: 16 / 11;
+      max-width: none;
+    }
+
+    .hero-copy {
+      max-width: none;
+    }
+
+    .bio {
+      font-size: 1.03rem;
+    }
+
     .parcours-grid {
       grid-template-columns: 1fr;
     }
 
-    .valeurs-grid {
+    .values-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
     }
   }
 </style>

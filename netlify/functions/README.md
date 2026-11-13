@@ -1,0 +1,90 @@
+# Fonction d'envoi automatique du bon cadeau
+
+`submission-created.js` se déclenche automatiquement à chaque soumission
+d'un formulaire Netlify Forms du site, mais ne traite que le formulaire
+`bon-cadeau` : recalcule tous les montants côté serveur (jamais de
+confiance dans les valeurs envoyées par le navigateur), génère un code
+unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre
+(avec le PDF du bon en pièce jointe, `bon-cadeau-LMS-AAMM-XXXX.pdf`, et le
+logo en pièce jointe inline référencée en CID, pas par URL : le site est
+encore privé), envoie une copie de suivi à `lameresimone.pro@gmail.com`,
+et prévient par mail en cas d'échec avec la soumission complète pour un
+envoi manuel.
+
+- `lib/voucher-pdf.js` génère le PDF (A5 paysage, pdf-lib, aucune
+  dépendance native) avec la même mise en page que le mail : logo, titre,
+  bénéficiaire/offrant, prestation, message, bandeau valeur/validité/code,
+  mentions légales. La taille du message s'adapte automatiquement à
+  l'espace disponible (jusqu'aux 220 caractères autorisés par le
+  formulaire) pour ne jamais chevaucher le reste de la mise en page.
+- `lib/logo-data.js` embarque le logo en base64 directement dans le code
+  (et non lu depuis un fichier), pour éviter toute dépendance au
+  packaging des fonctions Netlify. Réutilisé pour la pièce jointe inline
+  du mail et pour l'image intégrée au PDF.
+
+Le formulaire `devis` (page Contact) est volontairement ignoré par cette
+fonction : **aucun mail automatique n'est envoyé au demandeur**, la
+confirmation affichée dans la page suffit. La notification de la demande à
+`lameresimone.pro@gmail.com` passe uniquement par les notifications
+natives de Netlify Forms, à activer dans le tableau de bord (voir plus
+bas) — ce n'est pas ce code qui l'envoie.
+
+## À configurer avant la mise en ligne
+
+1. **Compte Resend** (ou équivalent) : créer un compte sur
+   [resend.com](https://resend.com), ajouter le domaine `lameresimone.fr` et
+   suivre les instructions pour configurer les enregistrements DNS **SPF**,
+   **DKIM** et **DMARC**, sans quoi les mails partiront en spam ou seront
+   refusés par les boîtes des destinataires. ✅ Domaine vérifié (région
+   Ireland).
+2. **Variable d'environnement Netlify** : dans l'interface Netlify du site →
+   *Site configuration* → *Environment variables*, ajouter :
+   - `RESEND_API_KEY` : la clé API générée dans Resend. Ne jamais la mettre
+     dans le code ni la committer. ✅ Configurée.
+3. **Adresse d'expédition** : le code envoie depuis
+   `bonjour@lameresimone.fr` (modifiable dans `submission-created.js`,
+   constante `FROM_ADDRESS`). Cette adresse doit appartenir au domaine
+   vérifié dans Resend. La réponse (reply-to) part vers
+   `lameresimone.pro@gmail.com`.
+4. **Netlify Blobs** : utilisé pour garantir l'unicité des codes de bons.
+   Aucune configuration de compte requise. Cette fonction utilise le format
+   de handler "v1" (`exports.handler` / `export const handler` recevant un
+   `event` au format API Gateway), où Blobs n'est pas configuré
+   automatiquement contrairement au format v2 : le code appelle
+   `connectLambda(event)` juste avant le premier `getStore(...)`, ce qui
+   suffit. Sans cet appel, `getStore()` lève
+   `MissingBlobsEnvironmentError` une fois déployé.
+5. **Notification de devis par mail** (dashboard Netlify, pas dans le code) :
+   Netlify → le site → *Forms* → *Settings and usage* → *Form notifications*
+   → *Add notification* → *Email notification* → entrer l'adresse
+   `lameresimone.pro@gmail.com`, choisir le formulaire `devis`, enregistrer.
+   Netlify Forms doit avoir détecté le formulaire au moins une fois (après
+   le premier déploiement contenant la page Contact à jour) pour qu'il
+   apparaisse dans cette liste ; sinon, vérifier dans l'onglet *Forms* qu'il
+   est bien listé avant de configurer la notification.
+6. **Domaine personnalisé `lameresimone.fr`** (dashboard Netlify + chez le
+   registrar du domaine, pas dans le code) :
+   - Netlify → le site → *Domain management* → *Add a domain* → saisir
+     `lameresimone.fr`.
+   - Netlify indique alors les enregistrements DNS à créer chez le
+     registrar du domaine (soit déléguer les NS à Netlify, soit ajouter un
+     enregistrement `A`/`ALIAS` vers le load balancer Netlify, selon
+     l'option choisie).
+   - Une fois le DNS propagé, Netlify provisionne automatiquement un
+     certificat HTTPS (Let's Encrypt) pour le domaine : HTTPS actif sans
+     étape supplémentaire.
+
+## Tester en local
+
+Les fonctions pures (calcul des montants, génération du code) peuvent être
+testées sans réseau :
+
+```bash
+node -e "import('./netlify/functions/lib/pricing.js').then(m => console.log(m.computeBonCadeau({ formule: 'Confort', personnes_en_plus: '1' })))"
+```
+
+Le handler complet (`submission-created.js`) a besoin de Netlify Blobs et de
+Resend, donc du contexte d'exécution Netlify réel : le plus simple est de
+tester via `netlify dev` (CLI Netlify) après avoir renseigné
+`RESEND_API_KEY` dans un fichier `.env` local, ou de soumettre le formulaire
+une fois le site déployé sur Netlify.

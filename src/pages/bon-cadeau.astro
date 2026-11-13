@@ -1,0 +1,1623 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formules, contact } from '../data/site';
+
+const confort = formules[0];
+const serenite = formules[1];
+
+const faqItems = [
+  {
+    question: 'Qui paie quoi ?',
+    jsonLdText:
+      "Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien directement. Le montant dépend du droit du foyer au crédit d'impôt. S'il a le droit au crédit d'impôt : vous lui virez 50% de la valeur du bon (par exemple, 85€ pour la formule Confort sans option). Je facture le montant avant crédit d'impôt : le foyer n'en règle que la moitié, via son compte URSSAF, grâce à l'avance immédiate qui déduit le crédit d'impôt du prix. S'il n'a pas le droit au crédit d'impôt : vous lui virez la totalité de la valeur du bon (par exemple, 170€ pour la formule Confort sans option, ou 210€ avec l'option courses). Il règle ensuite la prestation directement auprès de moi.",
+  },
+  {
+    question: "Comment savoir si le foyer a le droit au crédit d'impôt ?",
+    jsonLdText:
+      "Le droit au crédit d'impôt dépend de la situation fiscale du foyer. En cas de doute, le plus simple est de lui poser la question, afin qu'il vérifie sa situation. Vous trouverez aussi tous les détails sur ma page Crédit d'impôt.",
+  },
+  {
+    question: "Le crédit d'impôt est-il pour moi ou pour le foyer ?",
+    jsonLdText:
+      "Le crédit d'impôt est destiné au foyer qui reçoit la prestation. La facture est établie au nom du foyer, et c'est lui qui règle sa part : il en profite donc s'il y a droit. Vous, qui offrez le bon, n'avez pas de crédit d'impôt.",
+  },
+  {
+    question: "Le foyer n'a pas de compte URSSAF, est-ce un problème ?",
+    jsonLdText:
+      "Non, ce n'est pas un problème. L'inscription à l'URSSAF est gratuite, et j'accompagne le foyer pour activer l'avance immédiate avant la prestation.",
+  },
+  {
+    question: 'Combien de temps le bon est-il valable ?',
+    jsonLdText: "Le bon est valable 6 mois à compter de sa date d'émission, indiquée sur le bon.",
+  },
+  {
+    question: 'Pour combien de personnes ?',
+    jsonLdText:
+      "Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4 parts). Au-delà, un supplément de 20€ par personne avant crédit d'impôt, soit 10€ après, s'ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a simplement plus de repas d'avance.",
+  },
+  {
+    question: 'Peut-on ajouter les courses ?',
+    jsonLdText:
+      "Oui, je peux m'occuper des courses du foyer : il suffit de sélectionner l'option « Je fais vos courses » (40€ avant crédit d'impôt, soit 20€ après, sous réserve d'éligibilité du foyer). Cette option rémunère le service de courses, c'est-à-dire le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d'impôt et restent à la charge du foyer bénéficiaire.",
+  },
+  {
+    question: 'Comment remettre le bon ?',
+    jsonLdText:
+      "Le bon vous est envoyé par mail : vous pouvez l'imprimer pour l'offrir en main propre, ou le transférer directement au foyer.",
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.jsonLdText,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Offrir un bon cadeau batchcooking"
+  description="Offrez une prestation de batchcooking à domicile à une amie ou à une proche : choisissez la formule, vous offrez la moitié du prix grâce au crédit d&rsquo;impôt de 50%."
+  canonicalPath="/bon-cadeau"
+  jsonLd={jsonLd}
+>
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="rule"></span>
+        Bon cadeau
+      </p>
+      <h1>Offrez un batchcooking à domicile</h1>
+      <p class="intro">
+        Pour un cadeau de naissance, un cadeau d&rsquo;anniversaire ou simplement pour faire plaisir : offrez
+        une prestation de batchcooking à domicile. De bons plats faits maison, cuisinés chez eux, pour gagner
+        du temps au quotidien.
+      </p>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow-light">Comment ça marche</p>
+        <h2>Offrir en 4 étapes</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="num">1</div>
+          <div class="num-line"></div>
+          <h3>Vous composez le bon</h3>
+          <p>Formule, options, prénoms et message personnel. Le montant se calcule en direct.</p>
+        </div>
+        <div class="step-card">
+          <div class="num">2</div>
+          <div class="num-line"></div>
+          <h3>Vous recevez le bon par mail</h3>
+          <p>Avec son code unique et le montant à virer. Vous pouvez l&rsquo;imprimer ou le transférer.</p>
+        </div>
+        <div class="step-card">
+          <div class="num">3</div>
+          <div class="num-line"></div>
+          <h3>Vous offrez la somme</h3>
+          <p>Vous virez au foyer le montant de sa part :</p>
+          <ul class="dash">
+            <li>50% de la valeur du bon s&rsquo;il a le droit au crédit d&rsquo;impôt</li>
+            <li>100% s&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <div class="num">4</div>
+          <div class="num-line"></div>
+          <h3>Le foyer me contacte</h3>
+          <p>Nous fixons ensemble la date de la prestation. Le foyer règle ensuite sa part.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gift">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Composez votre bon</p>
+        <h2>Choisissez ce que vous offrez</h2>
+        <p>Le bon est valable 6 mois à compter de la date d&rsquo;émission, dans la métropole lilloise.</p>
+      </div>
+
+      <div class="credit-box">
+        <h3>Comment fonctionne le crédit d&rsquo;impôt ?</h3>
+        <p class="credit-intro">
+          Mes prestations de batchcooking à domicile relèvent des services à la personne (SAP) : elles ouvrent
+          droit à un crédit d&rsquo;impôt de 50% du montant payé, que le foyer soit imposable ou non. La somme
+          que vous offrez n&rsquo;est donc pas la même selon que le foyer a le droit ou non à ce crédit
+          d&rsquo;impôt.
+        </p>
+        <div class="credit-cols">
+          <div class="credit-col">
+            <p class="credit-tag">Le foyer a le droit au crédit d&rsquo;impôt</p>
+            <p>
+              Grâce à l&rsquo;avance immédiate proposée par l&rsquo;URSSAF, le crédit d&rsquo;impôt est déduit
+              directement du prix : le foyer ne règle que la moitié de la prestation et n&rsquo;avance rien.
+              Vous lui offrez donc cette moitié. Par exemple, pour la formule Confort sans option : 85€.
+            </p>
+          </div>
+          <div class="credit-col">
+            <p class="credit-tag">Le foyer n&rsquo;a pas le droit au crédit d&rsquo;impôt</p>
+            <p>
+              Il ne bénéficie pas du crédit d&rsquo;impôt et règle la prestation au prix complet. Vous lui
+              offrez alors la prestation complète. Par exemple, pour la formule Confort sans option : 170€.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form name="bon-cadeau" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="gift-form">
+        <input type="hidden" name="form-name" value="bon-cadeau" />
+        <p class="hp"><label>Ne pas remplir <input name="bot-field" /></label></p>
+        <input type="hidden" name="valeur_bon" id="f-valeur" />
+        <input type="hidden" name="montant_a_virer_foyer_eligible" id="f-virer" />
+        <input type="hidden" name="montant_prix_plein_foyer_non_eligible" id="f-plein" />
+        <input type="hidden" name="recapitulatif" id="f-recap" />
+
+        <div class="gift-grid">
+          <div>
+            <fieldset class="fieldset">
+              <legend><span class="step-tag">1</span>La formule</legend>
+              <p class="hint">Chaque formule comprend la cuisine propre et rangée à la fin de la prestation.</p>
+              <div class="formulas">
+                <label class="formula">
+                  <input
+                    type="radio"
+                    name="formule"
+                    value="Confort"
+                    data-name="Formule Confort"
+                    data-valeur={confort.prix.ponctuel.avant}
+                    checked
+                  />
+                  <span class="card">
+                    <span class="tick">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <h3>Confort</h3>
+                    <p class="plats">4 plats cuisinés</p>
+                    <p class="price">{confort.prix.ponctuel.avant}€<sup>*</sup></p>
+                    <p class="value">
+                      * Soit {confort.prix.ponctuel.client}€ après crédit d&rsquo;impôt, sous réserve
+                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                    </p>
+                  </span>
+                </label>
+                <label class="formula">
+                  <input
+                    type="radio"
+                    name="formule"
+                    value="Sérénité"
+                    data-name="Formule Sérénité"
+                    data-valeur={serenite.prix.ponctuel.avant}
+                  />
+                  <span class="card">
+                    <span class="tick">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <h3>Sérénité</h3>
+                    <p class="plats">5 plats cuisinés</p>
+                    <p class="price">{serenite.prix.ponctuel.avant}€<sup>*</sup></p>
+                    <p class="value">
+                      * Soit {serenite.prix.ponctuel.client}€ après crédit d&rsquo;impôt, sous réserve
+                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                    </p>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="fieldset">
+              <legend><span class="step-tag">2</span>Les options</legend>
+              <p class="hint">Facultatif. Les prix indiqués sont avant crédit d&rsquo;impôt.</p>
+              <div class="options">
+                <div class="option">
+                  <span class="o-text">
+                    <strong>Foyer de plus de 4 personnes</strong>
+                    <span>
+                      Le bon est prévu pour 4 personnes (1 plat = 4 parts). S&rsquo;il y a plus de 4 personnes
+                      au sein du foyer, ajoutez le nombre de personnes nécessaires, jusqu&rsquo;à 4 en plus.
+                    </span>
+                    <span class="ast">
+                      * Soit 10€ par personne supplémentaire après crédit d&rsquo;impôt, sous réserve
+                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                    </span>
+                  </span>
+                  <span class="o-right">
+                    <span class="o-price">+20€<sup>*</sup>/pers.</span>
+                    <span class="stepper" data-target="ep">
+                      <button type="button" aria-label="Retirer une personne" data-d="-1">&minus;</button>
+                      <output id="out-ep">0</output>
+                      <button type="button" aria-label="Ajouter une personne" data-d="1">+</button>
+                    </span>
+                    <input type="hidden" name="personnes_en_plus" id="in-ep" value="0" />
+                  </span>
+                </div>
+                <div class="option">
+                  <label class="switch">
+                    <span class="o-text">
+                      <strong>Je fais vos courses</strong>
+                      <span>Je m&rsquo;occupe des courses avant la prestation. Le prix des ingrédients n&rsquo;est pas compris dans le bon.</span>
+                      <span class="ast">
+                        * Soit 20€ après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité du foyer au
+                        crédit d&rsquo;impôt.
+                      </span>
+                    </span>
+                    <span class="o-right">
+                      <span class="o-price">+40€<sup>*</sup></span>
+                      <input type="checkbox" name="option_courses" value="oui" id="opt-courses" data-name="Je fais vos courses" data-valeur="40" />
+                    </span>
+                  </label>
+                </div>
+                <div class="option">
+                  <span class="o-text">
+                    <strong>Petits déjeuners</strong>
+                    <span>Des petits déjeuners faits maison, préparés à l&rsquo;avance.</span>
+                    <span class="ast">
+                      * Soit 7,50€ l&rsquo;unité après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
+                      du foyer au crédit d&rsquo;impôt.
+                    </span>
+                  </span>
+                  <span class="o-right">
+                    <span class="o-price">+15€<sup>*</sup> l&rsquo;unité</span>
+                    <span class="stepper" data-target="pd">
+                      <button type="button" aria-label="Retirer un petit déjeuner" data-d="-1">&minus;</button>
+                      <output id="out-pd">0</output>
+                      <button type="button" aria-label="Ajouter un petit déjeuner" data-d="1">+</button>
+                    </span>
+                    <input type="hidden" name="petits_dejeuners" id="in-pd" value="0" />
+                  </span>
+                </div>
+                <div class="option">
+                  <span class="o-text">
+                    <strong>Goûters</strong>
+                    <span>Des goûters faits maison, préparés à l&rsquo;avance.</span>
+                    <span class="ast">
+                      * Soit 7,50€ l&rsquo;unité après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
+                      du foyer au crédit d&rsquo;impôt.
+                    </span>
+                  </span>
+                  <span class="o-right">
+                    <span class="o-price">+15€<sup>*</sup> l&rsquo;unité</span>
+                    <span class="stepper" data-target="go">
+                      <button type="button" aria-label="Retirer un goûter" data-d="-1">&minus;</button>
+                      <output id="out-go">0</output>
+                      <button type="button" aria-label="Ajouter un goûter" data-d="1">+</button>
+                    </span>
+                    <input type="hidden" name="gouters" id="in-go" value="0" />
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fieldset">
+              <legend><span class="step-tag">3</span>Pour qui, et de la part de qui</legend>
+              <div class="fields">
+                <div class="field">
+                  <label for="f-benef">Prénom(s) des bénéficiaires</label>
+                  <input id="f-benef" name="prenom_beneficiaire" required autocomplete="off" placeholder="Camille et Julien" />
+                </div>
+                <div class="field">
+                  <label for="f-offrant">Votre prénom</label>
+                  <input id="f-offrant" name="prenom_offrant" required autocomplete="given-name" />
+                </div>
+                <div class="field full">
+                  <label for="f-mail">Votre adresse mail</label>
+                  <input id="f-mail" type="email" name="email_offrant" required autocomplete="email" />
+                  <span class="help">Vous y recevrez le bon, le code et le montant à virer.</span>
+                </div>
+                <div class="field full">
+                  <label for="f-msg">Votre message (facultatif)</label>
+                  <textarea id="f-msg" name="message" maxlength="220" placeholder="Pour que vous puissiez souffler et profiter. Je vous embrasse."></textarea>
+                  <span class="help">220 caractères maximum. Il figurera sur le bon.</span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <aside class="summary" aria-live="polite">
+            <h3>Votre bon cadeau</h3>
+            <ul id="sum-lines"></ul>
+            <div class="sum-block">
+              <p class="lbl">Valeur du bon</p>
+              <p class="amt" id="sum-valeur">170€</p>
+            </div>
+            <div class="sum-block main">
+              <p class="lbl">Vous offrez</p>
+              <p class="alt">Si le foyer a le droit au crédit d&rsquo;impôt :</p>
+              <p class="amt" id="sum-offrez">85€</p>
+              <p class="alt">S&rsquo;il n&rsquo;a pas le droit, la prestation complète :</p>
+              <p class="amt amt2" id="sum-plein">170€</p>
+              <small>Sommes à virer au foyer. Vous ne me payez rien directement.</small>
+            </div>
+            <button type="submit" class="submit" id="gift-submit">Recevoir mon bon par mail</button>
+            <p class="fine" id="gift-fine">
+              Aucun paiement en ligne. Le crédit d&rsquo;impôt revient au foyer bénéficiaire, sous réserve de
+              son éligibilité.
+            </p>
+            <p class="fine rgpd">
+              Le prénom des bénéficiaires, votre prénom et votre adresse mail servent uniquement à vous envoyer
+              le bon cadeau.
+            </p>
+            <div class="sent" id="gift-sent" hidden>
+              <span class="sent-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <p class="sent-title">Votre bon vient d&rsquo;être envoyé par mail</p>
+              <p class="sent-text">
+                Pensez à vérifier vos courriers indésirables. Toujours rien au bout de quelques minutes ?
+                Écrivez-moi à {contact.email}.
+              </p>
+            </div>
+            <p class="fine err" id="gift-err" hidden>
+              Une erreur est survenue. Réessayez, ou écrivez-moi à {contact.email}.
+            </p>
+          </aside>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="recevoir">
+    <div class="container recevoir-grid">
+      <div>
+        <p class="eyebrow">Après votre commande</p>
+        <h2>Ce que vous recevez par mail</h2>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="8 12 11 15 16 9" />
+            </svg>
+            Le bon cadeau personnalisé, à imprimer ou à transférer.
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="8 12 11 15 16 9" />
+            </svg>
+            Son code unique, valable 6 mois.
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="8 12 11 15 16 9" />
+            </svg>
+            Le montant à virer au foyer selon son éligibilité, et la marche à suivre.
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="mini-voucher" aria-hidden="true">
+          <div class="l">
+            <p class="e">Bon cadeau</p>
+            <h4>Une prestation de batchcooking à domicile</h4>
+            <p>Offert à <strong>Camille et Julien</strong><br />De la part de <strong>Sophie</strong></p>
+          </div>
+          <div class="r">
+            <small>Valeur du bon</small>
+            <b>240€</b>
+            <span>Valable 6 mois</span>
+          </div>
+          <div class="dam"></div>
+        </div>
+        <a class="see" href="/bon-cadeau-visuel">Voici un exemple de bon complet</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-bloc">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Questions fréquentes</p>
+        <h2>Tout savoir sur le bon cadeau</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Qui paie quoi ?<span class="plus">+</span></summary>
+          <p class="lead">
+            Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien
+            directement. Le montant dépend du droit du foyer au crédit d&rsquo;impôt.
+          </p>
+          <ul class="dash">
+            <li>
+              <strong>S&rsquo;il a le droit au crédit d&rsquo;impôt :</strong> vous lui virez 50% de la valeur
+              du bon (par exemple, 85€ pour la formule Confort sans option). Je facture le montant avant crédit
+              d&rsquo;impôt : le foyer n&rsquo;en règle que la moitié, via son compte URSSAF, grâce à
+              l&rsquo;avance immédiate qui déduit le crédit d&rsquo;impôt du prix.
+            </li>
+            <li>
+              <strong>S&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt :</strong> vous lui virez la
+              totalité de la valeur du bon (par exemple, 170€ pour la formule Confort sans option, ou 210€ avec
+              l&rsquo;option courses). Il règle ensuite la prestation directement auprès de moi.
+            </li>
+          </ul>
+        </details>
+        <details class="faq-item">
+          <summary>Comment savoir si le foyer a le droit au crédit d&rsquo;impôt ?<span class="plus">+</span></summary>
+          <p>
+            Le droit au crédit d&rsquo;impôt dépend de la situation fiscale du foyer. En cas de doute, le plus
+            simple est de lui poser la question, afin qu&rsquo;il vérifie sa situation. Vous trouverez aussi
+            tous les détails sur ma page <a href="/credit-impot">Crédit d&rsquo;impôt</a>.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Le crédit d&rsquo;impôt est-il pour moi ou pour le foyer ?<span class="plus">+</span></summary>
+          <p>
+            Le crédit d&rsquo;impôt est destiné au foyer qui reçoit la prestation. La facture est établie au
+            nom du foyer, et c&rsquo;est lui qui règle sa part : il en profite donc s&rsquo;il y a droit. Vous,
+            qui offrez le bon, n&rsquo;avez pas de crédit d&rsquo;impôt.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Le foyer n&rsquo;a pas de compte URSSAF, est-ce un problème ?<span class="plus">+</span></summary>
+          <p>
+            Non, ce n&rsquo;est pas un problème. L&rsquo;inscription à l&rsquo;URSSAF est gratuite, et
+            j&rsquo;accompagne le foyer pour activer l&rsquo;avance immédiate avant la prestation.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Combien de temps le bon est-il valable ?<span class="plus">+</span></summary>
+          <p>Le bon est valable 6 mois à compter de sa date d&rsquo;émission, indiquée sur le bon.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Pour combien de personnes ?<span class="plus">+</span></summary>
+          <p>
+            Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4
+            parts). Au-delà, un supplément de 20€ par personne avant crédit d&rsquo;impôt, soit 10€ après,
+            s&rsquo;ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a
+            simplement plus de repas d&rsquo;avance.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Peut-on ajouter les courses ?<span class="plus">+</span></summary>
+          <p>
+            Oui, je peux m&rsquo;occuper des courses du foyer : il suffit de sélectionner l&rsquo;option « Je
+            fais vos courses » (40€ avant crédit d&rsquo;impôt, soit 20€ après, sous réserve d&rsquo;éligibilité
+            du foyer). Cette option rémunère le service de courses, c&rsquo;est-à-dire le temps passé et le
+            déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d&rsquo;impôt
+            et restent à la charge du foyer bénéficiaire.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment remettre le bon ?<span class="plus">+</span></summary>
+          <p>
+            Le bon vous est envoyé par mail : vous pouvez l&rsquo;imprimer pour l&rsquo;offrir en main propre,
+            ou le transférer directement au foyer.
+          </p>
+        </details>
+      </div>
+      <p class="disclaimer">
+        Prestation à domicile dans la métropole lilloise. Le crédit d&rsquo;impôt est accordé aux foyers
+        éligibles et dépend de leur situation. <a href="/credit-impot">En savoir plus sur le crédit d&rsquo;impôt</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('gift-form') as HTMLFormElement | null;
+
+  if (form) {
+    const state: Record<'ep' | 'pd' | 'go', number> = { ep: 0, pd: 0, go: 0 };
+
+    function eur(n: number) {
+      const s = (Math.round(n * 100) / 100).toString().replace('.', ',');
+      return `${s}€`;
+    }
+
+    function update() {
+      if (!form) return;
+      const checkedFormule = form.querySelector<HTMLInputElement>('input[name=formule]:checked');
+      const courses = document.getElementById('opt-courses') as HTMLInputElement | null;
+      if (!checkedFormule || !courses) return;
+
+      const lines: [string, number][] = [];
+      let valeur = 0;
+
+      const fv = Number(checkedFormule.dataset.valeur);
+      valeur += fv;
+      lines.push([checkedFormule.dataset.name ?? '', fv]);
+
+      if (state.ep) {
+        valeur += 20 * state.ep;
+        lines.push([`${state.ep} personne${state.ep > 1 ? 's' : ''} en plus`, 20 * state.ep]);
+      }
+      if (courses.checked) {
+        valeur += 40;
+        lines.push(['Je fais vos courses', 40]);
+      }
+      if (state.pd) {
+        valeur += 15 * state.pd;
+        lines.push([`${state.pd} petit${state.pd > 1 ? 's' : ''} déjeuner${state.pd > 1 ? 's' : ''}`, 15 * state.pd]);
+      }
+      if (state.go) {
+        valeur += 15 * state.go;
+        lines.push([`${state.go} goûter${state.go > 1 ? 's' : ''}`, 15 * state.go]);
+      }
+
+      const offrez = valeur / 2;
+
+      const sumLines = document.getElementById('sum-lines');
+      if (sumLines) {
+        sumLines.innerHTML = lines
+          .map(([label, amount]) => `<li><span>${label}</span><span>${eur(amount)}</span></li>`)
+          .join('');
+      }
+
+      const setText = (id: string, value: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      const setValue = (id: string, value: string) => {
+        const el = document.getElementById(id) as HTMLInputElement | null;
+        if (el) el.value = value;
+      };
+
+      setText('sum-valeur', eur(valeur));
+      setText('sum-offrez', eur(offrez));
+      setValue('f-valeur', eur(valeur));
+      setValue('f-virer', eur(offrez));
+      setText('sum-plein', eur(valeur));
+      setValue('f-plein', eur(valeur));
+      setValue('f-recap', lines.map(([label]) => label).join(' + '));
+    }
+
+    form.querySelectorAll<HTMLInputElement>('input[name=formule], #opt-courses').forEach((input) => {
+      input.addEventListener('change', update);
+    });
+
+    form.querySelectorAll<HTMLElement>('.stepper').forEach((stepper) => {
+      const key = stepper.dataset.target as 'ep' | 'pd' | 'go' | undefined;
+      if (!key) return;
+      stepper.querySelectorAll<HTMLButtonElement>('button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const delta = Number(button.dataset.d);
+          state[key] = Math.max(0, Math.min(4, state[key] + delta));
+          const out = document.getElementById(`out-${key}`);
+          const hidden = document.getElementById(`in-${key}`) as HTMLInputElement | null;
+          if (out) out.textContent = String(state[key]);
+          if (hidden) hidden.value = String(state[key]);
+          update();
+        });
+      });
+    });
+
+    update();
+
+    const btn = document.getElementById('gift-submit') as HTMLButtonElement | null;
+    const fine = document.getElementById('gift-fine');
+    const sent = document.getElementById('gift-sent') as HTMLElement | null;
+    const err = document.getElementById('gift-err') as HTMLElement | null;
+
+    function showSent() {
+      if (btn) btn.hidden = true;
+      if (fine) fine.hidden = true;
+      if (err) err.hidden = true;
+      if (sent) sent.hidden = false;
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      if (!btn) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+      if (err) err.hidden = true;
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString(),
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error('submit failed');
+          showSent();
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = 'Recevoir mon bon par mail';
+          if (err) err.hidden = false;
+        });
+    });
+  }
+</script>
+
+<style>
+  .page-header {
+    background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+    color: #fff;
+    padding: 4rem 0 4.5rem;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-cream);
+    font-size: 0.84rem;
+  }
+
+  .rule {
+    width: 22px;
+    height: 1px;
+    background: var(--color-cream);
+    flex-shrink: 0;
+  }
+
+  .page-header h1 {
+    margin-top: 1.125rem;
+    font-size: clamp(2.125rem, 4.6vw, 3.75rem);
+    color: #fff;
+    max-width: 18ch;
+    line-height: 1.05;
+  }
+
+  .page-header .intro {
+    margin-top: 1.375rem;
+    font-size: 1.1875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.55;
+    max-width: 60ch;
+  }
+
+  .how {
+    background: var(--color-olive-muted);
+    padding: 4rem 0;
+    color: #fff;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .section-head h2 {
+    margin-top: 0.625rem;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: #fff;
+  }
+
+  .eyebrow-light {
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .eyebrow-light .rule {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.625rem;
+  }
+
+  .step-card .num {
+    font-size: 2.125rem;
+    font-weight: 900;
+    color: var(--color-cream);
+    line-height: 1;
+  }
+
+  .step-card .num-line {
+    width: 30px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    margin: 0.875rem 0;
+  }
+
+  .step-card h3 {
+    font-size: 1.0625rem;
+    color: #fff;
+  }
+
+  .step-card p {
+    margin-top: 0.625rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.6;
+  }
+
+  .step-card .dash {
+    margin-top: 0.5rem;
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .step-card .dash li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.5;
+  }
+
+  .step-card .dash li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .gift {
+    padding: 4rem 0;
+  }
+
+  .gift .section-head {
+    max-width: 640px;
+    margin: 0 0 2.25rem;
+    text-align: left;
+  }
+
+  .gift .section-head h2 {
+    color: var(--color-wine);
+  }
+
+  .gift .section-head p {
+    margin-top: 0.75rem;
+    font-size: 0.97rem;
+    color: var(--color-ink-soft);
+  }
+
+  .credit-box {
+    margin: 0 0 2.5rem;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 2rem;
+  }
+
+  .credit-box h3 {
+    font-size: 1.25rem;
+    color: var(--color-wine);
+  }
+
+  .credit-intro {
+    margin-top: 0.5rem;
+    font-size: 0.97rem;
+    color: var(--color-ink-soft);
+  }
+
+  .credit-cols {
+    margin-top: 1.125rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .credit-col {
+    background: var(--color-cream);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.25rem;
+  }
+
+  .credit-tag {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .credit-col p + p {
+    margin-top: 0.375rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .gift-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 2.25rem;
+    min-width: 0;
+  }
+
+  .fieldset legend {
+    padding: 0;
+    font-size: 1.1875rem;
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-bottom: 0.375rem;
+  }
+
+  .fieldset .hint {
+    font-size: 0.875rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  .step-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-wine);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    margin-right: 0.625rem;
+    vertical-align: 2px;
+  }
+
+  .formulas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .formula {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+
+  .formula input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+  }
+
+  .formula .card {
+    display: block;
+    position: relative;
+    background: #fff;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.375rem 1.375rem 1.25rem;
+    height: 100%;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .formula:hover .card {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .formula input:checked + .card {
+    border-color: var(--color-wine);
+    box-shadow: 0 0 0 3px rgba(125, 57, 77, 0.14);
+  }
+
+  .formula input:focus-visible + .card {
+    outline: 2px solid var(--color-wine);
+    outline-offset: 3px;
+  }
+
+  .formula h3 {
+    font-size: 1.25rem;
+    color: var(--color-wine);
+  }
+
+  .formula .plats {
+    margin-top: 0.375rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    font-weight: 600;
+  }
+
+  .formula .price {
+    margin-top: 1rem;
+    font-size: 2.125rem;
+    font-weight: 900;
+    color: var(--color-ink);
+    line-height: 1;
+  }
+
+  .formula .value {
+    margin-top: 0.375rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+  }
+
+  .formula .tick {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--color-line);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+  }
+
+  .formula .tick svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    color: #fff;
+  }
+
+  .formula input:checked + .card .tick {
+    background: var(--color-wine);
+    border-color: var(--color-wine);
+  }
+
+  .formula input:checked + .card .tick svg {
+    opacity: 1;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .option {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .option .o-text strong {
+    display: block;
+    font-size: 0.97rem;
+    color: var(--color-ink);
+  }
+
+  .option .o-text span {
+    display: block;
+    margin-top: 0.125rem;
+    font-size: 0.84rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+
+  .option .o-text .ast {
+    font-size: 0.78rem;
+    color: var(--color-olive-dark);
+    font-weight: 600;
+  }
+
+  .option .o-price {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--color-wine);
+    white-space: nowrap;
+  }
+
+  .option label.switch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .option input[type='checkbox'] {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--color-wine);
+    flex-shrink: 0;
+  }
+
+  .stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-cream);
+    flex-shrink: 0;
+  }
+
+  .stepper button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-wine);
+    cursor: pointer;
+  }
+
+  .stepper button:hover {
+    background: var(--color-cream-card);
+  }
+
+  .stepper output {
+    min-width: 34px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.9375rem;
+  }
+
+  .o-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field.full {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .field input,
+  .field textarea {
+    font: inherit;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 0.875rem;
+    border: 1px solid rgba(42, 33, 24, 0.25);
+    border-radius: var(--radius-md);
+    background: #fff;
+    color: var(--color-ink);
+    width: 100%;
+  }
+
+  .field textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--color-wine);
+    outline-offset: 1px;
+    border-color: var(--color-wine);
+  }
+
+  .field .help {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .summary {
+    position: sticky;
+    top: 1.25rem;
+    background: var(--color-wine);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 1.875rem 1.75rem;
+  }
+
+  .summary h3 {
+    font-size: 1.25rem;
+    color: #fff;
+  }
+
+  .summary ul {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  /* #sum-lines is filled client-side via innerHTML, so these elements never get
+     Astro's scoping attribute — the rules below must stay global to apply to them. */
+  .summary :global(li) {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .summary :global(li span:last-child) {
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  .sum-block {
+    margin-top: 1.25rem;
+  }
+
+  .sum-block .lbl {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .sum-block .amt {
+    margin-top: 0.25rem;
+    font-size: 1.875rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .sum-block.main {
+    margin-top: 1.375rem;
+    padding: 1.125rem 1.125rem 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+  }
+
+  .sum-block.main .amt {
+    font-size: 2.75rem;
+  }
+
+  .sum-block .amt2 {
+    font-size: 1.875rem !important;
+  }
+
+  .sum-block .alt {
+    margin-top: 0.625rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .sum-block small {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+  }
+
+  .summary .submit {
+    margin-top: 1.375rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    font: inherit;
+    font-weight: 800;
+    font-size: 0.9375rem;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+
+  .summary .submit:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .summary .submit[disabled] {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .summary .fine {
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+  }
+
+  .summary .fine.rgpd {
+    margin-top: 0.5rem;
+  }
+
+  .summary .fine.err {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .summary .sent {
+    margin-top: 1.375rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 1.375rem 1.125rem;
+  }
+
+  .sent-check {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: var(--color-cream);
+    color: var(--color-wine);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sent-check svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .sent-title {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .sent-text {
+    margin-top: 0.375rem;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.5;
+  }
+
+  .recevoir {
+    background: var(--color-cream-card);
+    padding: 4rem 0;
+  }
+
+  .recevoir-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .recevoir h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-wine);
+  }
+
+  .recevoir ul {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .recevoir li {
+    display: flex;
+    gap: 0.625rem;
+    font-size: 0.97rem;
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .recevoir li svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-olive);
+    margin-top: 0.125rem;
+  }
+
+  .mini-voucher {
+    background: var(--color-cream);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .mini-voucher .l {
+    padding: 1.375rem 1.375rem 1.125rem;
+  }
+
+  .mini-voucher .l .e {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-olive-dark);
+  }
+
+  .mini-voucher .l h4 {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--color-wine);
+    line-height: 1.1;
+  }
+
+  .mini-voucher .l p {
+    margin-top: 0.625rem;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+
+  .mini-voucher .r {
+    background: linear-gradient(155deg, var(--color-wine), var(--color-mauve) 65%, var(--color-wine-deeper));
+    color: #fff;
+    padding: 1.375rem 1.125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mini-voucher .r small {
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .mini-voucher .r b {
+    font-size: 2.375rem;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .mini-voucher .r span {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .mini-voucher .dam {
+    grid-column: 1 / -1;
+    height: 14px;
+    background-image: linear-gradient(90deg, var(--color-wine) 50%, transparent 50%);
+    background-size: 28px 100%;
+  }
+
+  .recevoir .see {
+    display: inline-block;
+    margin-top: 0.875rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--color-wine);
+    text-decoration: none;
+  }
+
+  .recevoir .see:hover {
+    text-decoration: underline;
+  }
+
+  .faq-bloc {
+    padding: 4rem 0;
+  }
+
+  .faq-bloc .eyebrow {
+    justify-content: center;
+    color: var(--color-olive-dark);
+  }
+
+  .faq-bloc .rule {
+    display: none;
+  }
+
+  .faq-bloc .section-head h2 {
+    color: var(--color-wine);
+  }
+
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 0.25rem 1.25rem;
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary .plus {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-olive);
+    color: var(--color-olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    transition: transform var(--transition);
+  }
+
+  .faq-item[open] summary .plus {
+    transform: rotate(45deg);
+  }
+
+  .faq-item p {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    padding: 0 0 1.125rem;
+  }
+
+  .faq-item .lead {
+    padding-bottom: 0.625rem !important;
+  }
+
+  .faq-item ul.dash {
+    margin: 0 0 1.125rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .faq-item ul.dash li {
+    position: relative;
+    padding-left: 1.125rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .faq-item ul.dash li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 9px;
+    height: 2px;
+    background: var(--color-olive);
+  }
+
+  .faq-item a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .disclaimer {
+    max-width: 760px;
+    margin: 1.75rem auto 0;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .disclaimer a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  sup {
+    font-size: 0.8em;
+    line-height: 0;
+    position: relative;
+    top: -0.1em;
+    vertical-align: super;
+  }
+
+  @media (max-width: 1100px) {
+    .steps-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .page-header {
+      padding: 2.75rem 0 3.25rem;
+    }
+
+    .page-header .intro {
+      font-size: 1.03rem;
+    }
+
+    .gift-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .summary {
+      position: static;
+    }
+
+    .recevoir-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .formulas {
+      grid-template-columns: 1fr;
+    }
+
+    .credit-cols {
+      grid-template-columns: 1fr;
+    }
+
+    .credit-box {
+      padding: 1.375rem 1.25rem;
+    }
+
+    .fields {
+      grid-template-columns: 1fr;
+    }
+
+    .option {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .o-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .option label.switch {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .mini-voucher {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

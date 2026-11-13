@@ -1,0 +1,344 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="robots" content="noindex" />
+    <title>Bon cadeau | La mère Simone</title>
+  </head>
+  <body>
+    <p class="note">
+      Maquette du bon cadeau (exemple rempli avec des données fictives). Les zones en gras sont remplies
+      automatiquement à partir du formulaire : prénoms, formule, options, message, valeur, date de validité et
+      code.
+    </p>
+
+    <div class="voucher">
+      <div class="v-main">
+        <img class="logo-img" src="/images/logo.png" alt="La mère Simone" />
+        <p class="eyebrow">Bon cadeau</p>
+        <h1>Une prestation de batchcooking à domicile</h1>
+
+        <div class="who">
+          <p>Offert à <strong>Camille et Julien</strong></p>
+          <p>De la part de <strong style="font-size: 17px">Sophie</strong></p>
+        </div>
+
+        <ul class="prestation">
+          <li>Formule Confort <span>: 4 plats cuisinés prêts à déguster</span></li>
+          <li>Une cuisine propre et rangée</li>
+          <li>Option : je fais vos courses</li>
+          <li>Option : 2 petits déjeuners</li>
+        </ul>
+
+        <p class="msg">« Pour que vous puissiez souffler et profiter. Je vous embrasse. »<small>Sophie</small></p>
+      </div>
+
+      <div class="v-side">
+        <p class="side-label">Valeur du bon</p>
+        <p class="value">240€</p>
+        <p class="value-sub">
+          Si le foyer a le droit au crédit d&rsquo;impôt de 50% : 120€ à régler via l&rsquo;URSSAF (avance
+          immédiate). Sinon : 240€, à régler directement.
+        </p>
+
+        <div class="block">
+          <p class="side-label">Valable 6 mois</p>
+          <p class="big">jusqu&rsquo;au 02/05/2027</p>
+        </div>
+        <div class="block">
+          <p class="side-label">Code du bon</p>
+          <p class="code">LMS-0001</p>
+        </div>
+
+        <div class="how">
+          <strong>Comment en profiter ?</strong>
+          Écrivez-moi à lameresimone.pro@gmail.com en indiquant votre code. Nous choisissons ensemble vos plats
+          et la date, et je viens cuisiner chez vous.
+        </div>
+      </div>
+
+      <div class="damier"></div>
+      <p class="legal">
+        Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas compris
+        dans le bon. Le crédit d&rsquo;impôt de 50% est accordé aux foyers éligibles et dépend de leur
+        situation. La mère Simone · SIRET 98938305400016 · lameresimone.fr
+      </p>
+    </div>
+
+    <a href="/bon-cadeau" class="back-link">&larr; Retour à la page Bon cadeau</a>
+
+    <style>
+      body {
+        background: #e9e1d8;
+        padding: 2.5rem 1.25rem;
+      }
+
+      .note {
+        max-width: 1000px;
+        margin: 0 auto 1.25rem;
+        font-size: 0.8125rem;
+        color: var(--color-ink-soft);
+      }
+
+      /* Bon cadeau : format A5 paysage (ratio 1,414) */
+      .voucher {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: var(--color-cream);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.55fr 1fr;
+        grid-template-rows: 1fr auto;
+        box-shadow: 0 24px 50px rgba(42, 33, 24, 0.18);
+        min-height: 707px;
+      }
+
+      .v-main {
+        padding: 3rem 3.25rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo-img {
+        height: 2.75rem;
+        width: auto;
+      }
+
+      .eyebrow {
+        margin-top: 2.125rem;
+        font-size: 0.8125rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-olive-dark);
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+
+      .eyebrow::before {
+        content: '';
+        width: 24px;
+        height: 1px;
+        background: var(--color-olive-dark);
+      }
+
+      .v-main h1 {
+        margin-top: 0.875rem;
+        font-size: 2.875rem;
+        line-height: 1.05;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color: var(--color-wine);
+      }
+
+      .who {
+        margin-top: 1.625rem;
+        display: grid;
+        gap: 0.25rem;
+        font-size: 1rem;
+        color: var(--color-ink-soft);
+      }
+
+      .who strong {
+        color: var(--color-ink);
+        font-size: 1.375rem;
+        font-weight: 800;
+      }
+
+      .prestation {
+        margin-top: 1.625rem;
+        padding: 0;
+        margin-left: 0;
+        border-top: 1px solid var(--color-line);
+      }
+
+      .prestation li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--color-line);
+        font-size: 0.97rem;
+        font-weight: 600;
+        color: var(--color-ink);
+        list-style: none;
+      }
+
+      .prestation li span {
+        font-weight: 500;
+        color: var(--color-ink-soft);
+      }
+
+      .msg {
+        margin-top: 1.5rem;
+        font-size: 0.97rem;
+        font-style: italic;
+        color: var(--color-ink-soft);
+        line-height: 1.6;
+        max-width: 46ch;
+      }
+
+      .msg small {
+        display: block;
+        margin-top: 0.375rem;
+        font-style: normal;
+        font-weight: 700;
+        color: var(--color-wine);
+        font-size: 0.875rem;
+      }
+
+      .v-side {
+        background: linear-gradient(155deg, var(--color-wine) 0%, var(--color-mauve) 65%, var(--color-wine-deeper) 100%);
+        color: #fff;
+        padding: 3rem 2.5rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .side-label {
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .value {
+        margin-top: 0.625rem;
+        font-size: 5.25rem;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .value-sub {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .block {
+        margin-top: 1.75rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .block .big {
+        margin-top: 0.375rem;
+        font-size: 1.1875rem;
+        font-weight: 800;
+      }
+
+      .code {
+        margin-top: 0.375rem;
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.14);
+        border-radius: var(--radius-md);
+        padding: 0.5rem 0.875rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        font-size: 1rem;
+      }
+
+      .how {
+        margin-top: auto;
+        padding-top: 1.625rem;
+        font-size: 0.875rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .how strong {
+        color: #fff;
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.9375rem;
+      }
+
+      .damier {
+        grid-column: 1 / -1;
+        height: 28px;
+        background-color: var(--color-cream);
+        background-image: linear-gradient(90deg, var(--color-wine) 50%, transparent 50%);
+        background-size: 56px 100%;
+      }
+
+      .legal {
+        grid-column: 1 / -1;
+        padding: 0.875rem 3.25rem 1.125rem;
+        font-size: 0.72rem;
+        color: var(--color-ink-soft);
+        background: var(--color-cream);
+      }
+
+      .back-link {
+        display: block;
+        max-width: 1000px;
+        margin: 1.5rem auto 0;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-wine);
+        text-decoration: none;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 820px) {
+        .voucher {
+          grid-template-columns: 1fr;
+          min-height: 0;
+        }
+
+        .v-main {
+          padding: 2.125rem 1.625rem 1.75rem;
+        }
+
+        .v-main h1 {
+          font-size: 2.25rem;
+        }
+
+        .v-side {
+          padding: 2rem 1.625rem;
+        }
+
+        .value {
+          font-size: 4rem;
+        }
+
+        .legal {
+          padding: 0.875rem 1.625rem 1.125rem;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .note,
+        .back-link {
+          display: none;
+        }
+
+        .voucher {
+          box-shadow: none;
+          border-radius: 0;
+          max-width: none;
+        }
+
+        @page {
+          size: A5 landscape;
+          margin: 0;
+        }
+      }
+    </style>
+  </body>
+</html>
