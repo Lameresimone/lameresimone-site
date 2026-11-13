@@ -4,9 +4,23 @@
 d'un formulaire Netlify Forms du site, mais ne traite que le formulaire
 `bon-cadeau` : recalcule tous les montants côté serveur (jamais de
 confiance dans les valeurs envoyées par le navigateur), génère un code
-unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre,
-envoie une copie de suivi à `lameresimone.pro@gmail.com`, et prévient par
-mail en cas d'échec avec la soumission complète pour un envoi manuel.
+unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre
+(avec le PDF du bon en pièce jointe, `bon-cadeau-LMS-AAMM-XXXX.pdf`, et le
+logo en pièce jointe inline référencée en CID, pas par URL : le site est
+encore privé), envoie une copie de suivi à `lameresimone.pro@gmail.com`,
+et prévient par mail en cas d'échec avec la soumission complète pour un
+envoi manuel.
+
+- `lib/voucher-pdf.js` génère le PDF (A5 paysage, pdf-lib, aucune
+  dépendance native) avec la même mise en page que le mail : logo, titre,
+  bénéficiaire/offrant, prestation, message, bandeau valeur/validité/code,
+  mentions légales. La taille du message s'adapte automatiquement à
+  l'espace disponible (jusqu'aux 220 caractères autorisés par le
+  formulaire) pour ne jamais chevaucher le reste de la mise en page.
+- `lib/logo-data.js` embarque le logo en base64 directement dans le code
+  (et non lu depuis un fichier), pour éviter toute dépendance au
+  packaging des fonctions Netlify. Réutilisé pour la pièce jointe inline
+  du mail et pour l'image intégrée au PDF.
 
 Le formulaire `devis` (page Contact) est volontairement ignoré par cette
 fonction : **aucun mail automatique n'est envoyé au demandeur**, la

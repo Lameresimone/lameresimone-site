@@ -2,7 +2,9 @@ import { connectLambda, getStore } from '@netlify/blobs';
 import { Resend } from 'resend';
 import { computeBonCadeau } from './lib/pricing.js';
 import { generateUniqueCode, formatValidityDate } from './lib/voucher-code.js';
-import { renderVoucherEmailHtml, renderInternalCopyHtml, renderFailureNoticeHtml } from './lib/email-template.js';
+import { renderVoucherEmailHtml, renderInternalCopyHtml, renderFailureNoticeHtml, LOGO_CID } from './lib/email-template.js';
+import { renderVoucherPdf } from './lib/voucher-pdf.js';
+import { getLogoBuffer } from './lib/logo-data.js';
 
 const OWNER_EMAIL = 'lameresimone.pro@gmail.com';
 const FROM_ADDRESS = 'La mère Simone <bonjour@lameresimone.fr>';
@@ -83,6 +85,8 @@ async function handleBonCadeau(resend, fields, event) {
     message: fields.message ?? '',
   };
 
+  const pdfBytes = await renderVoucherPdf(emailData);
+
   // On envoie d'abord le bon à la personne qui l'offre : c'est l'envoi qui
   // compte vraiment. Le code n'est marqué comme utilisé qu'une fois cet envoi
   // confirmé, pour ne jamais laisser de code "orphelin" réservé pour un bon
@@ -93,6 +97,13 @@ async function handleBonCadeau(resend, fields, event) {
     replyTo: OWNER_EMAIL,
     subject: 'Votre bon cadeau La mère Simone',
     html: renderVoucherEmailHtml(emailData),
+    attachments: [
+      // Logo en pièce jointe inline (CID), pas par URL distante : le site
+      // est encore privé, une image chargée par URL ne s'afficherait pas.
+      { filename: 'logo-la-mere-simone.png', content: getLogoBuffer(), contentType: 'image/png', contentId: LOGO_CID },
+      // Bon cadeau en PDF (A5 paysage), à imprimer ou transférer au foyer.
+      { filename: `bon-cadeau-${code}.pdf`, content: pdfBytes, contentType: 'application/pdf' },
+    ],
   });
 
   await store.setJSON(code, {

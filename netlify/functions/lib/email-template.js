@@ -2,8 +2,10 @@
 // On utilise des tableaux plutôt que flex/grid pour la compatibilité
 // (notamment Outlook desktop, qui ignore la plupart du CSS moderne).
 
-const SITE_URL = 'https://lameresimone.fr';
-const LOGO_URL = `${SITE_URL}/images/logo-cartouche.png`;
+// Référencé en pièce jointe inline (voir submission-created.js), pas par URL
+// distante : le site est encore privé, donc une image chargée par URL ne
+// s'afficherait pas dans les clients mail.
+export const LOGO_CID = 'logo-cartouche';
 
 const COLORS = {
   wine: '#7D394D',
@@ -26,7 +28,7 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
-function prestationLines(data) {
+export function prestationLines(data) {
   const lines = [`${escapeHtml(data.formuleLabel)} : ${data.formuleKey === 'Confort' ? '4' : '5'} plats cuisinés prêts à déguster`, 'Une cuisine propre et rangée'];
   if (data.optionCourses) lines.push('Option : je fais vos courses');
   if (data.petitsDejeuners > 0) lines.push(`Option : ${data.petitsDejeuners} petit${data.petitsDejeuners > 1 ? 's' : ''} déjeuner${data.petitsDejeuners > 1 ? 's' : ''}`);
@@ -62,7 +64,7 @@ export function renderVoucherEmailHtml(data) {
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:${COLORS.cream};border-radius:8px;overflow:hidden;">
             <tr>
               <td style="padding:32px 32px 8px;">
-                <img src="${LOGO_URL}" alt="La mère Simone" height="40" style="display:block;height:40px;width:auto;border:0;" />
+                <img src="cid:${LOGO_CID}" alt="La mère Simone" height="40" style="display:block;height:40px;width:auto;border:0;" />
               </td>
             </tr>
             <tr>
@@ -117,23 +119,23 @@ export function renderVoucherEmailHtml(data) {
 
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin-top:20px;">
             <tr>
-              <td style="padding:0 8px;font-family:Arial,sans-serif;font-size:14px;color:${COLORS.ink};line-height:1.7;">
-                <p style="margin:0 0 14px;font-weight:bold;color:${COLORS.wine};">Comment offrir ce bon ?</p>
-                <p style="margin:0 0 10px;">
+              <td style="padding:0 8px;font-family:Arial,sans-serif;font-size:16px;color:${COLORS.ink};line-height:1.85;">
+                <p style="margin:0 0 16px;font-weight:bold;color:${COLORS.wine};">Comment offrir ce bon ?</p>
+                <p style="margin:0 0 12px;">
                   Montant à virer directement à ${escapeHtml(data.prenomBeneficiaire)}, selon son droit au crédit
                   d&rsquo;impôt (sommes à virer au foyer, vous ne me payez rien directement) :
                 </p>
-                <ul style="margin:0 0 14px;padding-left:18px;">
-                  <li>Si le foyer a le droit au crédit d&rsquo;impôt : <strong>${escapeHtml(data.montantFoyerEligibleFormate)}</strong></li>
+                <ul style="margin:0 0 16px;padding-left:20px;">
+                  <li style="margin-bottom:8px;">Si le foyer a le droit au crédit d&rsquo;impôt : <strong>${escapeHtml(data.montantFoyerEligibleFormate)}</strong></li>
                   <li>S&rsquo;il n&rsquo;a pas le droit, la prestation complète : <strong>${escapeHtml(data.montantFoyerNonEligibleFormate)}</strong></li>
                 </ul>
-                <p style="margin:0 0 10px;font-weight:bold;">Les 3 étapes :</p>
-                <ol style="margin:0 0 14px;padding-left:18px;">
-                  <li style="margin-bottom:6px;">Vous virez la somme correspondante à ${escapeHtml(data.prenomBeneficiaire)}.</li>
-                  <li style="margin-bottom:6px;">Le foyer m&rsquo;écrit à lameresimone.pro@gmail.com en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
+                <p style="margin:0 0 12px;font-weight:bold;">Les 3 étapes :</p>
+                <ol style="margin:0 0 16px;padding-left:20px;">
+                  <li style="margin-bottom:8px;">Vous virez la somme correspondante à ${escapeHtml(data.prenomBeneficiaire)}.</li>
+                  <li style="margin-bottom:8px;">Le foyer m&rsquo;écrit à lameresimone.pro@gmail.com en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
                   <li>Nous fixons ensemble la date de la prestation.</li>
                 </ol>
-                <p style="margin:0;color:${COLORS.inkSoft};font-size:13px;">
+                <p style="margin:0;color:${COLORS.inkSoft};font-size:15px;">
                   Une question ? Écrivez-moi à lameresimone.pro@gmail.com.
                 </p>
               </td>
