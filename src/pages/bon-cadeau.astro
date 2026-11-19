@@ -308,11 +308,11 @@ const jsonLd = {
               <div class="fields">
                 <div class="field">
                   <label for="f-benef">Prénom(s) des bénéficiaires</label>
-                  <input id="f-benef" name="prenom_beneficiaire" required autocomplete="off" placeholder="Camille et Julien" />
+                  <input id="f-benef" name="prenom_beneficiaire" maxlength="80" required autocomplete="off" placeholder="Camille et Julien" />
                 </div>
                 <div class="field">
                   <label for="f-offrant">Votre prénom</label>
-                  <input id="f-offrant" name="prenom_offrant" required autocomplete="given-name" />
+                  <input id="f-offrant" name="prenom_offrant" maxlength="80" required autocomplete="given-name" />
                 </div>
                 <div class="field full">
                   <label for="f-mail">Votre adresse mail</label>
@@ -350,7 +350,10 @@ const jsonLd = {
             </p>
             <p class="fine rgpd">
               Le prénom des bénéficiaires, votre prénom et votre adresse mail servent uniquement à vous envoyer
-              le bon cadeau.
+              le bon cadeau ; ces informations ne sont ni vendues, ni transmises à des tiers à des fins
+              commerciales. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de
+              suppression de vos données : écrivez à {contact.email}. En savoir plus dans notre
+              <a href="/politique-confidentialite">politique de confidentialité</a>.
             </p>
             <div class="sent" id="gift-sent" hidden>
               <span class="sent-check">
@@ -1250,6 +1253,11 @@ const jsonLd = {
 
   .summary .fine.rgpd {
     margin-top: 0.5rem;
+  }
+
+  .summary .fine a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .summary .fine.err {
