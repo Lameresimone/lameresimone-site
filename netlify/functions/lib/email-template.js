@@ -132,11 +132,11 @@ export function renderVoucherEmailHtml(data) {
                 <p style="margin:0 0 12px;font-weight:bold;">Les 3 étapes :</p>
                 <ol style="margin:0 0 16px;padding-left:20px;">
                   <li style="margin-bottom:8px;">Vous virez la somme correspondante à ${escapeHtml(data.prenomBeneficiaire)}.</li>
-                  <li style="margin-bottom:8px;">Le foyer m&rsquo;écrit à lameresimone.pro@gmail.com en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
+                  <li style="margin-bottom:8px;">Le foyer m&rsquo;écrit à bonjour@lameresimone.fr en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
                   <li>Nous fixons ensemble la date de la prestation.</li>
                 </ol>
                 <p style="margin:0;color:${COLORS.inkSoft};font-size:15px;">
-                  Une question ? Écrivez-moi à lameresimone.pro@gmail.com.
+                  Une question ? Écrivez-moi à bonjour@lameresimone.fr.
                 </p>
               </td>
             </tr>
