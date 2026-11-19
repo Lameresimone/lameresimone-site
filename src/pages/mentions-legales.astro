@@ -1,13 +1,73 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contact } from '../data/site';
 ---
 
-<BaseLayout title="Mentions légales & CGV" description="Mentions légales et conditions générales de vente de La mère Simone.">
+<BaseLayout title="Mentions légales" description="Mentions légales de La mère Simone.">
   <section class="legal">
     <div class="container">
-      <h1>Mentions légales &amp; CGV</h1>
-      <p>Contenu à rédiger. SIRET : {contact.siret}.</p>
+      <p class="legal-updated">Dernière mise à jour : 19 novembre 2026</p>
+      <h1>Mentions légales</h1>
+
+      <h2>Éditeur du site</h2>
+      <p>
+        Le site lameresimone.fr est édité par Lola Simon, entrepreneuse individuelle, sous le nom commercial
+        &laquo; La mère Simone &raquo;.
+      </p>
+      <p>Activité : services à la personne (préparation de repas à domicile)</p>
+      <p>SIREN : 989 383 054</p>
+      <p>SIRET : 989 383 054 00016</p>
+      <p>Entreprise artisanale immatriculée au Registre national des entreprises (RNE) sous le numéro SIREN 989 383 054.</p>
+      <p>Organisme de services à la personne déclaré sous le numéro SAP989383054 (déclaration du 9 août 2026, DDETS du Nord).</p>
+      <p>Adresse : 11 rue Gay-Lussac, 59110 La Madeleine</p>
+      <p>Téléphone : 06 20 81 41 18</p>
+      <p>E-mail : lameresimone.pro@gmail.com</p>
+      <p>TVA non applicable, article 293 B du Code général des impôts.</p>
+
+      <h2>Directrice de la publication</h2>
+      <p>Lola Simon.</p>
+
+      <h2>Hébergement</h2>
+      <p>
+        Le site est hébergé par Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis,
+        <a href="https://www.netlify.com" target="_blank" rel="noopener">www.netlify.com</a>.
+      </p>
+      <p>Le nom de domaine est géré par OVH SAS, 2 rue Kellermann, 59100 Roubaix.</p>
+
+      <h2>Assurance</h2>
+      <p>
+        Lola Simon est titulaire d&rsquo;un contrat de responsabilité civile exploitation et professionnelle
+        souscrit auprès d&rsquo;ACM IARD SA (CIC), 4 rue Frédéric-Guillaume Raiffeisen, 67000 Strasbourg. La
+        couverture géographique est la France.
+      </p>
+
+      <h2>Médiation de la consommation</h2>
+      <p>
+        Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu
+        après une réclamation écrite auprès de La mère Simone, le consommateur peut recourir gratuitement au
+        médiateur suivant : Société Médiation Professionnelle, Rue Marc Sangnier, 33130 Bègles,
+        <a href="https://www.mediateur-consommation-smp.fr" target="_blank" rel="noopener">www.mediateur-consommation-smp.fr</a>.
+      </p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L&rsquo;ensemble des contenus du site (textes, photographies, visuels, logo, mise en page) est la
+        propriété de La mère Simone, sauf mention contraire. Toute reproduction, représentation ou adaptation,
+        totale ou partielle, sans autorisation écrite préalable est interdite.
+      </p>
+
+      <h2>Données personnelles et cookies</h2>
+      <p>
+        Les modalités de traitement de vos données personnelles sont décrites dans la Politique de
+        confidentialité. Ce site ne dépose aucun cookie de mesure d&rsquo;audience ou de publicité.
+      </p>
+
+      <h2>Signaler un contenu</h2>
+      <p>Pour signaler un contenu qui vous paraîtrait illicite, écrivez à lameresimone.pro@gmail.com.</p>
+
+      <p class="legal-seealso">
+        Voir aussi : <a href="/cgv">Conditions générales de vente</a> &middot;
+        <a href="/politique-confidentialite">Politique de confidentialité</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -19,13 +79,55 @@ import { contact } from '../data/site';
     min-height: 40vh;
   }
 
+  .legal-updated {
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
   .legal h1 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     color: var(--color-wine);
     margin-bottom: 1.25rem;
   }
 
+  .legal h2 {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    color: var(--color-wine);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
   .legal p {
     color: var(--color-ink-soft);
+    line-height: 1.65;
+  }
+
+  .legal p + p {
+    margin-top: 0.9rem;
+  }
+
+  .legal p + h2 {
+    margin-top: 2.25rem;
+  }
+
+  .legal a {
+    color: var(--color-wine);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-seealso {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.88rem;
+  }
+
+  .legal-seealso a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>

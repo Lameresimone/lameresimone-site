@@ -43,9 +43,8 @@ export const footerSiteLinks = [
 
 export const footerLegalLinks = [
   { label: 'Mentions légales', href: '/mentions-legales' },
-  { label: 'CGV', href: '/mentions-legales' },
+  { label: 'CGV', href: '/cgv' },
   { label: 'Politique de confidentialité', href: '/politique-confidentialite' },
-  { label: 'Cookies', href: '/cookies' },
 ];
 
 export const creditImpot = {

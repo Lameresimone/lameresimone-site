@@ -111,8 +111,8 @@ export function renderVoucherEmailHtml(data) {
             <tr>
               <td style="padding:16px 32px 28px;font-family:Arial,sans-serif;font-size:12px;color:${COLORS.inkSoft};line-height:1.6;">
                 Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas
-                compris dans le bon. Le crédit d&rsquo;impôt de 50% est accordé aux foyers éligibles et dépend
-                de leur situation. La mère Simone &middot; SIRET 98938305400016 &middot; lameresimone.fr
+                compris dans le bon. Le crédit d&rsquo;impôt de 50% est accordé aux foyers qui y ont droit et
+                dépend de leur situation. La mère Simone &middot; SIRET 98938305400016 &middot; lameresimone.fr
               </td>
             </tr>
           </table>
@@ -159,8 +159,8 @@ export function renderInternalCopyHtml(data) {
     ['Formule', data.formuleLabel],
     ['Récapitulatif', data.recapitulatif],
     ['Valeur du bon', data.valeurBonFormatee],
-    ['Montant à virer (foyer éligible)', data.montantFoyerEligibleFormate],
-    ['Montant à virer (foyer non éligible)', data.montantFoyerNonEligibleFormate],
+    ['Montant à virer (foyer ayant droit au crédit d\'impôt)', data.montantFoyerEligibleFormate],
+    ['Montant à virer (foyer sans droit au crédit d\'impôt)', data.montantFoyerNonEligibleFormate],
     ['Bénéficiaire(s)', data.prenomBeneficiaire],
     ['Offert par', data.prenomOffrant],
     ['Email de l\'offrant', data.emailOffrant],

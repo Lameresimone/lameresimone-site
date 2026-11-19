@@ -1,13 +1,165 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contact } from '../data/site';
 ---
 
 <BaseLayout title="Politique de confidentialité" description="Politique de confidentialité de La mère Simone.">
   <section class="legal">
     <div class="container">
+      <p class="legal-updated">Dernière mise à jour : 19 novembre 2026</p>
       <h1>Politique de confidentialité</h1>
-      <p>Contenu à rédiger. Pour toute question : {contact.email}.</p>
+
+      <p>
+        La mère Simone attache de l&rsquo;importance à la protection de vos données personnelles. La présente
+        page explique quelles données sont collectées par ce site, pourquoi, pendant combien de temps, et quels
+        sont vos droits.
+      </p>
+
+      <h2>Responsable du traitement</h2>
+      <p>
+        La mère Simone, exploitée par Lola Simon, entrepreneuse individuelle (SIREN 989 383 054), 11 rue
+        Gay-Lussac, 59110 La Madeleine.
+      </p>
+      <p>Contact : lameresimone.pro@gmail.com</p>
+
+      <h2>Données collectées</h2>
+      <p>
+        <strong>Formulaire de demande de devis.</strong> Prénom, nom, adresse e-mail, numéro de téléphone,
+        ville, détails de la demande (formule et rythme souhaités) et message éventuel.
+      </p>
+      <p>
+        <strong>Bon cadeau.</strong> Prénom du ou des bénéficiaires, prénom et adresse e-mail de l&rsquo;offrant,
+        formule et options choisies, message personnalisé.
+      </p>
+      <p>
+        <strong>Préparation d&rsquo;une prestation.</strong> Informations du questionnaire (habitudes de
+        consommation, équipement de la cuisine) et informations relatives aux allergies, intolérances et
+        régimes alimentaires. Ces dernières sont des données de santé : elles ne sont traitées qu&rsquo;avec
+        votre consentement explicite, aux seules fins d&rsquo;adapter la prestation.
+      </p>
+      <p>
+        <strong>Données techniques.</strong> Comme tout site, celui-ci reçoit votre adresse IP, le type de
+        navigateur et la page consultée. Ces informations sont traitées par l&rsquo;hébergeur pour délivrer les
+        pages et assurer la sécurité du service.
+      </p>
+      <p>Les champs marqués d&rsquo;un astérisque sont obligatoires ; à défaut, votre demande ne peut pas être traitée.</p>
+
+      <h2>Ce qui n&rsquo;est pas collecté</h2>
+      <p>
+        Ce site ne comporte ni compte utilisateur, ni outil de mesure d&rsquo;audience, ni publicité, ni
+        profilage. Aucune décision produisant des effets juridiques à votre égard n&rsquo;est prise de manière
+        automatisée.
+      </p>
+
+      <h2>Finalités, bases légales et durées de conservation</h2>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th>Finalité</th>
+              <th>Base légale</th>
+              <th>Conservation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Répondre à votre demande, établir un devis ou un bon cadeau</td>
+              <td>Mesures précontractuelles à votre demande (RGPD, art. 6.1.b)</td>
+              <td>3 ans après le dernier contact en l&rsquo;absence de suite</td>
+            </tr>
+            <tr>
+              <td>Organiser et réaliser la prestation</td>
+              <td>Exécution du contrat (art. 6.1.b)</td>
+              <td>Durée de la relation, puis 3 ans après la dernière prestation</td>
+            </tr>
+            <tr>
+              <td>Adapter la prestation à vos allergies, intolérances et régimes alimentaires</td>
+              <td>Consentement explicite (art. 9.2.a)</td>
+              <td>Supprimées à l&rsquo;issue de la dernière prestation, ou sur demande</td>
+            </tr>
+            <tr>
+              <td>Établir et conserver les factures et pièces comptables</td>
+              <td>Obligation légale (art. 6.1.c)</td>
+              <td>10 ans (factures et pièces comptables uniquement)</td>
+            </tr>
+            <tr>
+              <td>Gérer un bon cadeau</td>
+              <td>Exécution du contrat (art. 6.1.b)</td>
+              <td>Durée de validité, puis 3 ans</td>
+            </tr>
+            <tr>
+              <td>Assurer la sécurité du site et limiter les envois abusifs</td>
+              <td>Intérêt légitime (art. 6.1.f)</td>
+              <td>24 heures</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Destinataires et sous-traitants</h2>
+      <p>
+        Vos données sont destinées au seul Responsable du traitement. Elles ne sont ni vendues, ni louées, ni
+        cédées à des fins commerciales. Les prestataires suivants interviennent en qualité de sous-traitants :
+      </p>
+      <ul>
+        <li>
+          <strong>Netlify, Inc.</strong> (512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis) :
+          hébergement du site et de l&rsquo;outil de gestion interne, réception des formulaires, traitements
+          automatisés.
+        </li>
+        <li><strong>Resend</strong> : envoi des e-mails automatiques, notamment les bons cadeaux.</li>
+        <li>
+          <strong>Google</strong> : messagerie utilisée pour recevoir les demandes, et base de données
+          (Firebase) de l&rsquo;outil de gestion interne.
+        </li>
+        <li><strong>Abby</strong> : logiciel de facturation.</li>
+      </ul>
+      <p>
+        Lorsque vous choisissez l&rsquo;avance immédiate de crédit d&rsquo;impôt, les données nécessaires à la
+        facturation sont transmises à l&rsquo;URSSAF.
+      </p>
+
+      <h2>Transferts hors de l&rsquo;Union européenne</h2>
+      <p>
+        Certains de ces prestataires sont établis aux États-Unis. Les transferts sont encadrés par les
+        garanties prévues par le RGPD, notamment les clauses contractuelles types de la Commission européenne
+        ou le cadre de protection des données UE&ndash;États-Unis. Les e-mails sont envoyés depuis des serveurs
+        situés en Irlande.
+      </p>
+
+      <h2 id="cookies-et-traceurs">Cookies et traceurs</h2>
+      <p>
+        Ce site ne dépose aucun cookie et n&rsquo;utilise aucun traceur de mesure d&rsquo;audience ou de
+        publicité. Aucun bandeau de consentement ne vous est donc présenté, la réglementation n&rsquo;en
+        imposant un que lorsque des traceurs non strictement nécessaires sont déposés.
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Les échanges avec le site sont chiffrés (HTTPS). L&rsquo;accès aux données est limité au Responsable du
+        traitement et à ses prestataires, et les formulaires sont protégés contre les envois abusifs.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Vous disposez d&rsquo;un droit d&rsquo;accès, de rectification, d&rsquo;effacement, de limitation,
+        d&rsquo;opposition et de portabilité, du droit de retirer à tout moment votre consentement, ainsi que
+        du droit de définir des directives relatives au sort de vos données après votre décès. Pour les
+        exercer, écrivez à lameresimone.pro@gmail.com : une réponse vous sera apportée dans un délai d&rsquo;un
+        mois. Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation
+        auprès de la CNIL, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07,
+        <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.
+      </p>
+
+      <h2>Modification de la politique</h2>
+      <p>
+        La présente politique peut évoluer, notamment si un nouvel outil est ajouté au site. La date de
+        dernière mise à jour figure en haut de la page.
+      </p>
+
+      <p class="legal-seealso">
+        Voir aussi : <a href="/mentions-legales">Mentions légales</a> &middot;
+        <a href="/cgv">Conditions générales de vente</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -19,13 +171,122 @@ import { contact } from '../data/site';
     min-height: 40vh;
   }
 
+  .legal-updated {
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
   .legal h1 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     color: var(--color-wine);
     margin-bottom: 1.25rem;
   }
 
+  .legal h2 {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    color: var(--color-wine);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
   .legal p {
     color: var(--color-ink-soft);
+    line-height: 1.65;
+  }
+
+  .legal p + p,
+  .legal ul + p {
+    margin-top: 0.9rem;
+  }
+
+  .legal p + h2 {
+    margin-top: 2.25rem;
+  }
+
+  .legal strong {
+    color: var(--color-ink);
+  }
+
+  .legal a {
+    color: var(--color-wine);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal ul {
+    list-style: disc;
+    margin-top: 0.9rem;
+    padding-left: 1.25rem;
+    color: var(--color-ink-soft);
+    line-height: 1.65;
+  }
+
+  .legal ul li + li {
+    margin-top: 0.6rem;
+  }
+
+  .legal-table-wrap {
+    margin-top: 0.9rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  .legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 560px;
+  }
+
+  .legal-table th,
+  .legal-table td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: top;
+  }
+
+  .legal-table thead th {
+    background: var(--color-cream-card);
+    color: var(--color-wine);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .legal-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .legal-table td {
+    color: var(--color-ink-soft);
+  }
+
+  .legal-seealso {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.88rem;
+  }
+
+  .legal-seealso a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 560px) {
+    .legal-table {
+      font-size: 0.85rem;
+      min-width: 480px;
+    }
+
+    .legal-table th,
+    .legal-table td {
+      padding: 0.6rem 0.75rem;
+    }
   }
 </style>
