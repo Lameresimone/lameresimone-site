@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, contact, creditImpot, trustItems } from '../data/site';
+import { site, contact, creditImpot, trustItems, navCta } from '../data/site';
 
 const trustIconPaths = [
   'M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11Z M8 15c1 2 3 3 4 3',
@@ -45,7 +45,10 @@ const jsonLd = {
         </p>
         <h1>{site.tagline}</h1>
         <p class="sub">Cuisine à domicile : des repas faits maison, <br />cuisinés chez vous par une cheffe.</p>
-        <a href="/offre" class="cta-link">Découvrir l&rsquo;offre</a>
+        <div class="hero-ctas">
+          <a href={navCta.href} class="hero-btn hero-btn-primary">{navCta.label}</a>
+          <a href="/offre" class="hero-btn hero-btn-secondary">Découvrir l&rsquo;offre</a>
+        </div>
       </div>
 
       <div class="hero-photo-col">
@@ -146,21 +149,46 @@ const jsonLd = {
     line-height: 1.5;
   }
 
-  .cta-link {
-    display: inline-block;
+  .hero-ctas {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 14px;
     margin-top: 2.1rem;
-    background: var(--color-cream);
-    color: var(--color-wine-deeper);
+  }
+
+  .hero-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 0;
     padding: 1.1rem 2.25rem;
     border-radius: var(--radius-md);
     font-weight: 800;
     font-size: 1rem;
     text-decoration: none;
     border-bottom: 3px solid var(--color-olive);
-    transition: transform var(--transition), box-shadow var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   }
 
-  .cta-link:hover {
+  .hero-btn-primary {
+    background: var(--color-cream);
+    color: var(--color-wine-deeper);
+  }
+
+  .hero-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero-btn-secondary {
+    background: var(--color-olive-muted);
+    color: var(--color-cream);
+  }
+
+  .hero-btn-secondary:hover {
+    background: var(--color-olive);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
   }
@@ -365,6 +393,15 @@ const jsonLd = {
 
     .about-photo {
       aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero-ctas {
+      display: grid;
+      grid-auto-flow: row;
+      grid-auto-columns: unset;
+      width: 100%;
     }
   }
 </style>
