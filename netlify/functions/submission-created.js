@@ -7,8 +7,14 @@ import { renderVoucherPdf } from './lib/voucher-pdf.js';
 import { getLogoBuffer } from './lib/logo-data.js';
 import { isRateLimited } from './lib/rate-limit.js';
 
+// Destinataire des notifications internes (copie de suivi des bons émis,
+// alertes d'échec de traitement) : reste la boîte Gmail historique, jamais
+// montrée à un client.
 const OWNER_EMAIL = 'lameresimone.pro@gmail.com';
 const FROM_ADDRESS = 'La mère Simone <bonjour@lameresimone.fr>';
+// Adresse de réponse (Reply-To) des e-mails envoyés au client : visible par
+// lui, distincte de OWNER_EMAIL ci-dessus.
+const REPLY_TO_ADDRESS = 'bonjour@lameresimone.fr';
 
 // Validation de forme (pas de confiance dans ce que le navigateur a appliqué
 // côté client, un envoi direct au endpoint Netlify Forms contourne le HTML).
@@ -133,7 +139,7 @@ async function handleBonCadeau(resend, fields, event) {
   await sendOrThrow(resend, {
     from: FROM_ADDRESS,
     to: fields.email_offrant,
-    replyTo: OWNER_EMAIL,
+    replyTo: REPLY_TO_ADDRESS,
     subject: 'Votre bon cadeau La mère Simone',
     html: renderVoucherEmailHtml(emailData),
     attachments: [

@@ -7,7 +7,7 @@ export const site = {
 };
 
 export const contact = {
-  email: 'lameresimone.pro@gmail.com',
+  email: 'bonjour@lameresimone.fr',
   instagram: '@batchcooking_lameresimone',
   instagramUrl: 'https://instagram.com/batchcooking_lameresimone',
   siret: '98938305400016',

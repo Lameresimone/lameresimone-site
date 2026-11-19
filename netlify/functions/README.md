@@ -60,8 +60,11 @@ format (voir ci-dessus) est faite ici.
 3. **Adresse d'expédition** : le code envoie depuis
    `bonjour@lameresimone.fr` (modifiable dans `submission-created.js`,
    constante `FROM_ADDRESS`). Cette adresse doit appartenir au domaine
-   vérifié dans Resend. La réponse (reply-to) part vers
-   `lameresimone.pro@gmail.com`.
+   vérifié dans Resend. La réponse (reply-to) part aussi vers
+   `bonjour@lameresimone.fr` (constante `REPLY_TO_ADDRESS`), redirigée vers
+   la boîte Gmail pro. La copie de suivi et les alertes d'échec partent
+   elles vers `lameresimone.pro@gmail.com` (constante `OWNER_EMAIL`),
+   jamais montrée à un client.
 4. **Netlify Blobs** : utilisé pour garantir l'unicité des codes de bons.
    Aucune configuration de compte requise. Cette fonction utilise le format
    de handler "v1" (`exports.handler` / `export const handler` recevant un
