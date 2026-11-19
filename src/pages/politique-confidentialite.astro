@@ -6,8 +6,13 @@ import { contact } from '../data/site';
 <BaseLayout title="Politique de confidentialité" description="Politique de confidentialité de La mère Simone.">
   <section class="legal">
     <div class="container">
+      <p class="legal-updated">Dernière mise à jour : 19 novembre 2026</p>
       <h1>Politique de confidentialité</h1>
       <p>Contenu à rédiger. Pour toute question : {contact.email}.</p>
+      <p class="legal-seealso">
+        Voir aussi : <a href="/mentions-legales">Mentions légales</a> &middot;
+        <a href="/cgv">Conditions générales de vente</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -19,6 +24,12 @@ import { contact } from '../data/site';
     min-height: 40vh;
   }
 
+  .legal-updated {
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
   .legal h1 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     color: var(--color-wine);
@@ -27,5 +38,19 @@ import { contact } from '../data/site';
 
   .legal p {
     color: var(--color-ink-soft);
+  }
+
+  .legal-seealso {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.88rem;
+  }
+
+  .legal-seealso a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>

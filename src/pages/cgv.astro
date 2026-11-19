@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../data/site';
+---
+
+<BaseLayout title="Conditions générales de vente" description="Conditions générales de vente de La mère Simone.">
+  <section class="legal">
+    <div class="container">
+      <p class="legal-updated">Dernière mise à jour : 19 novembre 2026</p>
+      <h1>Conditions générales de vente</h1>
+      <p>Contenu à rédiger. Pour toute question : {contact.email}.</p>
+      <p class="legal-seealso">
+        Voir aussi : <a href="/mentions-legales">Mentions légales</a> &middot;
+        <a href="/politique-confidentialite">Politique de confidentialité</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    background: var(--color-cream);
+    padding-block: var(--space-section);
+    min-height: 40vh;
+  }
+
+  .legal-updated {
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--color-wine);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal p {
+    color: var(--color-ink-soft);
+  }
+
+  .legal-seealso {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.88rem;
+  }
+
+  .legal-seealso a {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
