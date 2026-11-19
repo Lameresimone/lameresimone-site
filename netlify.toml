@@ -12,3 +12,10 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # Le site ne charge aucune ressource tierce (scripts, polices, styles
+    # tous servis en local) : script-src/connect-src/font-src restent à
+    # 'self'. 'unsafe-inline' sur style-src est nécessaire pour le style
+    # inline de SapLogo.astro (largeur variable selon la page d'appel) ;
+    # aucun script inline n'est autorisé, donc le risque reste limité à de
+    # la mise en forme, jamais à de l'exécution de code.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"

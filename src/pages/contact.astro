@@ -64,11 +64,11 @@ const jsonLd = {
         <div class="form-row">
           <div class="form-group">
             <label for="prenom">Prénom <span class="req">*</span></label>
-            <input type="text" id="prenom" name="prenom" required />
+            <input type="text" id="prenom" name="prenom" maxlength="80" required />
           </div>
           <div class="form-group">
             <label for="nom">Nom <span class="req">*</span></label>
-            <input type="text" id="nom" name="nom" required />
+            <input type="text" id="nom" name="nom" maxlength="80" required />
           </div>
         </div>
 
@@ -85,7 +85,7 @@ const jsonLd = {
 
         <div class="form-group">
           <label for="ville">Ville <span class="req">*</span></label>
-          <input type="text" id="ville" name="ville" placeholder="Ex. Lille, Villeneuve-d'Ascq, Mons-en-Barœul..." required />
+          <input type="text" id="ville" name="ville" maxlength="80" placeholder="Ex. Lille, Villeneuve-d'Ascq, Mons-en-Barœul..." required />
         </div>
 
         <p class="section-title">Formule souhaitée</p>
@@ -122,9 +122,17 @@ const jsonLd = {
           <textarea
             id="message"
             name="message"
+            maxlength="1000"
             placeholder="Régime alimentaire, intolérances, nombre de personnes, disponibilités..."
           ></textarea>
         </div>
+
+        <p class="form-note rgpd-note">
+          Les informations de ce formulaire sont utilisées uniquement pour traiter votre demande de devis et ne
+          sont ni vendues, ni transmises à des tiers à des fins commerciales. Conformément au RGPD, vous disposez
+          d'un droit d'accès, de rectification et de suppression de vos données : écrivez à {contact.email}. En
+          savoir plus dans notre <a href="/politique-confidentialite">politique de confidentialité</a>.
+        </p>
 
         <button type="submit" class="submit-btn" id="devis-submit">Envoyer ma demande</button>
         <p class="form-note" id="devis-note">Réponse sous 48h, sans engagement de votre part.</p>
@@ -474,6 +482,17 @@ const jsonLd = {
     font-size: 0.78rem;
     color: var(--color-ink-soft);
     margin-top: 1rem;
+  }
+
+  .rgpd-note {
+    text-align: left;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line, rgba(42, 33, 24, 0.12));
+  }
+
+  .rgpd-note a {
+    color: var(--color-wine);
   }
 
   @media (max-width: 900px) {

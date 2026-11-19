@@ -1,15 +1,30 @@
 # Fonction d'envoi automatique du bon cadeau
 
 `submission-created.js` se déclenche automatiquement à chaque soumission
-d'un formulaire Netlify Forms du site, mais ne traite que le formulaire
-`bon-cadeau` : recalcule tous les montants côté serveur (jamais de
-confiance dans les valeurs envoyées par le navigateur), génère un code
-unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui l'offre
-(avec le PDF du bon en pièce jointe, `bon-cadeau-LMS-AAMM-XXXX.pdf`, et le
-logo en pièce jointe inline référencée en CID, pas par URL : le site est
-encore privé), envoie une copie de suivi à `lameresimone.pro@gmail.com`,
-et prévient par mail en cas d'échec avec la soumission complète pour un
-envoi manuel.
+d'un formulaire Netlify Forms du site. Deux formulaires sont traités :
+
+- `bon-cadeau` : recalcule tous les montants côté serveur (jamais de
+  confiance dans les valeurs envoyées par le navigateur), valide le format
+  des champs (adresse mail, longueur des prénoms et du message), génère un
+  code unique `LMS-AAMM-XXXX`, envoie le bon par mail à la personne qui
+  l'offre (avec le PDF du bon en pièce jointe,
+  `bon-cadeau-LMS-AAMM-XXXX.pdf`, et le logo en pièce jointe inline
+  référencée en CID, pas par URL : le site est encore privé), envoie une
+  copie de suivi à `lameresimone.pro@gmail.com`, et prévient par mail en
+  cas d'échec avec la soumission complète pour un envoi manuel.
+- `devis` (page Contact) : ne vérifie que le format des champs (adresse
+  mail, téléphone, longueurs) ; aucun mail n'est envoyé si tout est valide
+  (voir plus bas pourquoi). Une soumission qui échoue à cette vérification
+  (probablement un envoi direct au endpoint hors formulaire, pas un vrai
+  client) déclenche la même notification d'échec que pour un bon cadeau, à
+  titre de signalement.
+
+Toute soumission (bon cadeau ou devis) est d'abord passée par une limite
+anti-abus (`lib/rate-limit.js`, compteur par adresse mail et par IP sur une
+fenêtre d'une heure, stocké dans Netlify Blobs) : au-delà du seuil, la
+soumission est ignorée silencieusement (aucun mail, aucune notification),
+pour ne pas transformer une rafale d'envois abusifs en spam de la boîte du
+propriétaire.
 
 - `lib/voucher-pdf.js` génère le PDF (A5 paysage, pdf-lib, aucune
   dépendance native) avec la même mise en page que le mail : logo, titre,
@@ -22,12 +37,13 @@ envoi manuel.
   packaging des fonctions Netlify. Réutilisé pour la pièce jointe inline
   du mail et pour l'image intégrée au PDF.
 
-Le formulaire `devis` (page Contact) est volontairement ignoré par cette
-fonction : **aucun mail automatique n'est envoyé au demandeur**, la
-confirmation affichée dans la page suffit. La notification de la demande à
-`lameresimone.pro@gmail.com` passe uniquement par les notifications
-natives de Netlify Forms, à activer dans le tableau de bord (voir plus
-bas) — ce n'est pas ce code qui l'envoie.
+Le formulaire `devis` (page Contact) n'a volontairement aucun traitement
+métier dans cette fonction : **aucun mail automatique n'est envoyé au
+demandeur**, la confirmation affichée dans la page suffit. La notification
+de la demande à `lameresimone.pro@gmail.com` passe uniquement par les
+notifications natives de Netlify Forms, à activer dans le tableau de bord
+(voir plus bas) — ce n'est pas ce code qui l'envoie. Seule la validation de
+format (voir ci-dessus) est faite ici.
 
 ## À configurer avant la mise en ligne
 
