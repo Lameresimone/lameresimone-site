@@ -9,6 +9,8 @@ import { contact } from '../data/site';
       <p class="legal-updated">Dernière mise à jour : 19 novembre 2026</p>
       <h1>Politique de confidentialité</h1>
       <p>Contenu à rédiger. Pour toute question : {contact.email}.</p>
+      <h2 id="cookies-et-traceurs">Cookies et traceurs</h2>
+      <p>Contenu à rédiger.</p>
       <p class="legal-seealso">
         Voir aussi : <a href="/mentions-legales">Mentions légales</a> &middot;
         <a href="/cgv">Conditions générales de vente</a>
@@ -36,8 +38,19 @@ import { contact } from '../data/site';
     margin-bottom: 1.25rem;
   }
 
+  .legal h2 {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    color: var(--color-wine);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
   .legal p {
     color: var(--color-ink-soft);
+  }
+
+  .legal p + h2 {
+    margin-top: 2.25rem;
   }
 
   .legal-seealso {

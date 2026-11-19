@@ -166,7 +166,7 @@ export async function renderVoucherPdf(data) {
   // tracé en haut de cette fonction, à BOTTOM_BAND_H).
   const legalY = BOTTOM_BAND_H - 20;
   const legalLines = wrapText(
-    "Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas compris dans le bon. Le crédit d'impôt de 50% est accordé aux foyers éligibles et dépend de leur situation. La mère Simone, SIRET 98938305400016, lameresimone.fr",
+    "Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas compris dans le bon. Le crédit d'impôt de 50% est accordé aux foyers qui y ont droit et dépend de leur situation. La mère Simone, SIRET 98938305400016, lameresimone.fr",
     helvetica,
     8,
     PAGE_W - MARGIN * 2

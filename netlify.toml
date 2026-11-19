@@ -6,6 +6,14 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# L'ancienne page /cookies a été fusionnée dans la politique de
+# confidentialité (section « Cookies et traceurs ») : on redirige les liens
+# externes ou marque-pages existants plutôt que de laisser une 404.
+[[redirects]]
+  from = "/cookies"
+  to = "/politique-confidentialite#cookies-et-traceurs"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]
