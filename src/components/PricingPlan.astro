@@ -14,14 +14,14 @@ const { ponctuel, mensuel2, mensuel4 } = formule.prix;
 <div class="plan" data-plan={formule.id}>
   <h3>{formule.nom}</h3>
   <span class="from">à partir de</span>
-  <div class="price" data-client={ponctuel.client} data-client2={mensuel2.client} data-client4={mensuel4.client}>
-    {ponctuel.client}&euro;
+  <div class="price" data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>
+    {ponctuel.avant}&nbsp;&euro;
   </div>
-  <p class="price-note">
-    soit <strong data-real={ponctuel.avant} data-real2={mensuel2.avant} data-real4={mensuel4.avant}>{ponctuel.avant}&euro;</strong>
-    avant crédit d&rsquo;impôt*
+  <p class="credit-pill">
+    soit <strong class="amount" data-credit={ponctuel.client} data-credit2={mensuel2.client} data-credit4={mensuel4.client}>{ponctuel.client}&nbsp;&euro;</strong> après
+    crédit d&rsquo;impôt*
   </p>
-  <div class="price-savings-slot"></div>
+  <div class="engagement-slot"></div>
   <ul class="plan-features">
     {formule.avantages.map((avantage) => <li>{avantage}</li>)}
   </ul>
@@ -67,41 +67,51 @@ const { ponctuel, mensuel2, mensuel4 } = formule.prix;
   }
 
   .from {
-    font-size: 0.8125rem;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.75);
     display: block;
     margin-top: 1.375rem;
   }
 
+  /* Prix réel (avant crédit d'impôt) : information principale, en grand. */
   .price {
     margin-top: 0.25rem;
-    font-size: 4.75rem;
+    font-size: 58px;
     font-weight: 900;
     line-height: 1;
     color: #fff;
     letter-spacing: -0.02em;
   }
 
-  .price-note {
-    margin-top: 0.625rem;
-    font-size: 0.84rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-  }
-
-  .price-note strong {
-    color: #fff;
-  }
-
-  .price-savings-slot :global(.price-savings) {
-    font-size: 0.75rem;
-    font-weight: 700;
+  /* Crédit d'impôt : mention séparée, nettement plus petite, jamais mise en avant. */
+  .credit-pill {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 16px;
+    padding: 9px 14px;
+    border-radius: var(--radius-md);
+    background: rgba(250, 243, 237, 0.14);
+    border: 1px solid rgba(250, 243, 237, 0.4);
     color: var(--color-cream);
-    background: var(--color-olive);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .credit-pill .amount {
+    font-weight: 800;
+  }
+
+  .engagement-slot :global(.engagement-badge) {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
     margin-top: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(250, 243, 237, 0.7);
+    color: var(--color-cream);
+    font-size: 0.72rem;
+    font-weight: 700;
   }
 
   .plan-features {
@@ -154,7 +164,11 @@ const { ponctuel, mensuel2, mensuel4 } = formule.prix;
     }
 
     .price {
-      font-size: 4rem;
+      font-size: 50px;
+    }
+
+    .credit-pill {
+      font-size: 18px;
     }
   }
 </style>

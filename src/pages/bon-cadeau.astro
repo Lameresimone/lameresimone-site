@@ -9,7 +9,7 @@ const faqItems = [
   {
     question: 'Qui paie quoi ?',
     jsonLdText:
-      "Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien directement. Le montant dépend du droit du foyer au crédit d'impôt. S'il a le droit au crédit d'impôt : vous lui virez 50% de la valeur du bon (par exemple, 85€ pour la formule Confort sans option). Je facture le montant avant crédit d'impôt : le foyer n'en règle que la moitié, via son compte URSSAF, grâce à l'avance immédiate qui déduit le crédit d'impôt du prix. S'il n'a pas le droit au crédit d'impôt : vous lui virez la totalité de la valeur du bon (par exemple, 170€ pour la formule Confort sans option, ou 210€ avec l'option courses). Il règle ensuite la prestation directement auprès de moi.",
+      "Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien directement. Le montant dépend du droit du foyer au crédit d'impôt. S'il a le droit au crédit d'impôt : vous lui virez 50% de la valeur du bon (par exemple, 85 € pour la formule Confort sans option). Le foyer avance le solde et le récupère lors de sa déclaration de revenus (l'avance immédiate, qui permettra de le déduire directement, sera bientôt disponible). S'il n'a pas le droit au crédit d'impôt : vous lui virez la totalité de la valeur du bon (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec l'option courses). Il règle ensuite la prestation directement auprès de moi.",
   },
   {
     question: "Comment savoir si le foyer a le droit au crédit d'impôt ?",
@@ -24,7 +24,7 @@ const faqItems = [
   {
     question: "Le foyer n'a pas de compte URSSAF, est-ce un problème ?",
     jsonLdText:
-      "Non, ce n'est pas un problème. L'inscription à l'URSSAF est gratuite, et j'accompagne le foyer pour activer l'avance immédiate avant la prestation.",
+      "Non, ce n'est pas un problème. L'avance immédiate sera bientôt disponible ; en attendant, le foyer récupère son crédit d'impôt lors de sa déclaration de revenus, sans compte URSSAF nécessaire.",
   },
   {
     question: 'Combien de temps le bon est-il valable ?',
@@ -33,12 +33,12 @@ const faqItems = [
   {
     question: 'Pour combien de personnes ?',
     jsonLdText:
-      "Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4 parts). Au-delà, un supplément de 20€ par personne avant crédit d'impôt, soit 10€ après, s'ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a simplement plus de repas d'avance.",
+      "Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4 parts). Au-delà, un supplément de 20 € par personne avant crédit d'impôt, soit 10 € après, s'ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a simplement plus de repas d'avance.",
   },
   {
     question: 'Peut-on ajouter les courses ?',
     jsonLdText:
-      "Oui, je peux m'occuper des courses du foyer : il suffit de sélectionner l'option « Je fais vos courses » (40€ avant crédit d'impôt, soit 20€ après, sous réserve d'éligibilité du foyer). Cette option rémunère le service de courses, c'est-à-dire le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d'impôt et restent à la charge du foyer bénéficiaire.",
+      "Oui, je peux m'occuper des courses du foyer : il suffit de sélectionner l'option « Je fais vos courses » (40 € avant crédit d'impôt, soit 20 € après, sous réserve d'éligibilité du foyer). Cette option rémunère le service de courses, c'est-à-dire le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d'impôt et restent à la charge du foyer bénéficiaire.",
   },
   {
     question: 'Comment remettre le bon ?',
@@ -63,7 +63,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Offrir un bon cadeau batchcooking"
-  description="Offrez une prestation de batchcooking à domicile à une amie ou à une proche : choisissez la formule, vous offrez la moitié du prix grâce au crédit d&rsquo;impôt de 50%."
+  description="Offrez une prestation de batchcooking à domicile à une amie ou à une proche : choisissez la formule, à partir de 170&nbsp;€, soit 85&nbsp;€ après crédit d&rsquo;impôt de 50%*."
   canonicalPath="/bon-cadeau"
   jsonLd={jsonLd}
 >
@@ -141,16 +141,19 @@ const jsonLd = {
           <div class="credit-col">
             <p class="credit-tag">Le foyer a le droit au crédit d&rsquo;impôt</p>
             <p>
-              Grâce à l&rsquo;avance immédiate proposée par l&rsquo;URSSAF, le crédit d&rsquo;impôt est déduit
-              directement du prix : le foyer ne règle que la moitié de la prestation et n&rsquo;avance rien.
-              Vous lui offrez donc cette moitié. Par exemple, pour la formule Confort sans option : 85€.
+              Le crédit d&rsquo;impôt de 50% permet au foyer de ne financer que la moitié de la prestation.
+              Vous lui offrez donc cette moitié : par exemple, 170&nbsp;€, soit 85&nbsp;€ après crédit
+              d&rsquo;impôt*, pour la formule Confort sans option. Ce crédit s&rsquo;obtient actuellement via
+              la déclaration de revenus du foyer (l&rsquo;avance immédiate de l&rsquo;Urssaf, qui permettra de
+              le déduire directement, sera bientôt disponible).
             </p>
           </div>
           <div class="credit-col">
             <p class="credit-tag">Le foyer n&rsquo;a pas le droit au crédit d&rsquo;impôt</p>
             <p>
               Il ne bénéficie pas du crédit d&rsquo;impôt et règle la prestation au prix complet. Vous lui
-              offrez alors la prestation complète. Par exemple, pour la formule Confort sans option : 170€.
+              offrez alors la prestation complète. Par exemple, pour la formule Confort sans option :
+              170&nbsp;€.
             </p>
           </div>
         </div>
@@ -232,12 +235,12 @@ const jsonLd = {
                       au sein du foyer, ajoutez le nombre de personnes nécessaires, jusqu&rsquo;à 4 en plus.
                     </span>
                     <span class="ast">
-                      * Soit 10€ par personne supplémentaire après crédit d&rsquo;impôt, sous réserve
+                      * Soit 10 € par personne supplémentaire après crédit d&rsquo;impôt, sous réserve
                       d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
-                    <span class="o-price">+20€<sup>*</sup>/pers.</span>
+                    <span class="o-price">+20 €<sup>*</sup>/pers.</span>
                     <span class="stepper" data-target="ep">
                       <button type="button" aria-label="Retirer une personne" data-d="-1">&minus;</button>
                       <output id="out-ep">0</output>
@@ -252,12 +255,12 @@ const jsonLd = {
                       <strong>Je fais vos courses</strong>
                       <span>Je m&rsquo;occupe des courses avant la prestation. Le prix des ingrédients n&rsquo;est pas compris dans le bon.</span>
                       <span class="ast">
-                        * Soit 20€ après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité du foyer au
+                        * Soit 20 € après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité du foyer au
                         crédit d&rsquo;impôt.
                       </span>
                     </span>
                     <span class="o-right">
-                      <span class="o-price">+40€<sup>*</sup></span>
+                      <span class="o-price">+40 €<sup>*</sup></span>
                       <input type="checkbox" name="option_courses" value="oui" id="opt-courses" data-name="Je fais vos courses" data-valeur="40" />
                     </span>
                   </label>
@@ -267,12 +270,12 @@ const jsonLd = {
                     <strong>Petits-déjeuners</strong>
                     <span>Des petits-déjeuners faits maison, préparés à l&rsquo;avance.</span>
                     <span class="ast">
-                      * Soit 7,50€ par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
+                      * Soit 7,50 € par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
                       du foyer au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
-                    <span class="o-price">+15€<sup>*</sup> par recette</span>
+                    <span class="o-price">+15 €<sup>*</sup> par recette</span>
                     <span class="stepper" data-target="pd">
                       <button type="button" aria-label="Retirer un petit-déjeuner" data-d="-1">&minus;</button>
                       <output id="out-pd">0</output>
@@ -286,12 +289,12 @@ const jsonLd = {
                     <strong>Goûters</strong>
                     <span>Des goûters faits maison, préparés à l&rsquo;avance.</span>
                     <span class="ast">
-                      * Soit 7,50€ par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
+                      * Soit 7,50 € par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
                       du foyer au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
-                    <span class="o-price">+15€<sup>*</sup> par recette</span>
+                    <span class="o-price">+15 €<sup>*</sup> par recette</span>
                     <span class="stepper" data-target="go">
                       <button type="button" aria-label="Retirer un goûter" data-d="-1">&minus;</button>
                       <output id="out-go">0</output>
@@ -333,14 +336,14 @@ const jsonLd = {
             <ul id="sum-lines"></ul>
             <div class="sum-block">
               <p class="lbl">Valeur du bon</p>
-              <p class="amt" id="sum-valeur">170€</p>
+              <p class="amt" id="sum-valeur">170 €</p>
             </div>
             <div class="sum-block main">
               <p class="lbl">Vous offrez</p>
               <p class="alt">Si le foyer a le droit au crédit d&rsquo;impôt :</p>
-              <p class="amt" id="sum-offrez">85€</p>
+              <p class="amt" id="sum-offrez">85 €</p>
               <p class="alt">S&rsquo;il n&rsquo;a pas le droit, la prestation complète :</p>
-              <p class="amt amt2" id="sum-plein">170€</p>
+              <p class="amt amt2" id="sum-plein">170 €</p>
               <small>Sommes à virer au foyer. Vous ne me payez rien directement.</small>
             </div>
             <button type="submit" class="submit" id="gift-submit">Recevoir mon bon par mail</button>
@@ -411,7 +414,7 @@ const jsonLd = {
           </div>
           <div class="r">
             <small>Valeur du bon</small>
-            <b>240€</b>
+            <b>240 €</b>
             <span>Valable 6 mois</span>
           </div>
           <div class="dam"></div>
@@ -437,13 +440,13 @@ const jsonLd = {
           <ul class="dash">
             <li>
               <strong>S&rsquo;il a le droit au crédit d&rsquo;impôt :</strong> vous lui virez 50% de la valeur
-              du bon (par exemple, 85€ pour la formule Confort sans option). Je facture le montant avant crédit
-              d&rsquo;impôt : le foyer n&rsquo;en règle que la moitié, via son compte URSSAF, grâce à
-              l&rsquo;avance immédiate qui déduit le crédit d&rsquo;impôt du prix.
+              du bon (par exemple, 85 € pour la formule Confort sans option) ; le foyer avance le solde et
+              le récupère lors de sa déclaration de revenus (l&rsquo;avance immédiate, qui permettra de le
+              déduire directement, sera bientôt disponible).
             </li>
             <li>
               <strong>S&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt :</strong> vous lui virez la
-              totalité de la valeur du bon (par exemple, 170€ pour la formule Confort sans option, ou 210€ avec
+              totalité de la valeur du bon (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec
               l&rsquo;option courses). Il règle ensuite la prestation directement auprès de moi.
             </li>
           </ul>
@@ -467,8 +470,9 @@ const jsonLd = {
         <details class="faq-item">
           <summary>Le foyer n&rsquo;a pas de compte URSSAF, est-ce un problème ?<span class="plus">+</span></summary>
           <p>
-            Non, ce n&rsquo;est pas un problème. L&rsquo;inscription à l&rsquo;URSSAF est gratuite, et
-            j&rsquo;accompagne le foyer pour activer l&rsquo;avance immédiate avant la prestation.
+            Non, ce n&rsquo;est pas un problème. L&rsquo;avance immédiate sera bientôt disponible
+            ; en attendant, le foyer récupère son crédit d&rsquo;impôt lors de sa déclaration de
+            revenus, sans compte URSSAF nécessaire.
           </p>
         </details>
         <details class="faq-item">
@@ -479,7 +483,7 @@ const jsonLd = {
           <summary>Pour combien de personnes ?<span class="plus">+</span></summary>
           <p>
             Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4
-            parts). Au-delà, un supplément de 20€ par personne avant crédit d&rsquo;impôt, soit 10€ après,
+            parts). Au-delà, un supplément de 20 € par personne avant crédit d&rsquo;impôt, soit 10 € après,
             s&rsquo;ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a
             simplement plus de repas d&rsquo;avance.
           </p>
@@ -488,7 +492,7 @@ const jsonLd = {
           <summary>Peut-on ajouter les courses ?<span class="plus">+</span></summary>
           <p>
             Oui, je peux m&rsquo;occuper des courses du foyer : il suffit de sélectionner l&rsquo;option « Je
-            fais vos courses » (40€ avant crédit d&rsquo;impôt, soit 20€ après, sous réserve d&rsquo;éligibilité
+            fais vos courses » (40 € avant crédit d&rsquo;impôt, soit 20 € après, sous réserve d&rsquo;éligibilité
             du foyer). Cette option rémunère le service de courses, c&rsquo;est-à-dire le temps passé et le
             déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d&rsquo;impôt
             et restent à la charge du foyer bénéficiaire.
