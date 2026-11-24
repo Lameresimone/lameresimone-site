@@ -96,12 +96,18 @@ const jsonLd = {
                 <input type="radio" name="formule" value={formule.id} checked={i === 0} />
                 <div class="f-name">{formule.nom}</div>
                 <div class="f-detail">
-                  {formule.nbPlats} plats — à partir de {formule.prix.ponctuel.client}&euro;
+                  {formule.nbPlats} plats, à partir de {formule.prix.ponctuel.avant}&nbsp;&euro;
                 </div>
+                <div class="f-credit">soit {formule.prix.ponctuel.client}&nbsp;&euro; après crédit d&rsquo;impôt*</div>
               </label>
             ))
           }
         </div>
+
+        <p class="pricing-legal">
+          *Crédit d&rsquo;impôt de 50&nbsp;% selon l&rsquo;article 199 sexdecies du CGI, dans la limite des
+          plafonds en vigueur. Le montant des courses n&rsquo;est pas éligible au crédit d&rsquo;impôt.
+        </p>
 
         <p class="section-title">Rythme souhaité</p>
         <div class="engagement-row">
@@ -135,7 +141,7 @@ const jsonLd = {
         </p>
 
         <button type="submit" class="submit-btn" id="devis-submit">Envoyer ma demande</button>
-        <p class="form-note" id="devis-note">Réponse sous 48h, sans engagement de votre part.</p>
+        <p class="form-note" id="devis-note">Devis gratuit, réponse sous 48h, sans engagement de votre part.</p>
         <p class="form-note devis-err" id="devis-err" hidden>
           Une erreur est survenue. Réessayez, ou écrivez-moi à {contact.email}.
         </p>
@@ -419,6 +425,19 @@ const jsonLd = {
     font-size: 0.8rem;
     color: var(--color-ink-soft);
     margin-top: 0.25rem;
+  }
+
+  .f-credit {
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.15rem;
+  }
+
+  .pricing-legal {
+    font-size: 0.7rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    margin-top: 0.75rem;
   }
 
   .engagement-row {

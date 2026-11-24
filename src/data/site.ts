@@ -49,26 +49,26 @@ export const footerLegalLinks = [
 
 export const creditImpot = {
   taux: 50,
-  label: "de crédit d'impôt immédiat sur la prestation",
+  label: "de crédit d'impôt sur la prestation",
   plafond:
     "Plafond annuel de dépenses ouvrant droit au crédit d'impôt : 12 000€ par foyer fiscal (montant pouvant être majoré selon votre situation, à voir avec l'Urssaf).",
 };
 
 export const creditImpotEtapes = [
   {
-    titre: 'Je vous inscris au service',
+    titre: 'Je vous inscrirai au service',
     texte:
-      "Une fois vos conditions d'éligibilité vérifiées, vous recevez un mail de l'Urssaf pour activer votre compte sur particulier.urssaf.fr.",
+      "Une fois vos conditions d'éligibilité vérifiées, vous recevrez un mail de l'Urssaf pour activer votre compte sur particulier.urssaf.fr.",
   },
   {
     titre: 'Après chaque prestation',
     texte:
-      "J'émets une demande de paiement sur laquelle votre avance de 50% est automatiquement déduite. Vous la validez en ligne (ou elle l'est automatiquement sous 48h).",
+      "J'émettrai une demande de paiement sur laquelle votre avance de 50% sera automatiquement déduite. Vous la validerez en ligne (ou elle le sera automatiquement sous 48h).",
   },
   {
-    titre: "L'Urssaf gère le règlement",
+    titre: "L'Urssaf gérera le règlement",
     texte:
-      "Elle prélève votre reste à charge sur votre compte, puis me verse directement l'intégralité de la prestation. Rien à déclarer de votre côté.",
+      "Elle prélèvera votre reste à charge sur votre compte, puis me versera directement l'intégralité de la prestation. Rien à déclarer de votre côté.",
   },
 ];
 
@@ -76,27 +76,27 @@ export const creditImpotFaq = [
   {
     question: 'Faut-il être imposable pour en bénéficier ?',
     reponse:
-      "Non. Il s'agit d'un crédit d'impôt, pas d'une simple réduction : il s'applique que vous soyez imposable ou non. Si vous n'êtes pas imposable, l'avantage vous est tout de même accordé grâce à l'avance immédiate.",
+      "Non. Il s'agit d'un crédit d'impôt, pas d'une simple réduction : il s'applique que vous soyez imposable ou non. Si vous n'êtes pas imposable, l'avantage vous est tout de même remboursé lors de votre déclaration de revenus.",
   },
   {
     question: 'Quelles conditions dois-je remplir ?',
     reponse:
-      "Résider en France, disposer d'un numéro fiscal et avoir déjà effectué au moins une déclaration de revenus. Ce sont les conditions de base fixées par l'Urssaf pour activer le service.",
+      "Résider en France, disposer d'un numéro fiscal et avoir déjà effectué au moins une déclaration de revenus.",
   },
   {
     question: 'Puis-je cumuler avec un autre membre de mon foyer qui utilise déjà l\'avance immédiate ?',
     reponse:
-      "Non, un seul membre du foyer fiscal peut recourir à des services à la personne avec l'avance immédiate à la fois.",
+      "L'avance immédiate sera bientôt disponible. Lorsqu'elle le sera, un seul membre du foyer fiscal pourra y recourir à la fois pour des services à la personne.",
   },
   {
     question: "Puis-je en bénéficier si je perçois déjà l'APA ou la PCH ?",
     reponse:
-      "Non, l'avance immédiate n'est pas cumulable avec une prise en charge financière par un tiers, comme l'aide personnalisée d'autonomie (APA) ou la prestation de compensation du handicap (PCH).",
+      "L'avance immédiate sera bientôt disponible. Elle ne sera pas cumulable avec une prise en charge financière par un tiers, comme l'aide personnalisée d'autonomie (APA) ou la prestation de compensation du handicap (PCH).",
   },
   {
     question: "Comment j'active le service ?",
     reponse:
-      "Je m'occupe de votre inscription auprès de l'Urssaf. Une fois vos conditions vérifiées, vous recevez un mail pour activer votre compte sur particulier.urssaf.fr. C'est gratuit et rapide.",
+      "L'avance immédiate sera bientôt disponible. Je m'occuperai alors de votre inscription auprès de l'Urssaf : une fois vos conditions vérifiées, vous recevrez un mail pour activer votre compte sur particulier.urssaf.fr. En attendant, le crédit d'impôt de 50%* s'obtient via votre déclaration de revenus.",
   },
 ];
 
@@ -168,18 +168,18 @@ export const faqGroups = [
       {
         question: 'Quelles sont les formules proposées ?',
         reponse:
-          "Deux formules : Confort (4 plats cuisinés, à partir de 85€ après crédit d'impôt) et Sérénité (5 plats cuisinés, à partir de 99€ après crédit d'impôt). Les deux incluent une cuisine propre et rangée en fin de prestation.",
+          "Deux formules : Confort (4 plats cuisinés, à partir de 170 €, soit 85 € après crédit d'impôt*) et Sérénité (5 plats cuisinés, à partir de 198 €, soit 99 € après crédit d'impôt*). Les deux incluent une cuisine propre et rangée en fin de prestation.",
         lien: { texte: 'Détail complet sur la page', label: "L'offre", href: '/offre' },
       },
       {
         question: 'Le prix affiché inclut-il les courses ?',
         reponse:
-          "Non, le tarif affiché concerne uniquement la prestation de cuisine. Vous pouvez faire vos courses vous-même en amont, ou choisir l'option « je fais vos courses » (+20€, soit 40€ avant crédit d'impôt). Les courses elles-mêmes ne sont pas éligibles au crédit d'impôt.",
+          "Non, le tarif affiché concerne uniquement la prestation de cuisine. Vous pouvez faire vos courses vous-même en amont, ou choisir l'option « je fais vos courses » (+40 €, soit 20 € après crédit d'impôt*). Les courses elles-mêmes ne sont pas éligibles au crédit d'impôt.",
       },
       {
         question: 'Pour combien de personnes sont prévus les plats ?',
         reponse:
-          "Les plats sont généreux et pensés pour 4 personnes. Si vous êtes moins nombreux, vous en profitez sur plusieurs repas. Si vous êtes plus nombreux, la préparation demande plus de temps : un supplément de 10€ par personne en plus s'applique au-delà de 4 personnes, soit 20€ avant crédit d'impôt.",
+          "Les plats sont généreux et pensés pour 4 personnes. Si vous êtes moins nombreux, vous en profitez sur plusieurs repas. Si vous êtes plus nombreux, la préparation demande plus de temps : un supplément de 20 € par personne en plus s'applique au-delà de 4 personnes, soit 10 € après crédit d'impôt*.",
       },
       {
         question: "Puis-je m'abonner pour bénéficier d'une réduction ?",
@@ -189,7 +189,7 @@ export const faqGroups = [
       {
         question: "Comment fonctionne le crédit d'impôt de 50% ?",
         reponse:
-          "En tant que prestataire agréée services à la personne, mes prestations ouvrent droit à un crédit d'impôt de 50%. Grâce à l'avance immédiate de l'Urssaf, vous ne payez que votre part dès le départ, sans avance de trésorerie ni déclaration à faire.",
+          "En tant que prestataire agréée services à la personne, mes prestations ouvrent droit à un crédit d'impôt de 50%. Il s'obtient actuellement via votre déclaration de revenus de l'année suivante. L'avance immédiate de l'Urssaf, qui permettra de le déduire directement du prix, sera bientôt disponible.",
         lien: { texte: 'Tous les détails sur la page', label: "Crédit d'impôt", href: '/credit-impot' },
       },
       {
@@ -289,7 +289,7 @@ export const trustItems = [
 
 export const trustMini = [
   'Agréée services à la personne',
-  "50% de crédit d'impôt immédiat",
+  "50% de crédit d'impôt",
   'Formée HACCP',
 ];
 
@@ -334,7 +334,7 @@ export const advantageItems = [
   },
   {
     titre: "50% de crédit d'impôt",
-    soustitre: 'avec avance immédiate',
+    soustitre: 'sur vos repas',
     icone: 'M19 5 5 19 M6.5 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z M17.5 17.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
   },
   {
@@ -413,8 +413,8 @@ export const formules = [
 ] as const;
 
 export const optionsFormules = [
-  { label: 'Je fais vos courses', prix: "+20€, soit 40€ avant crédit d'impôt" },
-  { label: 'Goûter, petit-déjeuner', prix: "+7,50€ par recette, soit 15€ avant crédit d'impôt" },
+  { label: 'Je fais vos courses', prix: "+40 €, soit 20 € après crédit d'impôt*" },
+  { label: 'Goûter, petit-déjeuner', prix: "+15 € par recette, soit 7,50 € après crédit d'impôt*" },
 ];
 
 export const parcours = [

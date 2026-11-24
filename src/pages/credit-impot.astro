@@ -21,7 +21,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Crédit d'impôt & avance immédiate"
-  description="50% de crédit d'impôt sur vos repas faits maison, avec avance immédiate Urssaf : ne payez que votre part, sans avance de trésorerie ni déclaration."
+  description="50% de crédit d'impôt sur vos repas faits maison. Avance immédiate Urssaf bientôt disponible : en attendant, le crédit s'obtient via votre déclaration de revenus."
   canonicalPath="/credit-impot"
   jsonLd={jsonLd}
 >
@@ -33,8 +33,11 @@ const jsonLd = {
       </p>
       <h1>Crédit d&rsquo;impôt &amp; avance immédiate</h1>
       <p class="intro">
-        {creditImpot.taux}% du coût de la prestation vous est remboursé. Grâce à l&rsquo;avance immédiate,
-        vous n&rsquo;avancez même pas cette somme : vous ne payez que votre part, dès le départ.
+        {creditImpot.taux}% du coût de la prestation vous est remboursé sous forme de crédit d&rsquo;impôt.
+      </p>
+      <p class="coming-soon">
+        Avance immédiate : bientôt disponible. En attendant, le crédit d&rsquo;impôt de 50%* s&rsquo;obtient
+        dans votre déclaration de revenus de l&rsquo;année suivante.
       </p>
     </div>
   </section>
@@ -43,22 +46,22 @@ const jsonLd = {
     <div class="container principe-grid">
       <div class="principe-text">
         <p class="eyebrow">Le principe</p>
-        <h2>Un service à la personne, à moitié prix</h2>
+        <h2>Un service à la personne, avec 50% de crédit d&rsquo;impôt</h2>
         <p>
           En tant que prestataire agréée <strong>services à la personne</strong>, mes prestations de préparation
           de repas à domicile ouvrent droit à un crédit d&rsquo;impôt de <strong>{creditImpot.taux}%</strong> du
           montant payé.
         </p>
         <p>
-          Concrètement : sur une prestation à {confort.prix.ponctuel.avant}&euro;, vous ne payez au final que
-          <strong>{confort.prix.ponctuel.client}&euro;</strong>, que vous soyez imposable ou non. Ce n&rsquo;est
-          pas une réduction d&rsquo;impôt réservée aux foyers qui paient déjà des impôts, c&rsquo;est un crédit
-          remboursable pour tous.
+          Concrètement : sur une prestation à {confort.prix.ponctuel.avant}&nbsp;&euro;, soit
+          <strong>{confort.prix.ponctuel.client}&nbsp;&euro;</strong> après crédit d&rsquo;impôt*, que vous
+          soyez imposable ou non. Ce n&rsquo;est pas une réduction d&rsquo;impôt réservée aux foyers qui paient
+          déjà des impôts, c&rsquo;est un crédit remboursable pour tous.
         </p>
         <p>
-          L&rsquo;avance immédiate est un service <strong>optionnel et gratuit</strong>, proposé par
-          l&rsquo;Urssaf : elle déduit automatiquement votre crédit d&rsquo;impôt du coût de la prestation, sans
-          que vous ayez à avancer la somme.
+          L&rsquo;avance immédiate sera un service <strong>optionnel et gratuit</strong>, proposé par
+          l&rsquo;Urssaf : elle déduira alors automatiquement votre crédit d&rsquo;impôt du coût de la
+          prestation, sans que vous ayez à avancer la somme. Elle est bientôt disponible.
         </p>
       </div>
       <div class="principe-side">
@@ -78,7 +81,7 @@ const jsonLd = {
   <section class="how">
     <div class="container">
       <div class="how-head">
-        <p class="eyebrow eyebrow-light">L&rsquo;avance immédiate</p>
+        <p class="eyebrow eyebrow-light">Avec l&rsquo;avance immédiate (bientôt disponible)</p>
         <h2>Pas d&rsquo;avance, pas de paperasse</h2>
       </div>
       <div class="steps-grid">
@@ -105,16 +108,25 @@ const jsonLd = {
       <div class="example-card">
         <div class="example-row">
           <span class="label">{confort.nom} ({confort.nbPlats} plats)</span>
-          <span class="value">{confort.prix.ponctuel.avant}&euro;</span>
+          <span class="value">{confort.prix.ponctuel.avant}&nbsp;&euro;</span>
         </div>
         <div class="example-row">
           <span class="label">Crédit d&rsquo;impôt ({creditImpot.taux}%)</span>
-          <span class="value">&minus; {confort.prix.ponctuel.avant - confort.prix.ponctuel.client}&euro;</span>
+          <span class="value">&minus; {confort.prix.ponctuel.avant - confort.prix.ponctuel.client}&nbsp;&euro;</span>
         </div>
         <div class="example-row final">
-          <span class="label">Montant réglé avec l&rsquo;avance immédiate</span>
-          <span class="value">{confort.prix.ponctuel.client}&euro;</span>
+          <span class="label">Soit, après crédit d&rsquo;impôt*</span>
+          <span class="value">{confort.prix.ponctuel.client}&nbsp;&euro;</span>
         </div>
+      </div>
+      <div class="legal">
+        <p>
+          *Crédit d&rsquo;impôt de {creditImpot.taux}% selon l&rsquo;article 199 sexdecies du CGI, dans la
+          limite des plafonds en vigueur. Le montant des courses n&rsquo;est pas éligible au crédit
+          d&rsquo;impôt.
+        </p>
+        <p>TVA non applicable, article 293 B du CGI.</p>
+        <p>Devis gratuit sur simple demande.</p>
       </div>
     </div>
   </section>
@@ -149,7 +161,7 @@ const jsonLd = {
   <section class="cta-band">
     <div class="container">
       <div class="cta-inner">
-        <h2>Envie de profiter de l&rsquo;avance immédiate ?</h2>
+        <h2>Demander mon devis</h2>
         <a href="/contact" class="cta-link">Demander mon devis</a>
       </div>
     </div>
@@ -197,6 +209,23 @@ const jsonLd = {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.55;
     max-width: 60ch;
+  }
+
+  /* Même traitement que la mention crédit d'impôt sur la page Offre : bloc
+     crème translucide, 8px de rayon, aucune nouvelle couleur. */
+  .coming-soon {
+    display: block;
+    width: fit-content;
+    max-width: 60ch;
+    margin-top: 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-md);
+    background: rgba(250, 243, 237, 0.14);
+    border: 1px solid rgba(250, 243, 237, 0.4);
+    color: var(--color-cream);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.5;
   }
 
   .principe {
@@ -409,6 +438,19 @@ const jsonLd = {
     font-size: 1.75rem;
     font-weight: 900;
     color: var(--color-wine);
+  }
+
+  .legal {
+    max-width: 640px;
+    margin: 0.875rem auto 0;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .legal p + p {
+    margin-top: 0.25rem;
   }
 
   .eligibilite {

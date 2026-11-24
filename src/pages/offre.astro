@@ -34,13 +34,13 @@ const jsonLd = {
       '@type': 'Offer',
       name: formule.nom,
       description: `${formule.nbPlats} plats cuisinés prêts à déguster, pour ${formule.nbPortions} portions.`,
-      price: String(formule.prix.ponctuel.client),
+      price: String(formule.prix.ponctuel.avant),
       priceCurrency: 'EUR',
       priceSpecification: {
         '@type': 'PriceSpecification',
-        price: String(formule.prix.ponctuel.client),
+        price: String(formule.prix.ponctuel.avant),
         priceCurrency: 'EUR',
-        description: "Prix après 50% de crédit d'impôt immédiat, hors prix des courses.",
+        description: "Prix réel, hors prix des courses. Soumis à un crédit d'impôt de 50% selon conditions.",
       },
     })),
   },
@@ -49,7 +49,7 @@ const jsonLd = {
 
 <BaseLayout
   title="L&rsquo;offre"
-  description="Formules Confort et Sérénité : repas faits maison chez vous dès 85€ après crédit d&rsquo;impôt. Sans engagement ou en abonnement, métropole lilloise."
+  description="Formules Confort et Sérénité : repas faits maison chez vous dès 170&nbsp;€, soit 85&nbsp;€ après crédit d&rsquo;impôt. Sans engagement ou en abonnement, métropole lilloise."
   canonicalPath="/offre"
   jsonLd={jsonLd}
 >
@@ -129,12 +129,20 @@ const jsonLd = {
       </div>
 
       <p class="plans-note">
-        *Tarifs pour 4 plats (Confort) ou 5 plats (Sérénité) de 4 portions, hors prix des courses (non
-        éligibles au crédit d&rsquo;impôt).<br />
+        Tarifs pour 4 plats (Confort) ou 5 plats (Sérénité) de 4 portions, hors prix des courses.<br />
         Plats généreux pensés pour 4 personnes : si vous êtes moins nombreux, vous en profitez sur plusieurs
-        repas. Supplément de +10€ par personne en plus au-delà de 4 personnes, soit 20€ avant crédit
-        d&rsquo;impôt.
+        repas. Supplément de +20&nbsp;€ par personne en plus au-delà de 4 personnes, soit 10&nbsp;€ après
+        crédit d&rsquo;impôt*.
       </p>
+
+      <div class="legal">
+        <p>
+          *Crédit d&rsquo;impôt de 50&nbsp;% selon l&rsquo;article 199 sexdecies du CGI, dans la limite des
+          plafonds en vigueur. Le montant des courses n&rsquo;est pas éligible au crédit d&rsquo;impôt.
+        </p>
+        <p>TVA non applicable, article 293 B du CGI.</p>
+        <p>Devis gratuit sur simple demande.</p>
+      </div>
 
       <div class="pricing-cta">
         <SapLogo width={96} margin="1.625rem auto 0.25rem" />
@@ -236,15 +244,15 @@ const jsonLd = {
 
       document.querySelectorAll('.plan').forEach((plan) => {
         const priceEl = plan.querySelector<HTMLElement>('.price');
-        const realEl = plan.querySelector<HTMLElement>('.price-note strong');
-        const slot = plan.querySelector<HTMLElement>('.price-savings-slot');
-        if (!priceEl || !realEl || !slot) return;
+        const creditEl = plan.querySelector<HTMLElement>('.credit-pill .amount');
+        const slot = plan.querySelector<HTMLElement>('.engagement-slot');
+        if (!priceEl || !creditEl || !slot) return;
 
-        const client = priceEl.dataset[suffix ? `client${suffix}` : 'client'];
-        const real = realEl.dataset[suffix ? `real${suffix}` : 'real'];
-        priceEl.textContent = `${client}€`;
-        realEl.textContent = `${real}€`;
-        slot.innerHTML = mode === 'ponctuel' ? '' : `<span class="price-savings">${savingsText[mode]}</span>`;
+        const real = priceEl.dataset[suffix ? `real${suffix}` : 'real'];
+        const credit = creditEl.dataset[suffix ? `credit${suffix}` : 'credit'];
+        priceEl.textContent = `${real} €`;
+        creditEl.textContent = `${credit} €`;
+        slot.innerHTML = mode === 'ponctuel' ? '' : `<span class="engagement-badge">${savingsText[mode]}</span>`;
       });
     });
   });
@@ -466,7 +474,7 @@ const jsonLd = {
     background: var(--color-olive);
     color: #fff;
     padding: 0.15rem 0.45rem;
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .toggle-pill.active .save {
@@ -510,6 +518,19 @@ const jsonLd = {
     color: var(--color-ink-soft);
     line-height: 1.6;
     text-align: center;
+  }
+
+  .legal {
+    max-width: 1040px;
+    margin: 0.875rem auto 0;
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .legal p + p {
+    margin-top: 0.25rem;
   }
 
   .pricing-cta {
