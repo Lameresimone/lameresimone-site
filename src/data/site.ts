@@ -414,7 +414,7 @@ export const formules = [
 
 export const optionsFormules = [
   { label: 'Je fais vos courses', prix: "+20€, soit 40€ avant crédit d'impôt" },
-  { label: 'Goûter, petit déjeuner', prix: "+7,50€/unité, soit 15€ avant crédit d'impôt" },
+  { label: 'Goûter, petit-déjeuner', prix: "+7,50€ par recette, soit 15€ avant crédit d'impôt" },
 ];
 
 export const parcours = [
