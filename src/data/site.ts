@@ -112,7 +112,7 @@ export const faqGroups = [
       {
         question: 'Comment choisir mes plats ?',
         reponse:
-          "Vous sélectionnez vos recettes parmi la carte du moment. Les cartes changent à chaque saison et proposent de nombreux types de plats : mijotés, gratinés, healthy, express, sans gluten, veggie... Vous pouvez aussi me laisser carte blanche. Les options petit déjeuner et goûter sont disponibles si besoin.",
+          "Vous sélectionnez vos recettes parmi la carte du moment. Les cartes changent à chaque saison et proposent de nombreux types de plats : mijotés, gratinés, healthy, express, sans gluten, veggie... Vous pouvez aussi me laisser carte blanche. Les options petit-déjeuner et goûter sont disponibles si besoin.",
       },
       {
         question: 'Combien de temps dure une prestation ?',
@@ -305,7 +305,7 @@ export const etapesCommentCaMarche = [
     numero: '01',
     titre: 'On fait connaissance',
     texte:
-      'Vous remplissez un questionnaire sur vos préférences alimentaires et intolérances puis vous choisissez vos 4 à 5 plats de la semaine dans la carte, avec les options petit déjeuner et goûter si besoin.',
+      'Vous remplissez un questionnaire sur vos préférences alimentaires et intolérances puis vous choisissez vos 4 à 5 plats de la semaine dans la carte, avec les options petit-déjeuner et goûter si besoin.',
   },
   {
     numero: '02',
@@ -414,7 +414,7 @@ export const formules = [
 
 export const optionsFormules = [
   { label: 'Je fais vos courses', prix: "+20€, soit 40€ avant crédit d'impôt" },
-  { label: 'Goûter, petit déjeuner', prix: "+7,50€/unité, soit 15€ avant crédit d'impôt" },
+  { label: 'Goûter, petit-déjeuner', prix: "+7,50€ par recette, soit 15€ avant crédit d'impôt" },
 ];
 
 export const parcours = [

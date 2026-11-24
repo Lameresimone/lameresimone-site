@@ -31,7 +31,7 @@ function escapeHtml(value) {
 export function prestationLines(data) {
   const lines = [`${escapeHtml(data.formuleLabel)} : ${data.formuleKey === 'Confort' ? '4' : '5'} plats cuisinés prêts à déguster`, 'Une cuisine propre et rangée'];
   if (data.optionCourses) lines.push('Option : je fais vos courses');
-  if (data.petitsDejeuners > 0) lines.push(`Option : ${data.petitsDejeuners} petit${data.petitsDejeuners > 1 ? 's' : ''} déjeuner${data.petitsDejeuners > 1 ? 's' : ''}`);
+  if (data.petitsDejeuners > 0) lines.push(`Option : ${data.petitsDejeuners} petit${data.petitsDejeuners > 1 ? 's' : ''}-déjeuner${data.petitsDejeuners > 1 ? 's' : ''}`);
   if (data.gouters > 0) lines.push(`Option : ${data.gouters} goûter${data.gouters > 1 ? 's' : ''}`);
   if (data.personnesEnPlus > 0) lines.push(`Option : ${data.personnesEnPlus} personne${data.personnesEnPlus > 1 ? 's' : ''} en plus`);
   return lines;

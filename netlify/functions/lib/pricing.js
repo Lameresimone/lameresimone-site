@@ -57,7 +57,7 @@ export function computeBonCadeau(fields) {
   if (petitsDejeuners > 0) {
     const montant = petitsDejeuners * PRIX_PETIT_DEJEUNER;
     valeurBon += montant;
-    lignes.push({ label: `${petitsDejeuners} petit${petitsDejeuners > 1 ? 's' : ''} déjeuner${petitsDejeuners > 1 ? 's' : ''}`, montant });
+    lignes.push({ label: `${petitsDejeuners} petit${petitsDejeuners > 1 ? 's' : ''}-déjeuner${petitsDejeuners > 1 ? 's' : ''}`, montant });
   }
   if (gouters > 0) {
     const montant = gouters * PRIX_GOUTER;
