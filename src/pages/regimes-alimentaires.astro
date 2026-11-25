@@ -5,7 +5,7 @@ import { site, regimes, regimeClassique } from '../data/site';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Régimes alimentaires & sans gluten',
+  name: 'Régimes alimentaires',
   description:
     "Sans gluten, sans lactose, végétarien, IG bas, anti-inflammatoire : comment La mère Simone accompagne vos besoins alimentaires spécifiques en cuisine.",
   url: `${site.url}/regimes-alimentaires`,
@@ -27,7 +27,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="Régimes alimentaires & sans gluten"
+  title="Régimes alimentaires"
   description="Sans gluten, sans lactose, végétarien, IG bas, anti-inflammatoire : mon histoire avec l'alimentation, et comment j'accompagne vos besoins spécifiques en cuisine."
   canonicalPath="/regimes-alimentaires"
   jsonLd={jsonLd}
@@ -38,7 +38,7 @@ const jsonLd = {
         <span class="rule"></span>
         Alimentation &amp; bien-être
       </p>
-      <h1>Régimes alimentaires &amp; sans gluten</h1>
+      <h1>Régimes alimentaires</h1>
       <p class="intro">
         Je cuisine pour tous les goûts : de la cuisine classique aux besoins alimentaires spécifiques. Voici
         mon histoire et les régimes que je sais accompagner.
@@ -270,6 +270,7 @@ const jsonLd = {
   .regime-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
     gap: 1.375rem;
   }
 
@@ -369,8 +370,6 @@ const jsonLd = {
   }
 
   .accompagnement-inner {
-    max-width: 720px;
-    margin: 0 auto;
     text-align: center;
   }
 
@@ -397,8 +396,8 @@ const jsonLd = {
   }
 
   .disclaimer {
-    max-width: 720px;
-    margin: 2rem auto 0;
+    margin: 2rem 0 0;
+    max-width: none;
     font-size: 0.82rem;
     color: var(--color-ink-soft);
     line-height: 1.6;
