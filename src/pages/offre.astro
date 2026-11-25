@@ -11,7 +11,7 @@ import {
   engagementModes,
   advantageItems,
   profilsOffre,
-  profilJeunesParents,
+  profilBonCadeau,
 } from '../data/site';
 
 const jsonLd = {
@@ -212,13 +212,8 @@ const jsonLd = {
           </svg>
         </div>
         <div>
-          <h3>{profilJeunesParents.titre}</h3>
-          <p>
-            {profilJeunesParents.texte1}
-            <strong>{profilJeunesParents.texte1Strong}</strong>
-            {profilJeunesParents.texte1Apres}
-          </p>
-          <p>{profilJeunesParents.texte2}</p>
+          <h3>{profilBonCadeau.titre}</h3>
+          <p>{profilBonCadeau.texte}</p>
         </div>
         <a href="/bon-cadeau" class="gift-btn">Offrir un bon cadeau</a>
       </div>

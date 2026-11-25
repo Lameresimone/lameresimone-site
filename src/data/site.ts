@@ -372,14 +372,10 @@ export const profilsOffre = [
   },
 ];
 
-export const profilJeunesParents = {
-  titre: 'Jeunes parents : pré & post-partum',
-  texte1:
-    "Les semaines autour de la naissance sont intenses : fatigue, nuits courtes, et pourtant il faut continuer à bien manger. Je cuisine chez vous des repas faits maison et équilibrés pour ",
-  texte1Strong: 'prendre soin de la maman',
-  texte1Apres:
-    " et des jeunes parents : du temps gagné, et la charge mentale du « qu'est-ce qu'on mange ? » en moins.",
-  texte2: 'Vous pouvez aussi offrir cette prestation à de futurs parents avec un bon cadeau.',
+export const profilBonCadeau = {
+  titre: 'Bon cadeau',
+  texte:
+    "Offrez une prestation de batchcooking à domicile pour une naissance, un anniversaire, ou simplement pour le plaisir d'offrir. Je cuisine chez la personne que vous gâtez : elle profite de repas faits maison et de temps gagné. Un cadeau qui convient notamment aux futurs et jeunes parents, avant ou après la naissance.",
 };
 
 export const engagementModes = [

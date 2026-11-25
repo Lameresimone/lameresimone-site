@@ -83,10 +83,13 @@ export function renderVoucherEmailHtml(data) {
               <td style="padding:28px 32px;background:${COLORS.wine};">
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;color:#fff;">
                   <tr>
-                    <td style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);padding-bottom:8px;">Valeur du bon</td>
+                    <td style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);padding-bottom:8px;">Valeur de la prestation</td>
                   </tr>
                   <tr>
-                    <td style="font-size:40px;font-weight:900;line-height:1;padding-bottom:16px;">${escapeHtml(data.valeurBonFormatee)}</td>
+                    <td style="font-size:40px;font-weight:900;line-height:1;">${escapeHtml(data.valeurBonFormatee)}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;color:rgba(255,255,255,0.85);padding-top:6px;padding-bottom:16px;">soit ${escapeHtml(data.montantFoyerEligibleFormate)} après crédit d&rsquo;impôt*, si le bénéficiaire y a droit</td>
                   </tr>
                   <tr>
                     <td style="border-top:1px solid rgba(255,255,255,0.25);padding-top:16px;font-size:13px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);">Valable 6 mois</td>
@@ -110,9 +113,11 @@ export function renderVoucherEmailHtml(data) {
             </tr>
             <tr>
               <td style="padding:16px 32px 28px;font-family:Arial,sans-serif;font-size:12px;color:${COLORS.inkSoft};line-height:1.6;">
-                Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas
-                compris dans le bon. Le crédit d&rsquo;impôt de 50% est accordé aux foyers qui y ont droit et
-                dépend de leur situation. La mère Simone &middot; SIRET 98938305400016 &middot; lameresimone.fr
+                Prestation à domicile, secteur de la métropole lilloise, facturée au bénéficiaire. Devis
+                gratuit sur simple demande. Les produits des courses ne sont pas compris dans le bon. *Crédit
+                d&rsquo;impôt de 50% selon l&rsquo;article 199 sexdecies du CGI, dans la limite des plafonds en
+                vigueur, sous réserve d&rsquo;éligibilité du bénéficiaire. TVA non applicable, article 293 B du
+                CGI. La mère Simone &middot; SIRET 98938305400016 &middot; lameresimone.fr
               </td>
             </tr>
           </table>
@@ -122,18 +127,14 @@ export function renderVoucherEmailHtml(data) {
               <td style="padding:0 8px;font-family:Arial,sans-serif;font-size:16px;color:${COLORS.ink};line-height:1.85;">
                 <p style="margin:0 0 16px;font-weight:bold;color:${COLORS.wine};">Comment offrir ce bon ?</p>
                 <p style="margin:0 0 12px;">
-                  Montant à virer directement à ${escapeHtml(data.prenomBeneficiaire)}, selon son droit au crédit
-                  d&rsquo;impôt (sommes à virer au foyer, vous ne me payez rien directement) :
+                  Remettez à ${escapeHtml(data.prenomBeneficiaire)} la somme correspondante (par virement, par
+                  exemple), directement entre vous. Vous ne payez rien à La mère Simone.
                 </p>
-                <ul style="margin:0 0 16px;padding-left:20px;">
-                  <li style="margin-bottom:8px;">Si le foyer a le droit au crédit d&rsquo;impôt : <strong>${escapeHtml(data.montantFoyerEligibleFormate)}</strong></li>
-                  <li>S&rsquo;il n&rsquo;a pas le droit, la prestation complète : <strong>${escapeHtml(data.montantFoyerNonEligibleFormate)}</strong></li>
-                </ul>
                 <p style="margin:0 0 12px;font-weight:bold;">Les 3 étapes :</p>
                 <ol style="margin:0 0 16px;padding-left:20px;">
-                  <li style="margin-bottom:8px;">Vous virez la somme correspondante à ${escapeHtml(data.prenomBeneficiaire)}.</li>
-                  <li style="margin-bottom:8px;">Le foyer m&rsquo;écrit à bonjour@lameresimone.fr en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
-                  <li>Nous fixons ensemble la date de la prestation.</li>
+                  <li style="margin-bottom:8px;">Imprimez ou transférez ce bon, et remettez à ${escapeHtml(data.prenomBeneficiaire)} la somme correspondante.</li>
+                  <li style="margin-bottom:8px;">${escapeHtml(data.prenomBeneficiaire)} me contacte à bonjour@lameresimone.fr en indiquant le code <strong>${escapeHtml(data.code)}</strong>.</li>
+                  <li>Nous établissons ensemble un devis gratuit et fixons la date.</li>
                 </ol>
                 <p style="margin:0;color:${COLORS.inkSoft};font-size:15px;">
                   Une question ? Écrivez-moi à bonjour@lameresimone.fr.
@@ -158,9 +159,9 @@ export function renderInternalCopyHtml(data) {
     ['Valable jusqu\'au', data.validite],
     ['Formule', data.formuleLabel],
     ['Récapitulatif', data.recapitulatif],
-    ['Valeur du bon', data.valeurBonFormatee],
-    ['Montant à virer (foyer ayant droit au crédit d\'impôt)', data.montantFoyerEligibleFormate],
-    ['Montant à virer (foyer sans droit au crédit d\'impôt)', data.montantFoyerNonEligibleFormate],
+    ['Valeur de la prestation', data.valeurBonFormatee],
+    ['Si le bénéficiaire a le droit au crédit d\'impôt, soit', data.montantFoyerEligibleFormate],
+    ['S\'il n\'a pas le droit, montant plein', data.montantFoyerNonEligibleFormate],
     ['Bénéficiaire(s)', data.prenomBeneficiaire],
     ['Offert par', data.prenomOffrant],
     ['Email de l\'offrant', data.emailOffrant],
