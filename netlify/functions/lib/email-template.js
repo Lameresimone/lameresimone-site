@@ -128,7 +128,7 @@ export function renderVoucherEmailHtml(data) {
                 <p style="margin:0 0 16px;font-weight:bold;color:${COLORS.wine};">Comment offrir ce bon ?</p>
                 <p style="margin:0 0 12px;">
                   Remettez à ${escapeHtml(data.prenomBeneficiaire)} la somme correspondante (par virement, par
-                  exemple), directement entre vous. Vous ne payez rien à La mère Simone.
+                  exemple). Vous ne payez rien à La mère Simone.
                 </p>
                 <p style="margin:0 0 12px;font-weight:bold;">Les 3 étapes :</p>
                 <ol style="margin:0 0 16px;padding-left:20px;">

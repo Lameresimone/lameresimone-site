@@ -53,15 +53,16 @@ const jsonLd = {
           montant payé.
         </p>
         <p>
-          Concrètement : sur une prestation à {confort.prix.ponctuel.avant}&nbsp;&euro;, soit
-          <strong>{confort.prix.ponctuel.client}&nbsp;&euro;</strong> après crédit d&rsquo;impôt*, que vous
-          soyez imposable ou non. Ce n&rsquo;est pas une réduction d&rsquo;impôt réservée aux foyers qui paient
-          déjà des impôts, c&rsquo;est un crédit remboursable pour tous.
+          Concrètement : une prestation à {confort.prix.ponctuel.avant}&nbsp;&euro; ouvre droit à un crédit
+          d&rsquo;impôt de <strong>{confort.prix.ponctuel.client}&nbsp;&euro;*</strong>, que vous soyez
+          imposable ou non. Ce n&rsquo;est pas une réduction d&rsquo;impôt réservée aux foyers qui paient déjà
+          des impôts : si vous n&rsquo;êtes pas imposable, la somme vous est remboursée.
         </p>
         <p>
-          L&rsquo;avance immédiate sera un service <strong>optionnel et gratuit</strong>, proposé par
-          l&rsquo;Urssaf : elle déduira alors automatiquement votre crédit d&rsquo;impôt du coût de la
-          prestation, sans que vous ayez à avancer la somme. Elle est bientôt disponible.
+          L&rsquo;avance immédiate est un service <strong>optionnel et gratuit</strong>, proposé par
+          l&rsquo;Urssaf. Elle permet de déduire automatiquement votre crédit d&rsquo;impôt du coût de la
+          prestation, sans que vous ayez à avancer la somme. Grâce à l&rsquo;avance immédiate, vous ne payez
+          que la moitié de la prestation. Elle sera bientôt disponible pour mes prestations.
         </p>
       </div>
       <div class="principe-side">
@@ -312,11 +313,12 @@ const jsonLd = {
   }
 
   .eyebrow-light {
+    justify-content: center;
     color: rgba(247, 240, 230, 0.7);
   }
 
   .eyebrow-light .rule {
-    background: rgba(247, 240, 230, 0.7);
+    display: none;
   }
 
   .how-head h2 {

@@ -9,7 +9,7 @@ const faqItems = [
   {
     question: 'Qui paie quoi ?',
     jsonLdText:
-      "La création du bon est gratuite et vous ne payez rien à La mère Simone. Vous remettez au bénéficiaire la somme correspondante (par virement, par exemple), directement entre vous. Je facture la prestation au bénéficiaire, au prix réel, et c'est lui qui la règle. S'il a le droit au crédit d'impôt : il bénéficie de 50% de crédit d'impôt sur la prestation (par exemple, 170 € pour la formule Confort sans option, soit 85 € après crédit d'impôt). Il l'obtient dans sa déclaration de revenus de l'année suivante ; l'avance immédiate sera bientôt disponible. S'il n'a pas le droit au crédit d'impôt : il règle la prestation au prix réel (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec l'option courses).",
+      "La création du bon est gratuite et vous ne payez rien à La mère Simone. Vous remettez au bénéficiaire la somme correspondante (par virement, par exemple). Je facture la prestation au bénéficiaire, au prix réel, et c'est lui qui la règle. S'il a le droit au crédit d'impôt : il bénéficie de 50% de crédit d'impôt sur la prestation (par exemple, 170 € pour la formule Confort sans option, soit 85 € après crédit d'impôt). Il l'obtient dans sa déclaration de revenus de l'année suivante ; l'avance immédiate sera bientôt disponible. S'il n'a pas le droit au crédit d'impôt : il règle la prestation au prix réel (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec l'option courses).",
   },
   {
     question: "Comment savoir si le bénéficiaire a le droit au crédit d'impôt ?",
@@ -128,9 +128,9 @@ const jsonLd = {
       <div class="credit-box">
         <h3>Qui paie quoi ?</h3>
         <p class="credit-intro">
-          Vous offrez la prestation : vous remettez au bénéficiaire la somme correspondante (par virement, par
-          exemple), directement entre vous. La mère Simone facture la prestation au bénéficiaire, au prix
-          réel, et c&rsquo;est lui qui la règle. Vous ne payez rien à La mère Simone.
+          Vous offrez la prestation : vous remettez au bénéficiaire la somme correspondante (par virement
+          bancaire, par exemple). La mère Simone facture la prestation au bénéficiaire, au prix réel, et
+          c&rsquo;est lui qui la règle. Vous ne payez rien à La mère Simone.
         </p>
         <div class="credit-cols">
           <div class="credit-col">
@@ -426,8 +426,8 @@ const jsonLd = {
           <summary>Qui paie quoi ?<span class="plus">+</span></summary>
           <p class="lead">
             La création du bon est gratuite et vous ne payez rien à La mère Simone. Vous remettez au
-            bénéficiaire la somme correspondante (par virement, par exemple), directement entre vous. Je
-            facture la prestation au bénéficiaire, au prix réel, et c&rsquo;est lui qui la règle.
+            bénéficiaire la somme correspondante (par virement, par exemple). Je facture la prestation au
+            bénéficiaire, au prix réel, et c&rsquo;est lui qui la règle.
           </p>
           <ul class="dash">
             <li>
@@ -772,6 +772,10 @@ const jsonLd = {
 
   .gift {
     padding: 4rem 0;
+  }
+
+  .gift .eyebrow {
+    color: var(--color-olive-dark);
   }
 
   .gift .section-head {
@@ -1317,6 +1321,10 @@ const jsonLd = {
   .recevoir {
     background: var(--color-cream-card);
     padding: 4rem 0;
+  }
+
+  .recevoir .eyebrow {
+    color: var(--color-olive-dark);
   }
 
   .recevoir-grid {

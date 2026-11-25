@@ -56,19 +56,19 @@ export const creditImpot = {
 
 export const creditImpotEtapes = [
   {
-    titre: 'Je vous inscrirai au service',
+    titre: 'Inscription au service',
     texte:
-      "Une fois vos conditions d'éligibilité vérifiées, vous recevrez un mail de l'Urssaf pour activer votre compte sur particulier.urssaf.fr.",
+      "Une fois vos conditions d'éligibilité vérifiées, vous recevez un mail de l'Urssaf pour activer votre compte sur particulier.urssaf.fr.",
   },
   {
-    titre: 'Après chaque prestation',
+    titre: 'Demande de paiement',
     texte:
-      "J'émettrai une demande de paiement sur laquelle votre avance de 50% sera automatiquement déduite. Vous la validerez en ligne (ou elle le sera automatiquement sous 48h).",
+      "Après chaque prestation, j'émets une demande de paiement sur laquelle votre avance de 50% est automatiquement déduite. Vous la validez en ligne (ou elle l'est automatiquement sous 48h).",
   },
   {
-    titre: "L'Urssaf gérera le règlement",
+    titre: 'Paiement',
     texte:
-      "Elle prélèvera votre reste à charge sur votre compte, puis me versera directement l'intégralité de la prestation. Rien à déclarer de votre côté.",
+      "L'Urssaf gère le règlement. Elle prélève votre reste à charge sur votre compte, puis me verse directement l'intégralité de la prestation. Rien à déclarer de votre côté.",
   },
 ];
 
@@ -86,17 +86,17 @@ export const creditImpotFaq = [
   {
     question: 'Puis-je cumuler avec un autre membre de mon foyer qui utilise déjà l\'avance immédiate ?',
     reponse:
-      "L'avance immédiate sera bientôt disponible. Lorsqu'elle le sera, un seul membre du foyer fiscal pourra y recourir à la fois pour des services à la personne.",
+      "L'avance immédiate sera bientôt disponible. Un seul membre du foyer fiscal peut y recourir à la fois pour des services à la personne.",
   },
   {
     question: "Puis-je en bénéficier si je perçois déjà l'APA ou la PCH ?",
     reponse:
-      "L'avance immédiate sera bientôt disponible. Elle ne sera pas cumulable avec une prise en charge financière par un tiers, comme l'aide personnalisée d'autonomie (APA) ou la prestation de compensation du handicap (PCH).",
+      "L'avance immédiate sera bientôt disponible. Elle n'est pas cumulable avec une prise en charge financière par un tiers, comme l'aide personnalisée d'autonomie (APA) ou la prestation de compensation du handicap (PCH).",
   },
   {
     question: "Comment j'active le service ?",
     reponse:
-      "L'avance immédiate sera bientôt disponible. Je m'occuperai alors de votre inscription auprès de l'Urssaf : une fois vos conditions vérifiées, vous recevrez un mail pour activer votre compte sur particulier.urssaf.fr. En attendant, le crédit d'impôt de 50%* s'obtient via votre déclaration de revenus.",
+      "L'avance immédiate sera bientôt disponible. Je m'occupe alors de votre inscription auprès de l'Urssaf : une fois vos conditions vérifiées, vous recevez un mail pour activer votre compte sur particulier.urssaf.fr. En attendant, le crédit d'impôt de 50%* s'obtient via votre déclaration de revenus.",
   },
 ];
 
@@ -257,7 +257,7 @@ export const regimes = [
   {
     titre: 'Vegan',
     texte:
-      "Des repas 100% végétaux, pensés pour rester complets et équilibrés, sans aucun produit d'origine animale.",
+      "Des repas 100% vegan, pensés pour rester complets et équilibrés, sans aucun produit d'origine animale.",
     icone: 'M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5Z',
   },
   {
