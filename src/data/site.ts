@@ -184,7 +184,7 @@ export const faqGroups = [
       {
         question: "Puis-je m'abonner pour bénéficier d'une réduction ?",
         reponse:
-          "Oui : -5% sur un rythme de 2 prestations par mois, et -8% sur un rythme de 4 prestations par mois. Le sans engagement reste possible si vous préférez tester ponctuellement.",
+          "Oui : -8 € par séance sur un rythme de 2 prestations par mois, et -12 € par séance sur un rythme de 4 prestations par mois. Le sans engagement reste possible si vous préférez tester ponctuellement.",
       },
       {
         question: "Comment fonctionne le crédit d'impôt de 50% ?",
@@ -380,8 +380,8 @@ export const profilBonCadeau = {
 
 export const engagementModes = [
   { id: 'ponctuel', label: 'Sans engagement', remise: null },
-  { id: 'mensuel2', label: '2x / mois', remise: '-5%' },
-  { id: 'mensuel4', label: '4x / mois', remise: '-8%' },
+  { id: 'mensuel2', label: '2x / mois', remise: '-8 €/séance' },
+  { id: 'mensuel4', label: '4x / mois', remise: '-12 €/séance' },
 ] as const;
 
 export const engagementSavingsLabel: Record<string, string> = {
@@ -395,7 +395,7 @@ export const formules = [
     nom: 'Formule Confort',
     nbPlats: 4,
     nbPortions: 4,
-    prix: { ponctuel: { client: 85, avant: 170 }, mensuel2: { client: 81, avant: 162 }, mensuel4: { client: 78, avant: 156 } },
+    prix: { ponctuel: { client: 85, avant: 170 }, mensuel2: { client: 81, avant: 162 }, mensuel4: { client: 79, avant: 158 } },
     avantages: ['4 plats cuisinés prêts à déguster', 'Une cuisine propre et rangée'],
   },
   {
@@ -403,7 +403,7 @@ export const formules = [
     nom: 'Formule Sérénité',
     nbPlats: 5,
     nbPortions: 4,
-    prix: { ponctuel: { client: 99, avant: 198 }, mensuel2: { client: 94, avant: 188 }, mensuel4: { client: 91, avant: 182 } },
+    prix: { ponctuel: { client: 99, avant: 198 }, mensuel2: { client: 95, avant: 190 }, mensuel4: { client: 93, avant: 186 } },
     avantages: ['5 plats cuisinés prêts à déguster', 'Une cuisine propre et rangée'],
   },
 ] as const;
