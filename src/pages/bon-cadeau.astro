@@ -9,22 +9,22 @@ const faqItems = [
   {
     question: 'Qui paie quoi ?',
     jsonLdText:
-      "Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien directement. Le montant dépend du droit du foyer au crédit d'impôt. S'il a le droit au crédit d'impôt : vous lui virez 50% de la valeur du bon (par exemple, 85 € pour la formule Confort sans option). Le foyer avance le solde et le récupère lors de sa déclaration de revenus (l'avance immédiate, qui permettra de le déduire directement, sera bientôt disponible). S'il n'a pas le droit au crédit d'impôt : vous lui virez la totalité de la valeur du bon (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec l'option courses). Il règle ensuite la prestation directement auprès de moi.",
+      "La création du bon est gratuite et vous ne payez rien à La mère Simone. Vous remettez au bénéficiaire la somme correspondante (par virement, par exemple), directement entre vous. Je facture la prestation au bénéficiaire, au prix réel, et c'est lui qui la règle. S'il a le droit au crédit d'impôt : il bénéficie de 50% de crédit d'impôt sur la prestation (par exemple, 170 € pour la formule Confort sans option, soit 85 € après crédit d'impôt). Il l'obtient dans sa déclaration de revenus de l'année suivante ; l'avance immédiate sera bientôt disponible. S'il n'a pas le droit au crédit d'impôt : il règle la prestation au prix réel (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec l'option courses).",
   },
   {
-    question: "Comment savoir si le foyer a le droit au crédit d'impôt ?",
+    question: "Comment savoir si le bénéficiaire a le droit au crédit d'impôt ?",
     jsonLdText:
-      "Le droit au crédit d'impôt dépend de la situation fiscale du foyer. En cas de doute, le plus simple est de lui poser la question, afin qu'il vérifie sa situation. Vous trouverez aussi tous les détails sur ma page Crédit d'impôt.",
+      "Le droit au crédit d'impôt dépend de la situation fiscale du bénéficiaire. En cas de doute, le plus simple est de lui poser la question, afin qu'il vérifie sa situation. Vous trouverez aussi tous les détails sur ma page Crédit d'impôt.",
   },
   {
-    question: "Le crédit d'impôt est-il pour moi ou pour le foyer ?",
+    question: "Le crédit d'impôt est-il pour moi ou pour le bénéficiaire ?",
     jsonLdText:
-      "Le crédit d'impôt est destiné au foyer qui reçoit la prestation. La facture est établie au nom du foyer, et c'est lui qui règle sa part : il en profite donc s'il y a droit. Vous, qui offrez le bon, n'avez pas de crédit d'impôt.",
+      "Le crédit d'impôt est destiné au bénéficiaire qui reçoit la prestation. La facture est établie au nom du bénéficiaire, et c'est lui qui règle la prestation : il en profite donc s'il y a droit. Vous, qui offrez le bon, n'avez pas de crédit d'impôt.",
   },
   {
-    question: "Le foyer n'a pas de compte URSSAF, est-ce un problème ?",
+    question: "Qu'est-ce que l'avance immédiate ?",
     jsonLdText:
-      "Non, ce n'est pas un problème. L'avance immédiate sera bientôt disponible ; en attendant, le foyer récupère son crédit d'impôt lors de sa déclaration de revenus, sans compte URSSAF nécessaire.",
+      "L'avance immédiate est un dispositif de l'Urssaf qui permet de déduire le crédit d'impôt directement du prix, sans avance de trésorerie. Elle sera bientôt disponible. En attendant, le crédit d'impôt est obtenu dans la déclaration de revenus de l'année suivante.",
   },
   {
     question: 'Combien de temps le bon est-il valable ?',
@@ -33,17 +33,17 @@ const faqItems = [
   {
     question: 'Pour combien de personnes ?',
     jsonLdText:
-      "Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4 parts). Au-delà, un supplément de 20 € par personne avant crédit d'impôt, soit 10 € après, s'ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a simplement plus de repas d'avance.",
+      "Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4 parts). Au-delà, un supplément de 20 € par personne avant crédit d'impôt, soit 10 € après, s'ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le bénéficiaire a simplement plus de repas d'avance.",
   },
   {
     question: 'Peut-on ajouter les courses ?',
     jsonLdText:
-      "Oui, je peux m'occuper des courses du foyer : il suffit de sélectionner l'option « Je fais vos courses » (40 € avant crédit d'impôt, soit 20 € après, sous réserve d'éligibilité du foyer). Cette option rémunère le service de courses, c'est-à-dire le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d'impôt et restent à la charge du foyer bénéficiaire.",
+      "Oui, je peux m'occuper des courses du bénéficiaire : il suffit de sélectionner l'option « Je fais vos courses » (40 € avant crédit d'impôt, soit 20 € après, sous réserve d'éligibilité du bénéficiaire). Cette option rémunère le service de courses, c'est-à-dire le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d'impôt et restent à la charge du bénéficiaire.",
   },
   {
     question: 'Comment remettre le bon ?',
     jsonLdText:
-      "Le bon vous est envoyé par mail : vous pouvez l'imprimer pour l'offrir en main propre, ou le transférer directement au foyer.",
+      "Le bon vous est envoyé par mail : vous pouvez l'imprimer pour l'offrir en main propre, ou le transférer directement au bénéficiaire.",
   },
 ];
 
@@ -63,7 +63,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Offrir un bon cadeau batchcooking"
-  description="Offrez une prestation de batchcooking à domicile à une amie ou à une proche : choisissez la formule, à partir de 170&nbsp;€, soit 85&nbsp;€ après crédit d&rsquo;impôt de 50%*."
+  description="Offrez une prestation de batchcooking à domicile : choisissez la formule, le bon est gratuit."
   canonicalPath="/bon-cadeau"
   jsonLd={jsonLd}
 >
@@ -86,36 +86,32 @@ const jsonLd = {
     <div class="container">
       <div class="section-head">
         <p class="eyebrow eyebrow-light">Comment ça marche</p>
-        <h2>Offrir en 4 étapes</h2>
+        <h2>Offrir en 3 étapes</h2>
       </div>
       <div class="steps-grid">
         <div class="step-card">
           <div class="num">1</div>
           <div class="num-line"></div>
           <h3>Vous composez le bon</h3>
-          <p>Formule, options, prénoms et message personnel. Le montant se calcule en direct.</p>
+          <p>Formule, options, prénoms et message personnel. La création du bon est gratuite : vous ne payez rien à La mère Simone.</p>
         </div>
         <div class="step-card">
           <div class="num">2</div>
           <div class="num-line"></div>
-          <h3>Vous recevez le bon par mail</h3>
-          <p>Avec son code unique et le montant à virer. Vous pouvez l&rsquo;imprimer ou le transférer.</p>
+          <h3>Vous l&rsquo;offrez</h3>
+          <p>
+            Vous recevez le bon par mail, avec son code unique. Imprimez-le ou transférez-le, et remettez au
+            bénéficiaire la somme correspondante, par virement par exemple.
+          </p>
         </div>
         <div class="step-card">
           <div class="num">3</div>
           <div class="num-line"></div>
-          <h3>Vous offrez la somme</h3>
-          <p>Vous virez au foyer le montant de sa part :</p>
-          <ul class="dash">
-            <li>50% de la valeur du bon s&rsquo;il a le droit au crédit d&rsquo;impôt</li>
-            <li>100% s&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt</li>
-          </ul>
-        </div>
-        <div class="step-card">
-          <div class="num">4</div>
-          <div class="num-line"></div>
-          <h3>Le foyer me contacte</h3>
-          <p>Nous fixons ensemble la date de la prestation. Le foyer règle ensuite sa part.</p>
+          <h3>Le bénéficiaire me contacte</h3>
+          <p>
+            Nous établissons ensemble un devis gratuit et fixons la date. La prestation est facturée au
+            bénéficiaire, au prix réel, et c&rsquo;est lui qui la règle.
+          </p>
         </div>
       </div>
     </div>
@@ -130,41 +126,39 @@ const jsonLd = {
       </div>
 
       <div class="credit-box">
-        <h3>Comment fonctionne le crédit d&rsquo;impôt ?</h3>
+        <h3>Qui paie quoi ?</h3>
         <p class="credit-intro">
-          Mes prestations de batchcooking à domicile relèvent des services à la personne (SAP) : elles ouvrent
-          droit à un crédit d&rsquo;impôt de 50% du montant payé, que le foyer soit imposable ou non. La somme
-          que vous offrez n&rsquo;est donc pas la même selon que le foyer a le droit ou non à ce crédit
-          d&rsquo;impôt.
+          Vous offrez la prestation : vous remettez au bénéficiaire la somme correspondante (par virement, par
+          exemple), directement entre vous. La mère Simone facture la prestation au bénéficiaire, au prix
+          réel, et c&rsquo;est lui qui la règle. Vous ne payez rien à La mère Simone.
         </p>
         <div class="credit-cols">
           <div class="credit-col">
-            <p class="credit-tag">Le foyer a le droit au crédit d&rsquo;impôt</p>
+            <p class="credit-tag">Le bénéficiaire a le droit au crédit d&rsquo;impôt</p>
             <p>
-              Le crédit d&rsquo;impôt de 50% permet au foyer de ne financer que la moitié de la prestation.
-              Vous lui offrez donc cette moitié : par exemple, 170&nbsp;€, soit 85&nbsp;€ après crédit
-              d&rsquo;impôt*, pour la formule Confort sans option. Ce crédit s&rsquo;obtient actuellement via
-              la déclaration de revenus du foyer (l&rsquo;avance immédiate de l&rsquo;Urssaf, qui permettra de
-              le déduire directement, sera bientôt disponible).
+              Il bénéficie d&rsquo;un crédit d&rsquo;impôt de 50%*, obtenu dans sa déclaration de revenus de
+              l&rsquo;année suivante (avance immédiate bientôt disponible). Par exemple, pour la formule
+              Confort sans option : 170&nbsp;€, soit 85&nbsp;€ après crédit d&rsquo;impôt*.
             </p>
           </div>
           <div class="credit-col">
-            <p class="credit-tag">Le foyer n&rsquo;a pas le droit au crédit d&rsquo;impôt</p>
+            <p class="credit-tag">Le bénéficiaire n&rsquo;a pas le droit au crédit d&rsquo;impôt</p>
             <p>
-              Il ne bénéficie pas du crédit d&rsquo;impôt et règle la prestation au prix complet. Vous lui
-              offrez alors la prestation complète. Par exemple, pour la formule Confort sans option :
-              170&nbsp;€.
+              Il règle la prestation au prix réel, sans crédit d&rsquo;impôt. Par exemple, pour la formule
+              Confort sans option : 170&nbsp;€.
             </p>
           </div>
         </div>
+        <p class="credit-note">
+          *Crédit d&rsquo;impôt de 50% selon l&rsquo;article 199 sexdecies du CGI, dans la limite des plafonds
+          en vigueur. Le montant des courses n&rsquo;est pas éligible au crédit d&rsquo;impôt.
+        </p>
       </div>
 
       <form name="bon-cadeau" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="gift-form">
         <input type="hidden" name="form-name" value="bon-cadeau" />
         <p class="hp"><label>Ne pas remplir <input name="bot-field" /></label></p>
-        <input type="hidden" name="valeur_bon" id="f-valeur" />
-        <input type="hidden" name="montant_a_virer_foyer_eligible" id="f-virer" />
-        <input type="hidden" name="montant_prix_plein_foyer_non_eligible" id="f-plein" />
+        <input type="hidden" name="valeur_prestation" id="f-valeur" />
         <input type="hidden" name="recapitulatif" id="f-recap" />
 
         <div class="gift-grid">
@@ -193,7 +187,7 @@ const jsonLd = {
                     <p class="price">{confort.prix.ponctuel.avant}€<sup>*</sup></p>
                     <p class="value">
                       * Soit {confort.prix.ponctuel.client}€ après crédit d&rsquo;impôt, sous réserve
-                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                      d&rsquo;éligibilité du bénéficiaire au crédit d&rsquo;impôt.
                     </p>
                   </span>
                 </label>
@@ -216,7 +210,7 @@ const jsonLd = {
                     <p class="price">{serenite.prix.ponctuel.avant}€<sup>*</sup></p>
                     <p class="value">
                       * Soit {serenite.prix.ponctuel.client}€ après crédit d&rsquo;impôt, sous réserve
-                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                      d&rsquo;éligibilité du bénéficiaire au crédit d&rsquo;impôt.
                     </p>
                   </span>
                 </label>
@@ -236,7 +230,7 @@ const jsonLd = {
                     </span>
                     <span class="ast">
                       * Soit 10 € par personne supplémentaire après crédit d&rsquo;impôt, sous réserve
-                      d&rsquo;éligibilité du foyer au crédit d&rsquo;impôt.
+                      d&rsquo;éligibilité du bénéficiaire au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
@@ -255,7 +249,7 @@ const jsonLd = {
                       <strong>Je fais vos courses</strong>
                       <span>Je m&rsquo;occupe des courses avant la prestation. Le prix des ingrédients n&rsquo;est pas compris dans le bon.</span>
                       <span class="ast">
-                        * Soit 20 € après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité du foyer au
+                        * Soit 20 € après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité du bénéficiaire au
                         crédit d&rsquo;impôt.
                       </span>
                     </span>
@@ -271,7 +265,7 @@ const jsonLd = {
                     <span>Des petits-déjeuners faits maison, préparés à l&rsquo;avance.</span>
                     <span class="ast">
                       * Soit 7,50 € par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
-                      du foyer au crédit d&rsquo;impôt.
+                      du bénéficiaire au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
@@ -290,7 +284,7 @@ const jsonLd = {
                     <span>Des goûters faits maison, préparés à l&rsquo;avance.</span>
                     <span class="ast">
                       * Soit 7,50 € par recette après crédit d&rsquo;impôt, sous réserve d&rsquo;éligibilité
-                      du foyer au crédit d&rsquo;impôt.
+                      du bénéficiaire au crédit d&rsquo;impôt.
                     </span>
                   </span>
                   <span class="o-right">
@@ -320,7 +314,7 @@ const jsonLd = {
                 <div class="field full">
                   <label for="f-mail">Votre adresse mail</label>
                   <input id="f-mail" type="email" name="email_offrant" required autocomplete="email" />
-                  <span class="help">Vous y recevrez le bon, le code et le montant à virer.</span>
+                  <span class="help">Vous y recevrez le bon et son code unique.</span>
                 </div>
                 <div class="field full">
                   <label for="f-msg">Votre message (facultatif)</label>
@@ -334,22 +328,19 @@ const jsonLd = {
           <aside class="summary" aria-live="polite">
             <h3>Votre bon cadeau</h3>
             <ul id="sum-lines"></ul>
-            <div class="sum-block">
-              <p class="lbl">Valeur du bon</p>
-              <p class="amt" id="sum-valeur">170 €</p>
-            </div>
             <div class="sum-block main">
-              <p class="lbl">Vous offrez</p>
-              <p class="alt">Si le foyer a le droit au crédit d&rsquo;impôt :</p>
-              <p class="amt" id="sum-offrez">85 €</p>
-              <p class="alt">S&rsquo;il n&rsquo;a pas le droit, la prestation complète :</p>
-              <p class="amt amt2" id="sum-plein">170 €</p>
-              <small>Sommes à virer au foyer. Vous ne me payez rien directement.</small>
+              <p class="lbl">Valeur de la prestation</p>
+              <p class="amt" id="sum-valeur">170 €</p>
+              <p class="alt">soit <strong id="sum-offrez">85 €</strong> après crédit d&rsquo;impôt*, si le bénéficiaire y a droit</p>
+              <small>
+                La création du bon est gratuite. La prestation est facturée au bénéficiaire, qui la règle : à
+                vous de lui remettre la somme.
+              </small>
             </div>
             <button type="submit" class="submit" id="gift-submit">Recevoir mon bon par mail</button>
             <p class="fine" id="gift-fine">
-              Aucun paiement en ligne. Le crédit d&rsquo;impôt revient au foyer bénéficiaire, sous réserve de
-              son éligibilité.
+              Aucun paiement en ligne. *Crédit d&rsquo;impôt de 50% selon l&rsquo;article 199 sexdecies du
+              CGI, sous réserve d&rsquo;éligibilité du bénéficiaire.
             </p>
             <p class="fine rgpd">
               Le prénom des bénéficiaires, votre prénom et votre adresse mail servent uniquement à vous envoyer
@@ -401,7 +392,7 @@ const jsonLd = {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10" /><polyline points="8 12 11 15 16 9" />
             </svg>
-            Le montant à virer au foyer selon son éligibilité, et la marche à suivre.
+            La marche à suivre pour le bénéficiaire : me contacter pour établir un devis gratuit.
           </li>
         </ul>
       </div>
@@ -413,7 +404,7 @@ const jsonLd = {
             <p>Offert à <strong>Camille et Julien</strong><br />De la part de <strong>Sophie</strong></p>
           </div>
           <div class="r">
-            <small>Valeur du bon</small>
+            <small>Valeur de la prestation</small>
             <b>240 €</b>
             <span>Valable 6 mois</span>
           </div>
@@ -434,45 +425,47 @@ const jsonLd = {
         <details class="faq-item">
           <summary>Qui paie quoi ?<span class="plus">+</span></summary>
           <p class="lead">
-            Vous virez une somme au foyer bénéficiaire, qui règle ensuite la prestation : vous ne me payez rien
-            directement. Le montant dépend du droit du foyer au crédit d&rsquo;impôt.
+            La création du bon est gratuite et vous ne payez rien à La mère Simone. Vous remettez au
+            bénéficiaire la somme correspondante (par virement, par exemple), directement entre vous. Je
+            facture la prestation au bénéficiaire, au prix réel, et c&rsquo;est lui qui la règle.
           </p>
           <ul class="dash">
             <li>
-              <strong>S&rsquo;il a le droit au crédit d&rsquo;impôt :</strong> vous lui virez 50% de la valeur
-              du bon (par exemple, 85 € pour la formule Confort sans option) ; le foyer avance le solde et
-              le récupère lors de sa déclaration de revenus (l&rsquo;avance immédiate, qui permettra de le
-              déduire directement, sera bientôt disponible).
+              <strong>S&rsquo;il a le droit au crédit d&rsquo;impôt :</strong> il bénéficie de 50%* de crédit
+              d&rsquo;impôt sur la prestation (par exemple, 170 € pour la formule Confort sans option, soit
+              85 € après crédit d&rsquo;impôt*). Il l&rsquo;obtient dans sa déclaration de revenus de
+              l&rsquo;année suivante ; l&rsquo;avance immédiate sera bientôt disponible.
             </li>
             <li>
-              <strong>S&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt :</strong> vous lui virez la
-              totalité de la valeur du bon (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec
-              l&rsquo;option courses). Il règle ensuite la prestation directement auprès de moi.
+              <strong>S&rsquo;il n&rsquo;a pas le droit au crédit d&rsquo;impôt :</strong> il règle la
+              prestation au prix réel (par exemple, 170 € pour la formule Confort sans option, ou 210 € avec
+              l&rsquo;option courses).
             </li>
           </ul>
         </details>
         <details class="faq-item">
-          <summary>Comment savoir si le foyer a le droit au crédit d&rsquo;impôt ?<span class="plus">+</span></summary>
+          <summary>Comment savoir si le bénéficiaire a le droit au crédit d&rsquo;impôt ?<span class="plus">+</span></summary>
           <p>
-            Le droit au crédit d&rsquo;impôt dépend de la situation fiscale du foyer. En cas de doute, le plus
-            simple est de lui poser la question, afin qu&rsquo;il vérifie sa situation. Vous trouverez aussi
-            tous les détails sur ma page <a href="/credit-impot">Crédit d&rsquo;impôt</a>.
+            Le droit au crédit d&rsquo;impôt dépend de la situation fiscale du bénéficiaire. En cas de doute,
+            le plus simple est de lui poser la question, afin qu&rsquo;il vérifie sa situation. Vous trouverez
+            aussi tous les détails sur ma page <a href="/credit-impot">Crédit d&rsquo;impôt</a>.
           </p>
         </details>
         <details class="faq-item">
-          <summary>Le crédit d&rsquo;impôt est-il pour moi ou pour le foyer ?<span class="plus">+</span></summary>
+          <summary>Le crédit d&rsquo;impôt est-il pour moi ou pour le bénéficiaire ?<span class="plus">+</span></summary>
           <p>
-            Le crédit d&rsquo;impôt est destiné au foyer qui reçoit la prestation. La facture est établie au
-            nom du foyer, et c&rsquo;est lui qui règle sa part : il en profite donc s&rsquo;il y a droit. Vous,
-            qui offrez le bon, n&rsquo;avez pas de crédit d&rsquo;impôt.
+            Le crédit d&rsquo;impôt est destiné au bénéficiaire qui reçoit la prestation. La facture est
+            établie au nom du bénéficiaire, et c&rsquo;est lui qui règle la prestation : il en profite donc
+            s&rsquo;il y a droit. Vous, qui offrez le bon, n&rsquo;avez pas de crédit d&rsquo;impôt.
           </p>
         </details>
         <details class="faq-item">
-          <summary>Le foyer n&rsquo;a pas de compte URSSAF, est-ce un problème ?<span class="plus">+</span></summary>
+          <summary>Qu&rsquo;est-ce que l&rsquo;avance immédiate ?<span class="plus">+</span></summary>
           <p>
-            Non, ce n&rsquo;est pas un problème. L&rsquo;avance immédiate sera bientôt disponible
-            ; en attendant, le foyer récupère son crédit d&rsquo;impôt lors de sa déclaration de
-            revenus, sans compte URSSAF nécessaire.
+            L&rsquo;avance immédiate est un dispositif de l&rsquo;Urssaf qui permet de déduire le crédit
+            d&rsquo;impôt directement du prix, sans avance de trésorerie. Elle sera bientôt disponible. En
+            attendant, le crédit d&rsquo;impôt est obtenu dans la déclaration de revenus de l&rsquo;année
+            suivante.
           </p>
         </details>
         <details class="faq-item">
@@ -484,32 +477,40 @@ const jsonLd = {
           <p>
             Le bon peut être établi pour un foyer de 4 à 8 personnes. La base est de 4 personnes (1 plat = 4
             parts). Au-delà, un supplément de 20 € par personne avant crédit d&rsquo;impôt, soit 10 € après,
-            s&rsquo;ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le foyer a
-            simplement plus de repas d&rsquo;avance.
+            s&rsquo;ajoute au bon. Pour un couple ou un foyer plus petit, le prix reste identique : le
+            bénéficiaire a simplement plus de repas d&rsquo;avance.
           </p>
         </details>
         <details class="faq-item">
           <summary>Peut-on ajouter les courses ?<span class="plus">+</span></summary>
           <p>
-            Oui, je peux m&rsquo;occuper des courses du foyer : il suffit de sélectionner l&rsquo;option « Je
-            fais vos courses » (40 € avant crédit d&rsquo;impôt, soit 20 € après, sous réserve d&rsquo;éligibilité
-            du foyer). Cette option rémunère le service de courses, c&rsquo;est-à-dire le temps passé et le
-            déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au crédit d&rsquo;impôt
-            et restent à la charge du foyer bénéficiaire.
+            Oui, je peux m&rsquo;occuper des courses du bénéficiaire : il suffit de sélectionner l&rsquo;option
+            « Je fais vos courses » (40 € avant crédit d&rsquo;impôt, soit 20 € après, sous réserve
+            d&rsquo;éligibilité du bénéficiaire). Cette option rémunère le service de courses, c&rsquo;est-à-dire
+            le temps passé et le déplacement. Les ingrédients ne sont pas compris : ils ne donnent pas droit au
+            crédit d&rsquo;impôt et restent à la charge du bénéficiaire.
           </p>
         </details>
         <details class="faq-item">
           <summary>Comment remettre le bon ?<span class="plus">+</span></summary>
           <p>
             Le bon vous est envoyé par mail : vous pouvez l&rsquo;imprimer pour l&rsquo;offrir en main propre,
-            ou le transférer directement au foyer.
+            ou le transférer directement au bénéficiaire.
           </p>
         </details>
       </div>
       <p class="disclaimer">
-        Prestation à domicile dans la métropole lilloise. Le crédit d&rsquo;impôt est accordé aux foyers
-        ayant droit au crédit d&rsquo;impôt et dépend de leur situation. <a href="/credit-impot">En savoir plus sur le crédit d&rsquo;impôt</a>
+        Prestation à domicile dans la métropole lilloise. Le crédit d&rsquo;impôt est accordé aux bénéficiaires
+        éligibles et dépend de leur situation. <a href="/credit-impot">En savoir plus sur le crédit d&rsquo;impôt</a>
       </p>
+      <div class="legal-mentions">
+        <p>
+          *Crédit d&rsquo;impôt de 50% selon l&rsquo;article 199 sexdecies du CGI, dans la limite des plafonds
+          en vigueur. Le montant des courses n&rsquo;est pas éligible au crédit d&rsquo;impôt.
+        </p>
+        <p>TVA non applicable, article 293 B du CGI.</p>
+        <p>Devis gratuit sur simple demande.</p>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -576,9 +577,6 @@ const jsonLd = {
       setText('sum-valeur', eur(valeur));
       setText('sum-offrez', eur(offrez));
       setValue('f-valeur', eur(valeur));
-      setValue('f-virer', eur(offrez));
-      setText('sum-plein', eur(valeur));
-      setValue('f-plein', eur(valeur));
       setValue('f-recap', lines.map(([label]) => label).join(' + '));
     }
 
@@ -711,7 +709,7 @@ const jsonLd = {
 
   .steps-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 
@@ -835,6 +833,13 @@ const jsonLd = {
     font-size: 0.9rem;
     color: var(--color-ink-soft);
     line-height: 1.6;
+  }
+
+  .credit-note {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
   }
 
   .gift-grid {
@@ -1202,14 +1207,15 @@ const jsonLd = {
     font-size: 2.75rem;
   }
 
-  .sum-block .amt2 {
-    font-size: 1.875rem !important;
-  }
-
   .sum-block .alt {
     margin-top: 0.625rem;
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.92);
+  }
+
+  .sum-block .alt strong {
+    font-size: 1.0625rem;
+    font-weight: 800;
   }
 
   .sum-block small {
@@ -1556,18 +1562,25 @@ const jsonLd = {
     text-underline-offset: 2px;
   }
 
+  .legal-mentions {
+    max-width: 760px;
+    margin: 1.125rem auto 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .legal-mentions p + p {
+    margin-top: 0.25rem;
+  }
+
   sup {
     font-size: 0.8em;
     line-height: 0;
     position: relative;
     top: -0.1em;
     vertical-align: super;
-  }
-
-  @media (max-width: 1100px) {
-    .steps-grid {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   @media (max-width: 980px) {
@@ -1577,6 +1590,10 @@ const jsonLd = {
 
     .page-header .intro {
       font-size: 1.03rem;
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
     }
 
     .gift-grid {
@@ -1593,10 +1610,6 @@ const jsonLd = {
   }
 
   @media (max-width: 640px) {
-    .steps-grid {
-      grid-template-columns: 1fr;
-    }
-
     .formulas {
       grid-template-columns: 1fr;
     }

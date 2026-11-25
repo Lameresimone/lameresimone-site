@@ -12,7 +12,7 @@ const LEFT_W = PAGE_W - RIGHT_W;
 const MARGIN = 40;
 // Bande pleine largeur en bas de page (mentions légales), sous les deux
 // colonnes : évite que leur texte ne passe sous le bandeau bordeaux de droite.
-const BOTTOM_BAND_H = 54;
+const BOTTOM_BAND_H = 68;
 const CONTENT_H = PAGE_H - BOTTOM_BAND_H;
 
 const COLOR = {
@@ -143,10 +143,22 @@ export async function renderVoucherPdf(data) {
   const rightMaxWidth = RIGHT_W - 56;
   let ry = PAGE_H - MARGIN;
 
-  page.drawText('VALEUR DU BON', { x: rightX, y: ry, size: 10, font: bold, color: COLOR.white, opacity: 0.75 });
+  page.drawText('VALEUR DE LA PRESTATION', { x: rightX, y: ry, size: 10, font: bold, color: COLOR.white, opacity: 0.75 });
   ry -= 34;
   page.drawText(data.valeurBonFormatee, { x: rightX, y: ry, size: 34, font: bold, color: COLOR.white });
-  ry -= 36;
+  ry -= 20;
+
+  const creditSubLines = wrapText(
+    `soit ${data.montantFoyerEligibleFormate} après crédit d'impôt*, si le bénéficiaire y a droit`,
+    helvetica,
+    9,
+    rightMaxWidth
+  );
+  for (const line of creditSubLines) {
+    page.drawText(line, { x: rightX, y: ry, size: 9, font: helvetica, color: COLOR.white, opacity: 0.85 });
+    ry -= 12;
+  }
+  ry -= 8;
 
   page.drawLine({ start: { x: rightX, y: ry }, end: { x: rightX + rightMaxWidth, y: ry }, thickness: 1, color: COLOR.white, opacity: 0.35 });
   ry -= 20;
@@ -166,7 +178,7 @@ export async function renderVoucherPdf(data) {
   // tracé en haut de cette fonction, à BOTTOM_BAND_H).
   const legalY = BOTTOM_BAND_H - 20;
   const legalLines = wrapText(
-    "Prestation à domicile, secteur de la métropole lilloise. Les produits des courses ne sont pas compris dans le bon. Le crédit d'impôt de 50% est accordé aux foyers qui y ont droit et dépend de leur situation. La mère Simone, SIRET 98938305400016, lameresimone.fr",
+    "Prestation à domicile, secteur de la métropole lilloise, facturée au bénéficiaire. Devis gratuit sur simple demande. Les produits des courses ne sont pas compris dans le bon. *Crédit d'impôt de 50% selon l'article 199 sexdecies du CGI, dans la limite des plafonds en vigueur, sous réserve d'éligibilité du bénéficiaire. TVA non applicable, article 293 B du CGI. La mère Simone, SIRET 98938305400016, lameresimone.fr",
     helvetica,
     8,
     PAGE_W - MARGIN * 2
