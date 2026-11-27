@@ -260,18 +260,6 @@ export const regimes = [
       "Des repas 100% vegan, pensés pour rester complets et équilibrés, sans aucun produit d'origine animale.",
     icone: 'M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5Z',
   },
-  {
-    titre: 'IG bas & diabète',
-    texte:
-      "Des repas pensés pour limiter les pics glycémiques, avec des associations d'aliments qui stabilisent l'énergie sur la durée.",
-    icone: 'M3 3v18h18M7 14l4-4 3 3 5-6',
-  },
-  {
-    titre: 'Anti-inflammatoire',
-    texte:
-      'Le régime que je pratique moi-même : des produits frais, peu transformés, riches en oméga-3, fruits et légumes de saison.',
-    icone: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z',
-  },
 ];
 
 export const regimeClassique = {

@@ -362,23 +362,33 @@ const jsonLd = {
       grid-template-columns: minmax(0, 1fr);
       min-height: auto;
       padding-top: 3rem;
+      gap: 0;
     }
 
-    .hero-photo-col {
-      width: 100%;
-      max-width: 400px;
-      min-width: 0;
-      margin-inline: auto;
-      padding-top: 0.5rem;
-    }
-
+    /* Les enfants (eyebrow, h1, sub, hero-ctas) deviennent des items directs
+       de la grille, pour pouvoir réordonner les boutons après la photo sans
+       dupliquer de contenu ni casser l'accessibilité. */
     .hero-copy {
-      max-width: none;
-      min-width: 0;
+      display: contents;
     }
 
     .hero-copy .sub br {
       display: none;
+    }
+
+    .hero-photo-col {
+      order: 1;
+      width: 100%;
+      max-width: 400px;
+      min-width: 0;
+      margin-inline: auto;
+      margin-top: 2rem;
+      padding-top: 0.5rem;
+    }
+
+    .hero-ctas {
+      order: 2;
+      margin-top: 2rem;
     }
 
     .trust-row {
